@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stories — Seeds of Hom</title>
+<meta name="description" content="Read Persian through Iranian history, celebrations, and remarkable people." />
+
+<link rel="stylesheet" href="https://esm.sh/gh/rahatool/persian-fonts/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --night:#170A2F;
+  --cyan:#78EFFA;
+  --orange:#F5853F;
+  --paper:#F7F0E7;
+  --soft:rgba(247,240,231,.72);
+  --faint:rgba(247,240,231,.12);
+  --cyan-faint:rgba(120,239,250,.18);
+  --orange-faint:rgba(245,133,63,.18);
+
+  /* Topic color codes */
+  --history:#78EFFA;
+  --history-faint:rgba(120,239,250,.14);
+  --celebrations:#F5853F;
+  --celebrations-faint:rgba(245,133,63,.14);
+  --people:#C9A7FF;
+  --people-faint:rgba(201,167,255,.14);
+}
+
+*{box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  background:var(--night);
+  overflow-x:hidden;
+  scrollbar-width:none;
+}
+html::-webkit-scrollbar{display:none}
+body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  color:var(--paper);
+  background:var(--night);
+  font-family:"Times New Roman", Times, serif;
+  line-height:1.5;
+}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+body *{font-family:"Times New Roman", Times, serif}
+[lang="fa"], .fa{
+  font-family:"IranNastaliq" !important;
+  direction:rtl;
+  font-feature-settings:"calt" 1,"liga" 1,"rlig" 1,"cswh" 1;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:var(--orange);color:var(--night)}
+
+.site-bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(120,239,250,.08), transparent 26%),
+    radial-gradient(circle at 86% 18%, rgba(245,133,63,.075), transparent 24%),
+    radial-gradient(circle at 48% 72%, rgba(120,239,250,.045), transparent 32%),
+    var(--night);
+}
+
+.shell{width:min(1080px,calc(100% - 48px));margin-inline:auto}
+.section{position:relative;padding:92px 0}
+.section + .section:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:min(860px,80%);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(120,239,250,.42),rgba(245,133,63,.30),transparent);
+}
+
+/* Keep the first content section close to the hero without changing spacing elsewhere. */
+.history{padding-top:44px}
+
+/* ===== Page identity ===== */
+.masthead{padding:28px 0 0}
+.masthead-row{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{width:auto;max-width:170px;max-height:76px;display:block}
+.brand-text{
+  color:var(--paper);
+  font-size:18px;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:700;
+  white-space:nowrap;
+}
+.brand-text:hover{color:var(--cyan)}
+.archive-tag{
+  color:var(--cyan);
+  border:1px solid rgba(120,239,250,.34);
+  padding:8px 11px;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.hero{padding:68px 0 28px;position:relative}
+.hero-grid{
+  display:block;
+}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+h1,h2,h3,p{margin-top:0}
+h1{
+  font-size:clamp(62px,8vw,108px);
+  line-height:.86;
+  letter-spacing:-.045em;
+  font-weight:400;
+  margin-bottom:26px;
+  max-width:980px;
+}
+h1 em{font-weight:400;color:var(--cyan)}
+.hero-copy p{font-size:20px;max-width:900px;color:var(--soft);margin-bottom:30px}
+
+.category-nav{display:flex;flex-wrap:wrap;gap:9px}
+.category-nav a,
+.filter-btn{
+  border:1px solid rgba(247,240,231,.18);
+  background:rgba(255,255,255,.015);
+  color:var(--paper);
+  padding:10px 14px;
+  min-height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.22s ease;
+}
+.category-nav a:hover,.filter-btn:hover,.filter-btn.active{
+  border-color:var(--cyan);
+  color:var(--cyan);
+  transform:translateY(-1px);
+}
+
+/* Category navigation uses the same topic color code as each section. */
+.category-nav a[href="#history"]{color:var(--history);border-color:rgba(120,239,250,.34)}
+.category-nav a[href="#celebrations"]{color:var(--celebrations);border-color:rgba(245,133,63,.34)}
+.category-nav a[href="#people"]{color:var(--people);border-color:rgba(201,167,255,.34)}
+.category-nav a[href="#history"]:hover{border-color:var(--history)}
+.category-nav a[href="#celebrations"]:hover{border-color:var(--celebrations)}
+.category-nav a[href="#people"]:hover{border-color:var(--people)}
+
+/* ===== IMAGE SLOTS =====
+   Do NOT paste image URLs into the HTML.
+   Add every image URL once in the IMAGE_URLS block at the bottom of this file.
+*/
+.hero-art{display:grid;place-items:center;min-height:430px}
+.hero-image-placeholder,
+.card-image,
+.person-image,
+.history-image{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(247,240,231,.14);
+  background:
+    linear-gradient(180deg, rgba(247,240,231,.025), rgba(247,240,231,.01)),
+    radial-gradient(circle at 28% 28%, rgba(120,239,250,.10), transparent 28%),
+    radial-gradient(circle at 72% 34%, rgba(245,133,63,.10), transparent 26%),
+    linear-gradient(135deg, rgba(120,239,250,.04), rgba(245,133,63,.035));
+}
+
+/* Every real image automatically fills its slot. */
+.hero-image-placeholder img,
+.card-image img,
+.person-image img,
+.history-image img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  z-index:5;
+}
+
+/* If you have not pasted a valid URL yet, the image hides and the placeholder remains visible. */
+.image-placeholder-copy{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:22px;
+  z-index:1;
+  pointer-events:none;
+}
+.image-placeholder-copy span{
+  max-width:220px;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(247,240,231,.58);
+}
+
+.hero-image-placeholder{
+  width:min(100%,430px);
+  min-height:430px;
+  box-shadow:inset 0 0 60px rgba(120,239,250,.03);
+}
+.hero-image-placeholder:before{
+  content:"";
+  position:absolute;
+  inset:22px;
+  border:1px solid rgba(247,240,231,.10);
+  pointer-events:none;
+}
+
+.person-image{
+  border-right:1px solid rgba(247,240,231,.12);
+  min-height:100%;
+}
+/* ===== Section headers ===== */
+.section-head{display:grid;grid-template-columns:.78fr 1.22fr;gap:54px;align-items:end;margin-bottom:42px}
+.section-mark{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.avestan{
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid rgba(120,239,250,.36);
+  color:var(--cyan);
+  font-family:"Noto Sans Avestan",serif !important;
+  font-size:18px;
+}
+.avestan.orange{color:var(--orange);border-color:rgba(245,133,63,.40)}
+.kicker{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--orange)}
+h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-height:.95;margin-bottom:0}
+.section-intro{color:var(--soft);font-size:18px;max-width:560px;margin:0}
+
+/* ===== Filters ===== */
+.filters{padding:24px 0 0}
+.filter-row{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  padding:16px 0;
+  border-top:1px solid rgba(247,240,231,.10);
+  border-bottom:1px solid rgba(247,240,231,.10);
+}
+.filter-label{color:var(--soft);font-size:14px;font-style:italic}
+.filter-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.filter-btn{padding:7px 11px;min-height:34px;font-size:12px}
+
+/* ===== History — original vertical design, compact Famous-People scale ===== */
+.history-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  width:100%;
+  margin:0;
+}
+.history-event{width:100%;min-width:0}
+.timeline-date{
+  display:block;
+  color:var(--history);
+  font-size:10px;
+  line-height:1.35;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  margin:0 0 8px;
+}
+
+/* History cards: compact, with image on the left and text on the right. */
+.history-card{
+  width:100%;
+  height:272px;
+  display:grid;
+  grid-template-columns:150px minmax(0,1fr);
+  border:1px solid color-mix(in srgb,var(--history) 38%,transparent);
+  background:linear-gradient(180deg,var(--history-faint),rgba(255,255,255,.01) 38%);
+  position:relative;
+  overflow:hidden;
+  transition:.22s ease;
+}
+.history-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--history);
+  background:linear-gradient(180deg,rgba(120,239,250,.14),rgba(255,255,255,.015) 42%);
+}
+.history-card:after{
+  content:"";
+  position:absolute;
+  left:16px;
+  right:16px;
+  bottom:10px;
+  height:1px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--history) 38%,transparent),transparent);
+}
+.history-image{
+  width:100%;
+  height:100%;
+  min-height:0;
+  border:0;
+  border-right:1px solid color-mix(in srgb,var(--history) 26%,transparent);
+}
+.history-body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+  padding:12px 16px 13px;
+}
+.history-meta{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  gap:8px;
+  margin-bottom:6px;
+}
+.history-level{
+  font-size:9px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--night);
+  background:var(--history);
+  padding:3px 6px;
+}
+.history-card h3{
+  font-size:25px;
+  line-height:1;
+  font-weight:400;
+  letter-spacing:-.02em;
+  margin-bottom:6px;
+}
+.history-card p{
+  font-size:12.5px;
+  line-height:1.35;
+  color:var(--soft);
+  margin-bottom:7px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.history-foot{
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-top:7px;
+  border-top:1px solid rgba(247,240,231,.10);
+}
+.history-foot span:first-child{
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--history);
+}
+.history-foot .card-arrow{font-size:17px;color:var(--history)}
+
+/* ===== Topic color coding ===== */
+.history .kicker,
+.history .section-intro strong{color:var(--history)}
+.history .avestan{
+  color:var(--history);
+  border-color:color-mix(in srgb,var(--history) 48%,transparent);
+}
+
+.celebrations .kicker{color:var(--celebrations)}
+.celebrations .avestan{
+  color:var(--celebrations);
+  border-color:color-mix(in srgb,var(--celebrations) 48%,transparent);
+}
+.celebrations .story-card{
+  border-color:color-mix(in srgb,var(--celebrations) 30%,transparent);
+  background:linear-gradient(180deg,var(--celebrations-faint),rgba(255,255,255,.01) 34%);
+}
+.celebrations .story-card:hover{
+  border-color:var(--celebrations);
+  background:linear-gradient(180deg,rgba(245,133,63,.18),rgba(255,255,255,.015) 40%);
+}
+.celebrations .level{background:var(--celebrations)}
+.celebrations .card-kind,
+.celebrations .card-arrow{color:var(--celebrations)}
+
+.people .kicker{color:var(--people)}
+.people .avestan{
+  color:var(--people);
+  border-color:color-mix(in srgb,var(--people) 48%,transparent);
+}
+.people .person-card{
+  border-color:color-mix(in srgb,var(--people) 30%,transparent);
+  background:linear-gradient(90deg,var(--people-faint),rgba(255,255,255,.01) 38%);
+}
+.people .person-card:hover{border-color:var(--people)}
+.people .person-era,
+.people .card-kind,
+.people .card-arrow{color:var(--people)}
+
+/* ===== Celebrations ===== */
+.story-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card-image{
+  width:100%;
+  height:300px;
+  flex-shrink:0;
+  margin-bottom:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.story-card{
+  grid-column:span 4;
+  min-height:420px;
+  position:relative;
+  padding:18px;
+  border:1px solid rgba(247,240,231,.14);
+  background:rgba(255,255,255,.014);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:.25s ease;
+}
+.story-card:hover{transform:translateY(-4px)}
+.story-card:after{
+  content:"";
+  position:absolute;
+  width:145px;height:145px;border-radius:50%;
+  right:-62px;bottom:-68px;
+  border:1px solid rgba(120,239,250,.10);
+}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.level{color:var(--night);background:var(--cyan);padding:5px 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.readtime{font-size:12px;color:var(--soft)}
+.card-fa{font-size:31px;color:var(--orange);line-height:1.5;margin-bottom:6px;min-height:48px}
+.story-card h3{font-size:33px;line-height:.98;font-weight:400;letter-spacing:-.02em;margin-bottom:12px}
+.story-card p{font-size:15.5px;color:var(--soft);margin-bottom:24px;max-width:520px}
+.card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid rgba(247,240,231,.10);padding-top:14px}
+.card-kind{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+.card-arrow{font-size:20px;color:var(--cyan)}
+.story-card[hidden], .history-card[hidden], .person-card[hidden]{display:none !important}
+.history-event[hidden]{display:none !important}
+
+.season-note{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  border:1px solid rgba(247,240,231,.12);
+  margin-bottom:16px;
+}
+.season-btn{
+  appearance:none;
+  width:100%;
+  min-height:68px;
+  padding:13px 15px;
+  border:0;
+  border-right:1px solid rgba(247,240,231,.10);
+  background:transparent;
+  color:var(--soft);
+  text-align:left;
+  cursor:pointer;
+  transition:.22s ease;
+}
+.season-btn:last-child{border-right:0}
+.season-btn strong{
+  display:block;
+  font-weight:400;
+  color:var(--paper);
+  font-size:16px;
+  margin-bottom:3px;
+}
+.season-btn:hover,
+.season-btn.active{
+  background:var(--celebrations-faint);
+  color:var(--celebrations);
+}
+.season-btn.active strong,
+.season-btn:hover strong{color:var(--celebrations)}
+.season-btn:focus-visible{
+  outline:2px solid var(--celebrations);
+  outline-offset:-2px;
+}
+.season-empty{
+  display:none;
+  grid-column:1/-1;
+  padding:28px 20px;
+  border:1px dashed color-mix(in srgb,var(--celebrations) 40%,transparent);
+  color:var(--soft);
+  text-align:center;
+  font-size:15px;
+}
+.season-empty.show{display:block}
+
+/* ===== People ===== */
+.people-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.person-card{
+  min-height:272px;
+  border:1px solid rgba(247,240,231,.14);
+  display:grid;
+  grid-template-columns:180px 1fr;
+  position:relative;
+  overflow:hidden;
+  transition:.22s ease;
+  background:rgba(255,255,255,.012);
+}
+.person-card:hover{border-color:rgba(245,133,63,.46);transform:translateY(-3px)}
+.person-image{
+  border-right:1px solid rgba(247,240,231,.12);
+  min-height:100%;
+}
+.person-body{padding:23px;display:flex;flex-direction:column}
+.person-era{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.person-body h3{font-size:32px;line-height:1;margin-bottom:9px;font-weight:400}
+.person-body p{font-size:15px;color:var(--soft);margin-bottom:18px}
+.person-body .card-foot{padding-top:11px}
+
+/* ===== Reading experience ===== */
+.reading-system{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.reading-demo{border:1px solid rgba(120,239,250,.28);padding:26px;background:rgba(0,0,0,.08)}
+.demo-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+.demo-tab{font-size:11px;padding:6px 9px;border:1px solid rgba(247,240,231,.17);color:var(--soft)}
+.demo-tab.active{border-color:var(--orange);color:var(--orange)}
+.demo-fa{font-size:34px;line-height:2.1;text-align:right;margin-bottom:14px}
+.demo-finglish{color:var(--cyan);font-size:16px;font-style:italic;margin-bottom:18px}
+.demo-vocab{border-top:1px solid rgba(247,240,231,.10);padding-top:15px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;color:var(--soft);font-size:13px}
+.demo-vocab strong{font-weight:400;color:var(--orange)}
+.reading-copy .eyebrow{color:var(--cyan)}
+.reading-copy h2{margin-bottom:18px}
+.reading-copy p{font-size:18px;color:var(--soft);max-width:560px}
+.checks{margin:24px 0 0;padding:0;list-style:none;border-top:1px solid rgba(247,240,231,.10)}
+.checks li{padding:12px 0;border-bottom:1px solid rgba(247,240,231,.10);font-size:15px;color:var(--paper)}
+.checks li:before{content:"✦";color:var(--orange);font-size:10px;margin-right:10px}
+
+/* ===== Newsletter ===== */
+.newsletter{text-align:center;padding:100px 0 110px}
+.newsletter .avestan{margin:0 auto 16px}
+.newsletter .eyebrow{color:var(--cyan)}
+.newsletter h2{max-width:820px;margin:0 auto 18px}
+.newsletter p{font-size:18px;color:var(--soft);max-width:600px;margin:0 auto 27px}
+.newsletter-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;min-height:46px;border:1px solid var(--orange);background:var(--orange);color:var(--night);transition:.22s}
+.newsletter-btn:hover{transform:translateY(-2px);box-shadow:0 0 26px rgba(245,133,63,.16)}
+
+/* ===== Mobile ===== */
+@media(max-width:900px){
+  .shell{width:min(100% - 36px,760px)}
+  .section{padding:72px 0}
+  .hero-grid,.section-head,.reading-system{grid-template-columns:1fr}
+  .hero-grid{gap:38px}
+  .section-head{gap:14px;align-items:start}
+  .hero-art{min-height:360px}
+  .hero-image-placeholder{max-width:440px;min-height:360px}
+  .story-card{grid-column:span 6}
+  .people-grid{grid-template-columns:1fr}
+  .history-list{grid-template-columns:1fr}
+}
+
+@media(max-width:620px){
+  .site-bg{display:none}
+  .shell{width:calc(100% - 36px)}
+  .masthead{padding-top:20px}
+  .logo{max-width:138px;max-height:62px}
+  .brand-text{font-size:15px;letter-spacing:.13em}
+  .archive-tag{font-size:9px;padding:7px 9px}
+  .hero{padding:48px 0 24px}
+  h1{font-size:clamp(52px,16vw,70px);line-height:.89}
+  .hero-copy p{font-size:17px;line-height:1.6}
+  .category-nav{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .category-nav a{width:100%;font-size:13px}
+  .category-nav a:last-child{grid-column:1/-1}
+
+  .hero-art{min-height:300px}
+  .hero-image-placeholder{min-height:300px}
+
+  .section{padding:58px 0}
+  .history{padding-top:34px}
+  h2{font-size:clamp(38px,12vw,52px)}
+  .section-intro{font-size:16px;line-height:1.6}
+  .filter-row{align-items:flex-start}
+  .filter-buttons{width:100%;display:grid;grid-template-columns:repeat(4,1fr)}
+  .filter-btn{width:100%;padding:7px 4px}
+
+  .story-grid,
+  .people-grid{display:block}
+
+  .history-list{
+    width:100%;
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+  .timeline-date{margin-bottom:8px}
+  .history-card,
+  .story-card,
+  .person-card{margin-bottom:11px}
+  .history-card{
+    height:auto;
+    min-height:240px;
+    grid-template-columns:112px minmax(0,1fr);
+  }
+  .history-image{
+    height:100%;
+    min-height:240px;
+    border-right:1px solid color-mix(in srgb,var(--history) 26%,transparent);
+    border-bottom:0;
+  }
+  .history-body{padding:13px 15px 14px}
+  .history-card h3{font-size:24px}
+  .history-card p{font-size:12.5px;line-height:1.4;-webkit-line-clamp:3}
+
+  .story-card{min-height:0;padding:18px}
+  .story-card h3{font-size:30px}
+  .card-image{height:136px}
+  .card-fa{font-size:28px;min-height:42px}
+  .story-card p{font-size:15px;line-height:1.55}
+
+  .season-note{grid-template-columns:1fr 1fr;margin-bottom:12px}
+  .season-btn{
+    min-height:62px;
+    border-right:0;
+    border-bottom:1px solid rgba(247,240,231,.10);
+    padding:11px 13px;
+  }
+  .season-btn:nth-child(odd){border-right:1px solid rgba(247,240,231,.10)}
+  .season-btn:last-child{
+    grid-column:1/-1;
+    border-right:0;
+    border-bottom:0;
+  }
+
+  .person-card{grid-template-columns:1fr;min-height:0}
+  .person-image{height:148px;border-right:0;border-bottom:1px solid rgba(247,240,231,.12)}
+  .person-body{padding:19px 17px}
+  .person-body h3{font-size:28px}
+  .person-body p{font-size:14.5px;line-height:1.5}
+
+  .reading-demo{padding:20px 17px}
+  .demo-fa{font-size:29px;line-height:2}
+  .demo-vocab{grid-template-columns:1fr}
+  .reading-copy p{font-size:16px;line-height:1.6}
+  .newsletter{text-align:left;padding:66px 0 76px}
+  .newsletter .avestan{margin-left:0}
+  .newsletter h2,.newsletter p{margin-left:0;margin-right:0}
+  .newsletter-btn{width:100%}
+}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<style>
+/* ===== GitHub sticky navigation ===== */
+.top-nav{
+  position:sticky;
+  top:0;
+  z-index:9999;
+  height:68px;
+  background:rgba(23,10,47,.92);
+  border-bottom:1px solid rgba(247,240,231,.12);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.nav-inner{
+  width:min(1080px,calc(100% - 48px));
+  height:100%;
+  margin:0 auto;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+}
+.nav-links-left{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  z-index:2;
+}
+.nav-links-left a,
+.nav-menu a{
+  position:relative;
+  color:var(--soft);
+  font-size:18px;
+  transition:color .2s ease;
+}
+.nav-links-left a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:-8px;
+  height:1px;
+  background:var(--cyan);
+  transition:right .22s ease;
+}
+.nav-links-left a:hover,
+.nav-menu a:hover{
+  color:var(--paper);
+}
+.nav-links-left a:hover::after{
+  right:0;
+}
+.nav-brand-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:var(--paper);
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  z-index:3;
+}
+.nav-brand-center:hover{color:var(--cyan)}
+.nav-toggle{
+  display:none;
+  width:42px;
+  height:42px;
+  padding:0;
+  border:1px solid rgba(247,240,231,.18);
+  background:transparent;
+  color:var(--paper);
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+}
+.nav-toggle-lines,
+.nav-toggle-lines::before,
+.nav-toggle-lines::after{
+  display:block;
+  width:18px;
+  height:1px;
+  background:currentColor;
+  position:relative;
+  transition:.2s ease;
+}
+.nav-toggle-lines::before,
+.nav-toggle-lines::after{
+  content:"";
+  position:absolute;
+  left:0;
+}
+.nav-toggle-lines::before{top:-6px}
+.nav-toggle-lines::after{top:6px}
+
+.nav-menu{display:none}
+
+#history,#celebrations,#people,#how-to-read{
+  scroll-margin-top:88px;
+}
+
+@media(max-width:820px){
+  .top-nav{height:62px}
+  .nav-inner{width:min(100% - 32px,1080px)}
+  .nav-links-left{display:none}
+  .nav-brand-center{
+    font-size:13px;
+    letter-spacing:.13em;
+  }
+  .nav-toggle{
+    display:inline-flex;
+    margin-left:auto;
+  }
+  .nav-menu{
+    display:none;
+    position:absolute;
+    top:62px;
+    left:16px;
+    right:16px;
+    padding:12px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    background:rgba(23,10,47,.98);
+    border:1px solid rgba(247,240,231,.14);
+    box-shadow:0 18px 45px rgba(0,0,0,.26);
+  }
+  .nav-menu.open{display:flex}
+  .nav-menu a{
+    padding:13px 12px;
+    font-size:17px;
+  }
+}
+</style>
+
+
+<style>
+/* ===== GitHub footer ===== */
+.site-footer{
+  position:relative;
+  overflow:hidden;
+  padding:52px 24px 24px;
+  background:var(--cyan);
+  color:var(--night);
+}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  border:1px solid rgba(23,10,47,.16);
+  border-radius:50%;
+  right:-120px;
+  top:-160px;
+}
+.site-footer::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border:1px dashed rgba(23,10,47,.14);
+  border-radius:50%;
+  left:-70px;
+  bottom:-95px;
+}
+.site-footer-inner{
+  position:relative;
+  z-index:1;
+  width:min(1080px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:32px;
+}
+.footer-left,
+.footer-center,
+.footer-right{
+  display:flex;
+  align-items:center;
+}
+.footer-left{justify-content:flex-start}
+.footer-center{justify-content:center;gap:10px}
+.footer-right{justify-content:flex-end;gap:18px}
+
+.footer-logo-text{
+  color:var(--night);
+  font-size:18px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.footer-link{
+  color:var(--night);
+  font-size:15px;
+  border-bottom:1px solid rgba(23,10,47,.35);
+  padding-bottom:2px;
+}
+.footer-link:hover{border-bottom-color:var(--night)}
+.social-link{
+  width:40px;
+  height:40px;
+  border:1px solid rgba(23,10,47,.34);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--night);
+  background:rgba(247,240,231,.12);
+  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+}
+.social-link:hover{
+  background:rgba(247,240,231,.34);
+  border-color:rgba(23,10,47,.62);
+  transform:translateY(-2px);
+}
+.social-link svg{
+  width:17px;
+  height:17px;
+  fill:currentColor;
+}
+.footer-copy{
+  grid-column:1/-1;
+  width:100%;
+  margin-top:10px;
+  padding-top:18px;
+  border-top:1px solid rgba(23,10,47,.20);
+  color:rgba(23,10,47,.72);
+  font-size:12px;
+  letter-spacing:.03em;
+  text-align:center;
+}
+@media(max-width:700px){
+  .site-footer{
+    padding:42px 22px 24px;
+  }
+  .site-footer-inner{
+    grid-template-columns:1fr;
+    justify-items:center;
+    gap:22px;
+    text-align:center;
+  }
+  .footer-left,
+  .footer-center,
+  .footer-right{
+    justify-content:center;
+  }
+  .footer-copy{
+    grid-column:1;
+    margin-top:4px;
+  }
+}
+</style>
+
+
+<style>
+/* ===== Center navbar logo ===== */
+.nav-brand-center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.nav-logo-img{
+  display:block;
+  width:auto;
+  height:48px;
+  max-width:190px;
+  object-fit:contain;
+}
+
+@media(max-width:820px){
+  .nav-logo-img{
+    height:40px;
+    max-width:155px;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+
+    <div class="nav-links-left">
+      <a href="./index.html">Home</a>
+      <a href="./stories.html">Stories</a>
+      <a href="./poems.html">Poems</a>
+      <a href="./projects.html">Projects</a>
+    </div>
+
+    <a class="nav-brand-center" href="./index.html" aria-label="Seeds of Hom home">
+      <img class="nav-logo-img" src="./assets/logos/logo.svg" alt="Seeds of Hom">
+    </a>
+
+    <button class="nav-toggle" type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="nav-menu">
+      <span class="nav-toggle-lines"></span>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <a href="./index.html">Home</a>
+      <a href="./stories.html">Stories</a>
+      <a href="./poems.html">Poems</a>
+      <a href="./projects.html">Projects</a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="site-bg" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Persian through lives, memory & ritual</div>
+      <h1>Every story opens a <em>door.</em></h1>
+      <p>Read graded Persian through the histories people inherit, the celebrations they return to, and the lives that changed Iranian culture. Choose the subject first; meet the language inside it.</p>
+      <nav class="category-nav" aria-label="Story categories">
+        <a href="#history" data-scroll-target="history">History ↓</a>
+        <a href="#celebrations" data-scroll-target="celebrations">Celebrations ↓</a>
+        <a href="#people" data-scroll-target="people">Famous people ↓</a>
+      </nav>
+    </div>
+
+  <div class="shell filters">
+    <div class="filter-row">
+      <span class="filter-label">Filter every section by reading level</span>
+      <div class="filter-buttons" role="group" aria-label="Filter stories by level">
+        <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" type="button" data-filter="A1" aria-pressed="false">A1</button>
+        <button class="filter-btn" type="button" data-filter="A2" aria-pressed="false">A2</button>
+        <button class="filter-btn" type="button" data-filter="B1" aria-pressed="false">B1</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section history" id="history">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-mark"><span class="avestan">𐬙</span><span class="kicker">01 / History</span></div>
+          <h2>Moments that still echo.</h2>
+        </div>
+        <p class="section-intro">Short, readable Persian stories about turning points, places, and ideas that continue to live in Iranian cultural memory.</p>
+      </div>
+
+      <div class="history-list" aria-label="Iranian history stories">
+        <div class="history-event">
+          <div class="timeline-date">c. 6th century BCE</div>
+
+          <a class="history-card"
+             data-level="A2"
+             href="./cyrus.html"
+             data-page="cyrus">
+
+            <div class="history-image">
+              <img data-image="cyrus" src="" alt="Cyrus the Great story">
+              <div class="image-placeholder-copy"><span>Cyrus image</span></div>
+            </div>
+
+            <div class="history-body">
+              <div class="history-meta">
+                <span class="history-level">A2 Persian</span>
+              </div>
+
+              <h3>Cyrus and the beginning of an empire</h3>
+
+              <p>
+                A learner-friendly introduction to Cyrus the Great,
+                the Achaemenid world, and why his name still occupies
+                such a large place in Iranian historical memory.
+              </p>
+
+              <div class="history-foot">
+                <span>Founding memory</span>
+                <span class="card-arrow">↗</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="history-event">
+          <div class="timeline-date">Ancient Iran</div>
+          <a class="history-card"
+             data-level="A1"
+             href="./perspolis.html"
+             data-page="persepolis">
+            <div class="history-image">
+              <img data-image="persepolis" src="" alt="Persepolis story">
+              <div class="image-placeholder-copy"><span>Persepolis image</span></div>
+            </div>
+            <div class="history-body">
+              <div class="history-meta"><span class="history-level">A1 Persian</span></div>
+              <h3>A day at Persepolis</h3>
+              <p>Enter the ceremonial capital through simple descriptive Persian: stone, stairs, visitors, kings, and carved delegations.</p>
+              <div class="history-foot"><span>Ceremonial world</span><span class="card-arrow">↗</span></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="history-event">
+          <div class="timeline-date">1905–1911</div>
+          <article class="history-card" data-level="B1">
+            <div class="history-image">
+              <img data-image="constitutionalRevolution" src="" alt="Iranian Constitutional Revolution story">
+              <div class="image-placeholder-copy"><span>Constitutional Revolution image</span></div>
+            </div>
+            <div class="history-body">
+              <div class="history-meta"><span class="history-level">B1 Persian</span></div>
+              <h3>The Constitutional Revolution</h3>
+              <p>A story of newspapers, parliament, protest, and a society arguing over what political life could become in the early twentieth century.</p>
+              <div class="history-foot"><span>Modern turning point</span><span class="card-arrow">↗</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section celebrations" id="celebrations">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-mark"><span class="avestan">𐬨</span><span class="kicker">02 / Celebrations</span></div>
+          <h2>The year, told by ritual.</h2>
+        </div>
+        <p class="section-intro">Festivals are full of repeatable language: things people say, prepare, eat, light, visit, give, and remember. That makes them perfect reading material.</p>
+      </div>
+
+      <div class="season-note" role="group" aria-label="Filter celebrations by season">
+        <button class="season-btn active" type="button" data-season-filter="all" aria-pressed="true"><strong>All seasons</strong>Show everything</button>
+        <button class="season-btn" type="button" data-season-filter="spring" aria-pressed="false"><strong>Spring</strong>Nowruz</button>
+        <button class="season-btn" type="button" data-season-filter="summer" aria-pressed="false"><strong>Summer</strong>Tirgan</button>
+        <button class="season-btn" type="button" data-season-filter="autumn" aria-pressed="false"><strong>Autumn</strong>Mehregan</button>
+        <button class="season-btn" type="button" data-season-filter="winter" aria-pressed="false"><strong>Winter</strong>Yalda</button>
+      </div>
+
+      <div class="story-grid">
+        <article class="story-card" data-level="A1" data-season="spring">
+          <div class="card-image">
+            <img data-image="nowruz" src="" alt="Nowruz story">
+            <div class="image-placeholder-copy"><span>Nowruz image</span></div>
+          </div>
+          <div class="card-top"><span class="level">A1 Persian</span><span class="readtime">4 min read</span></div>
+          <div class="card-fa" lang="fa">نوروز</div>
+          <h3>Nowruz morning</h3>
+          <p>Follow a family through greetings, new clothes, the haft-seen, visiting relatives, and the first moments of the new year.</p>
+          <div class="card-foot"><span class="card-kind">Spring equinox</span><span class="card-arrow">↗</span></div>
+        </article>
+
+    <a class="story-card" data-level="A2" data-season="winter"
+   href="./shb-ylda-shab-e-yalda.html"
+   data-page="yalda">
+          <div class="card-image">
+            <img data-image="yalda" src="" alt="Yalda story">
+            <div class="image-placeholder-copy"><span>Yalda image</span></div>
+          </div>
+          <div class="card-top"><span class="level">A2 Persian</span><span class="readtime">6 min read</span></div>
+          <div class="card-fa" lang="fa">شب یلدا</div>
+          <h3>The longest night</h3>
+          <p>Pomegranates, watermelon, Hafez, family, and staying awake together on Shab-e Yalda.</p>
+          <div class="card-foot"><span class="card-kind">Winter solstice</span><span class="card-arrow">↗</span></div>
+        </a>
+        <article class="story-card" data-level="B1" data-season="spring">
+          <div class="card-image">
+            <img data-image="chaharshanbeSuri" src="" alt="Chaharshanbe Suri story">
+            <div class="image-placeholder-copy"><span>Chaharshanbe Suri image</span></div>
+          </div>
+          <div class="card-top"><span class="level">B1 Persian</span><span class="readtime">7 min read</span></div>
+          <div class="card-fa" lang="fa">چهارشنبه‌سوری</div>
+          <h3>Fire before spring</h3>
+          <p>Read the ritual, its vocabulary, and the feeling of a city turning toward renewal just before Nowruz.</p>
+          <div class="card-foot"><span class="card-kind">Last Wednesday before Nowruz</span><span class="card-arrow">↗</span></div>
+        </article>
+        <div class="season-empty" id="season-empty" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section people" id="people">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="section-mark"><span class="avestan">𐬭</span><span class="kicker">03 / Famous people</span></div>
+          <h2>Lives larger than a vocabulary list.</h2>
+        </div>
+        <p class="section-intro">Poets, scientists, artists, rulers, and thinkers—historical and modern. Meet the person first, then meet the Persian through their story.</p>
+      </div>
+
+      <div class="people-grid">
+        <article class="person-card" data-level="A2">
+          <div class="person-image">
+            <img data-image="ferdowsi" src="" alt="Ferdowsi">
+            <div class="image-placeholder-copy"><span>Ferdowsi image</span></div>
+          </div>
+          <div class="person-body">
+            <div class="person-era">c. 940–1020 · Poet</div>
+            <h3>Ferdowsi</h3>
+            <p>The poet behind the <em>Shahnameh</em>, and one of the central names in the long life of Persian literature.</p>
+            <div class="card-foot"><span class="card-kind">A2 Persian</span><span class="card-arrow">↗</span></div>
+          </div>
+        </article>
+
+        <article class="person-card" data-level="A2">
+          <div class="person-image">
+            <img data-image="forough" src="" alt="Forough Farrokhzad">
+            <div class="image-placeholder-copy"><span>Forough image</span></div>
+          </div>
+          <div class="person-body">
+            <div class="person-era">1935–1967 · Poet</div>
+            <h3>Forough Farrokhzad</h3>
+            <p>A modern poet whose voice, imagery, and life reshaped what Persian poetry could sound like in the twentieth century.</p>
+            <div class="card-foot"><span class="card-kind">A2 Persian</span><span class="card-arrow">↗</span></div>
+          </div>
+        </article>
+
+        <article class="person-card" data-level="B1">
+          <div class="person-image">
+            <img data-image="kiarostami" src="" alt="Abbas Kiarostami">
+            <div class="image-placeholder-copy"><span>Abbas Kiarostami image</span></div>
+          </div>
+          <div class="person-body">
+            <div class="person-era">1940–2016 · Filmmaker</div>
+            <h3>Abbas Kiarostami</h3>
+            <p>A filmmaker who made ordinary roads, faces, silences, and questions travel around the world.</p>
+            <div class="card-foot"><span class="card-kind">B1 Persian</span><span class="card-arrow">↗</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reading-experience" id="how-to-read">
+    <div class="shell reading-system">
+      <div class="reading-demo">
+        <div class="demo-tabs"><span class="demo-tab active">Persian</span><span class="demo-tab">Finglish</span><span class="demo-tab">Vocabulary</span></div>
+        <div class="demo-fa fa" lang="fa">شب یلدا بلندترین شب سال است.</div>
+        <div class="demo-finglish">Shab-e Yaldā boland-tarin shab-e sāl ast.</div>
+        <div class="demo-vocab"><div><strong>بلندترین</strong> — longest</div><div><strong>شب</strong> — night</div><div><strong>سال</strong> — year</div><div><strong>است</strong> — is</div></div>
+      </div>
+
+      <div class="reading-copy">
+        <div class="eyebrow">The reading system</div>
+        <h2>The story stays in front.</h2>
+        <p>Support should feel like a margin, not a wall. Each story can keep Persian central while Finglish, vocabulary, and cultural notes appear only when the reader wants them.</p>
+        <ul class="checks">
+          <li>Level clearly shown before opening a story</li>
+          <li>Persian text remains the visual focus</li>
+          <li>Optional Finglish rather than permanent transliteration</li>
+          <li>Vocabulary tied to the actual story</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="shell">
+      <div class="avestan orange">𐬢</div>
+      <div class="eyebrow">New stories as they grow</div>
+      <h2>Come back for another door into Persian.</h2>
+      <p>New readings can move between history, celebration, biography, and everyday culture without turning the archive into a textbook.</p>
+      <a class="newsletter-btn" href="./index.html#newsletter" data-page="newsletter">Join the newsletter →</a>
+    </div>
+  </section>
+</main>
+
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+
+    <div class="footer-left">
+      <a class="footer-logo-text" href="./index.html">Seeds of Hom</a>
+    </div>
+
+    <div class="footer-center" aria-label="Social media">
+      <a class="social-link" href="#" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5Zm8.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+        </svg>
+      </a>
+
+      <a class="social-link" href="#" aria-label="Substack" title="Substack">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h18v2H3V4Zm0 4h18v2H3V8Zm0 4h18v2H3v-2Zm2 4h14v4l-7 4-7-4v-4Z"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer-right">
+      <a class="footer-link" href="./impressum.html">Impressum</a>
+    </div>
+
+    <div class="footer-copy">
+      © <span id="footer-year"></span> Seeds of Hom. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+/* ==========================================================
+   GITHUB PAGE PATHS
+   Keep the HTML files in the same folder as this page, or edit
+   these paths to match your repository structure.
+   ========================================================== */
+const PAGE_URLS = {
+  home: "./index.html",
+  cyrus: "./cyrus.html",
+  persepolis: "./perspolis.html",
+  yalda: "./shb-ylda-shab-e-yalda.html",
+  newsletter: "./index.html#newsletter"
+};
+
+/* ==========================================================
+   IMAGE URLS — THIS IS THE ONLY PLACE YOU NEED TO EDIT IMAGES
+   Paste each image URL between the quotation marks.
+   Leave "" if you want the placeholder to stay visible.
+   ========================================================== */
+const IMAGE_URLS = {
+  hero: "",
+  cyrus: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-aug-22-2026-at-10_32_49-am-0jVkgT1OdxWOebGU.png",
+  persepolis: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-aug-22-2026-at-10_35_55-am-VzsuOfN8JiIE0u4O.png",
+  constitutionalRevolution: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_05_08-pm-adIUvQu2CtQjCJZ2.png",
+  nowruz: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_54_36-pm-Kqavpwe3zp093bPH.png",
+  yalda: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_56_13-pm-mpcii5071R65PEqa.png",
+  chaharshanbeSuri: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_57_00-pm-QdedgrAIFYilUESI.png",
+  ferdowsi: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-02_25_52-pm-qDGETzpuocM5QCgV.png",
+  forough: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-02_22_53-pm-Tna91DdU2l1Pe0xy.png",
+  kiarostami: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/620dcf58-5357-49cf-8987-625e606eeef3-xlv5vrJVj21eAaPC.png"
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  /* Apply GitHub page paths from the single PAGE_URLS block above. */
+  document.querySelectorAll("[data-page]").forEach(link => {
+    const key = link.dataset.page;
+    if (PAGE_URLS[key]) link.href = PAGE_URLS[key];
+  });
+
+  /* Load every image from the single IMAGE_URLS block above. */
+  document.querySelectorAll("img[data-image]").forEach(img => {
+    const key = img.dataset.image;
+    const url = (IMAGE_URLS[key] || "").trim();
+
+    if (!url) {
+      img.style.display = "none";
+      return;
+    }
+
+    img.src = url;
+    img.style.display = "block";
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+    }, { once:true });
+  });
+
+  /* Smooth in-page category navigation for GitHub Pages. */
+  document.querySelectorAll(".category-nav [data-scroll-target]").forEach(link => {
+    link.addEventListener("click", event => {
+      const target = document.getElementById(link.dataset.scrollTarget);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
+
+      /* Keep the URL hash useful without relying on the browser's default anchor jump. */
+      if (history.replaceState) {
+        history.replaceState(null, "", "#" + link.dataset.scrollTarget);
+      }
+    });
+  });
+
+  /* Combined reading-level + celebration-season filters. */
+  const levelButtons = document.querySelectorAll(".filter-btn");
+  const seasonButtons = document.querySelectorAll(".season-btn");
+  const cards = document.querySelectorAll("[data-level]");
+  const celebrationCards = document.querySelectorAll(".celebrations .story-card[data-season]");
+  const seasonEmpty = document.getElementById("season-empty");
+
+  let activeLevel = "all";
+  let activeSeason = "all";
+
+  function applyFilters() {
+    cards.forEach(card => {
+      const matchesLevel = activeLevel === "all" || card.dataset.level === activeLevel;
+      const isCelebration = card.matches(".celebrations .story-card");
+      const matchesSeason = !isCelebration || activeSeason === "all" || card.dataset.season === activeSeason;
+      const hide = !(matchesLevel && matchesSeason);
+
+      card.hidden = hide;
+
+      /* For history cards, hide the entire event so its date vanishes too. */
+      const event = card.closest(".history-event");
+      if (event) event.hidden = hide;
+    });
+
+    if (seasonEmpty) {
+      const visibleCelebrations = Array.from(celebrationCards).filter(card => !card.hidden);
+      const showEmpty = visibleCelebrations.length === 0;
+
+      seasonEmpty.classList.toggle("show", showEmpty);
+      if (showEmpty) {
+        const seasonName = activeSeason === "all"
+          ? "this selection"
+          : activeSeason.charAt(0).toUpperCase() + activeSeason.slice(1);
+        seasonEmpty.textContent = `No ${seasonName.toLowerCase()} celebration stories match the selected reading level yet.`;
+      } else {
+        seasonEmpty.textContent = "";
+      }
+    }
+  }
+
+  levelButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeLevel = button.dataset.filter;
+
+      levelButtons.forEach(btn => {
+        const isActive = btn === button;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+      applyFilters();
+    });
+  });
+
+  seasonButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeSeason = button.dataset.seasonFilter;
+
+      seasonButtons.forEach(btn => {
+        const isActive = btn === button;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".nav-toggle");
+  const menu = document.querySelector(".nav-menu");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  const year = document.getElementById("footer-year");
+  if (year) year.textContent = new Date().getFullYear();
+});
+</script>
+
+</body>
+</html>
