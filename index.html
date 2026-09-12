@@ -1773,8 +1773,64 @@ footer.site-footer::after{
     margin-top:4px;
   }
 }
-.hero-copy {
-  padding-left: 40px;
+
+</style>
+
+
+<style>
+/* FINAL OVERRIDES — navbar + desktop hero alignment */
+
+/* Larger Times New Roman menu text */
+.nav-links-left a,
+.nav-menu a {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 19px !important;
+}
+
+/* Slightly larger centered logo */
+.nav-logo img {
+  height: 48px !important;
+  width: auto !important;
+  max-width: 190px !important;
+  object-fit: contain !important;
+}
+
+/* Move the complete desktop hero composition a little to the right */
+@media (min-width: 821px) {
+  .hero-inner {
+    transform: translateX(42px);
+  }
+
+  /* Remove the old text-only offset so text + orbit move together */
+  .hero-copy {
+    padding-left: 0 !important;
+  }
+}
+
+/* Keep mobile centered and within the viewport */
+@media (max-width: 820px) {
+  .hero-inner {
+    transform: none !important;
+  }
+
+  .nav-logo img {
+    height: 40px !important;
+    max-width: 155px !important;
+  }
+
+  .nav-menu a {
+    font-size: 18px !important;
+  }
+}
+</style>
+
+
+<style>
+/* FINAL — 40px left/right padding on every section */
+section {
+  padding-left: 70px !important;
+  padding-right: 70px !important;
+}
 }
 </style>
 
@@ -1793,7 +1849,7 @@ footer.site-footer::after{
     </div>
 
     <a class="nav-logo" href="#top" aria-label="Seeds of Hom home">
-      <img src="logo" alt="Seeds of Hom">
+      <img src="logo.svg" alt="Seeds of Hom">
     </a>
 
     <button class="nav-toggle" type="button"
