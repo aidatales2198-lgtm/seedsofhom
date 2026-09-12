@@ -1,14 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Seeds of Hom — Persian language, literature, stories and culture." />
   <title>Seeds of Hom</title>
-</head>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
 <body>
-  <h1>Seeds of Hom</h1>
-  <p>Persian language, literature & culture.</p>
-  <p>New website coming soon 🌱</p>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="Seeds of Hom home">
+        <span class="brand-mark">✦</span>
+        <span>Seeds of Hom</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#learn">Learn Persian</a>
+        <a href="#stories">Stories & Culture</a>
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#newsletter">Newsletter</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Language · Literature · Culture</p>
+          <h1>Persian stories, words, and worlds worth keeping alive.</h1>
+          <p class="hero-text">
+            Seeds of Hom is a place to learn Persian through culture, discover Iranian stories,
+            and read about literature, mythology and memory.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#stories">Explore stories</a>
+            <a class="button secondary" href="#learn">Learn Persian</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Persian quote card">
+          <div class="ornament">✦</div>
+          <p class="persian" dir="rtl">هر کلمه، دانه‌ای‌ست برای یک داستان.</p>
+          <p class="translation">Every word can become the seed of a story.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stories">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Read</p>
+            <h2>Stories & culture</h2>
+          </div>
+          <p>Iranian traditions, poetry, mythology and stories — written for curious readers and Persian learners.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <span class="tag">Culture</span>
+            <h3>Yalda</h3>
+            <p>The longest night of the year, pomegranates, poetry, family and the symbolism behind the celebration.</p>
+            <a href="#">Read article →</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Story</span>
+            <h3>Tooti o Bazargan</h3>
+            <p>A classic Persian tale retold for learners, with vocabulary and cultural notes.</p>
+            <a href="#">Read story →</a>
+          </article>
+
+          <article class="card">
+            <span class="tag">Literature</span>
+            <h3>Forough Farrokhzad</h3>
+            <p>An introduction to one of Iran's most influential modern poets and the world behind her writing.</p>
+            <a href="#">Read article →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="learn">
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">Learn</p>
+          <h2>Persian that lives outside the textbook.</h2>
+          <p class="large-copy">
+            Learn through stories, cultural notes, everyday vocabulary and real Persian.
+            Materials can grow from beginner-friendly A1 pages to richer B1 reading.
+          </p>
+          <a class="text-link" href="#">Browse learning materials →</a>
+        </div>
+
+        <div class="learning-list">
+          <div class="learning-item">
+            <span>01</span>
+            <div>
+              <h3>Beginner Persian</h3>
+              <p>Useful vocabulary, pronunciation and simple grammar.</p>
+            </div>
+          </div>
+          <div class="learning-item">
+            <span>02</span>
+            <div>
+              <h3>Graded readings</h3>
+              <p>Short texts with vocabulary support and cultural context.</p>
+            </div>
+          </div>
+          <div class="learning-item">
+            <span>03</span>
+            <div>
+              <h3>Culture notes</h3>
+              <p>Festivals, poetry, mythology, customs and everyday Iran.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="writing">
+      <div class="container feature">
+        <div>
+          <p class="eyebrow">Writing</p>
+          <h2>Essays, mythology & historical fiction</h2>
+          <p class="large-copy">
+            A space for longer writing on Iranian myth, literature, psychology and the stories that continue to shape us.
+          </p>
+          <a class="button secondary" href="#">Explore writing</a>
+        </div>
+
+        <blockquote>
+          “A culture survives not only in monuments, but in the stories people continue to tell.”
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>Why Seeds of Hom?</h2>
+        </div>
+        <div>
+          <p class="large-copy">
+            Seeds of Hom brings Persian language learning together with literature, storytelling and Iranian culture.
+            It is made for people who want more than vocabulary lists — and for readers who want to discover Iran through its stories.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter">
+      <div class="container newsletter-box">
+        <div>
+          <p class="eyebrow">Newsletter</p>
+          <h2>New stories, Persian words & cultural notes.</h2>
+          <p>Join the list and get new Seeds of Hom writing in your inbox.</p>
+        </div>
+
+        <form class="newsletter-form" action="#" method="post">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" type="email" placeholder="Your email address" required />
+          <button class="button primary" type="submit">Join</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> Seeds of Hom</p>
+      <p>Persian language · literature · culture</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
