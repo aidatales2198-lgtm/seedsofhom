@@ -988,6 +988,180 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 </style>
 
 
+
+
+<style>
+/* ================================================================
+   BORDER SYSTEM PATCH — matched to Seeds of Hom homepage
+   Applies the same thin topic-colour frame, faint wash,
+   corner-circle detail and subtle hover lift consistently.
+   ================================================================ */
+
+/* Small framed controls */
+.archive-tag,
+.category-nav a,
+.filter-btn{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.010) 42%);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease;
+}
+
+.archive-tag{
+  border:1px solid rgba(120,239,250,.34);
+  background:linear-gradient(180deg,rgba(120,239,250,.10),rgba(255,255,255,.010) 42%);
+}
+.archive-tag::after{
+  content:"";
+  position:absolute;
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  right:-34px;
+  bottom:-40px;
+  border:1px solid rgba(120,239,250,.24);
+  pointer-events:none;
+}
+
+.category-nav a:hover,
+.filter-btn:hover,
+.filter-btn.active{
+  transform:translateY(-2px);
+  background:linear-gradient(180deg,rgba(120,239,250,.10),rgba(255,255,255,.012) 42%);
+}
+
+/* Hero image frame */
+.hero-image-placeholder{
+  --frame-color:var(--cyan);
+  position:relative;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--frame-color) 34%,transparent);
+  background:linear-gradient(180deg,rgba(120,239,250,.14),rgba(255,255,255,.012) 40%);
+  box-shadow:none;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.hero-image-placeholder::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-64px;
+  bottom:-74px;
+  border:1px solid color-mix(in srgb,var(--frame-color) 26%,transparent);
+  pointer-events:none;
+  z-index:2;
+}
+.hero-image-placeholder:hover{
+  transform:translateY(-3px);
+  border-color:var(--frame-color);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--frame-color) 20%,transparent),rgba(255,255,255,.015) 42%);
+}
+
+/* Make image separators use each card's topic colour */
+.history-image{
+  border-right:1px solid color-mix(in srgb,var(--history) 26%,transparent);
+}
+.celebrations .card-image{
+  border:1px solid color-mix(in srgb,var(--celebrations) 26%,transparent);
+}
+.people .person-image{
+  border-right:1px solid color-mix(in srgb,var(--people) 26%,transparent);
+}
+
+/* Season selector uses the same orange frame language */
+.season-note{
+  --frame-color:var(--celebrations);
+  position:relative;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--frame-color) 34%,transparent);
+  background:linear-gradient(180deg,var(--celebrations-faint),rgba(255,255,255,.012) 40%);
+}
+.season-note::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-64px;
+  bottom:-74px;
+  border:1px solid color-mix(in srgb,var(--frame-color) 26%,transparent);
+  pointer-events:none;
+}
+.season-btn{
+  position:relative;
+  z-index:1;
+}
+
+/* Reading demo uses the same cyan card frame */
+.reading-demo{
+  --frame-color:var(--cyan);
+  position:relative;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--frame-color) 34%,transparent);
+  background:linear-gradient(180deg,rgba(120,239,250,.14),rgba(255,255,255,.012) 40%);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.reading-demo::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-64px;
+  bottom:-74px;
+  border:1px solid color-mix(in srgb,var(--frame-color) 26%,transparent);
+  pointer-events:none;
+}
+.reading-demo:hover{
+  transform:translateY(-3px);
+  border-color:var(--frame-color);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--frame-color) 20%,transparent),rgba(255,255,255,.015) 42%);
+}
+.reading-demo > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Topic-aware card image border — keeps the frame cohesive */
+.story-card .card-image{
+  border-color:color-mix(in srgb,var(--card-color) 26%,transparent);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card-color) 8%,transparent),rgba(255,255,255,.008) 42%);
+}
+.person-card .person-image,
+.history-card .history-image{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card-color) 8%,transparent),rgba(255,255,255,.008) 42%);
+}
+
+/* Keep decorative circles behind text but visible */
+.card > *,
+.read-card > *,
+.history-card > *,
+.story-card > *,
+.person-card > *{
+  position:relative;
+  z-index:1;
+}
+.card::after,
+.read-card::after,
+.history-card::after,
+.story-card::after,
+.person-card::after{
+  z-index:0;
+}
+
+/* Mobile: preserve topic-colour dividers */
+@media(max-width:620px){
+  .people .person-image{
+    border-right:0;
+    border-bottom:1px solid color-mix(in srgb,var(--people) 26%,transparent);
+  }
+  .history-image{
+    border-bottom:0;
+  }
+}
+</style>
+
 </head>
 <body>
 
