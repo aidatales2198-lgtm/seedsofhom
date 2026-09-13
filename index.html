@@ -149,18 +149,41 @@ section{position:relative;padding:118px 28px}
 /* Reading archive */
 .readings{border-bottom:1px solid var(--line)}
 .reading-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:58px}
+
+/* ================================================================
+   UNIFIED CARD SYSTEM (matches stories.html)
+   - 1px border in the card's topic color at ~34% opacity
+   - faint gradient wash from the topic color into transparent
+   - soft rise + brighter border + brighter wash on hover
+   - a decorative circle bleeding off the bottom-right corner
+   This is the single "kadr" (frame) shared by every card on the site.
+   ================================================================ */
 .read-card{
-  min-height:310px;padding:34px;border:1px solid rgba(247,240,231,.14);position:relative;overflow:hidden;
-  background:rgba(255,255,255,.015);transition:.25s;
+  --card-color:var(--cyan);
+  --card-faint:rgba(120,239,250,.14);
+  min-height:310px;padding:34px;position:relative;overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--card-color) 34%,transparent);
+  background:linear-gradient(180deg,var(--card-faint),rgba(255,255,255,.012) 40%);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
 }
-.read-card:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;border:1px solid rgba(120,239,250,.10);right:-60px;bottom:-80px}
-.read-card:nth-child(even):after{border-color:rgba(245,133,63,.13)}
-.read-card:hover{border-color:rgba(120,239,250,.48);transform:translateY(-3px);background:rgba(120,239,250,.025)}
-.read-card:nth-child(even):hover{border-color:rgba(245,133,63,.46);background:rgba(245,133,63,.025)}
-.read-card .num{font-size:12px;letter-spacing:.18em;color:var(--orange);text-transform:uppercase}
+.read-card:nth-child(even){
+  --card-color:var(--orange);
+  --card-faint:rgba(245,133,63,.14);
+}
+.read-card:after{
+  content:"";position:absolute;width:170px;height:170px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--card-color) 26%,transparent);
+  right:-64px;bottom:-74px;pointer-events:none;
+}
+.read-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--card-color);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card-color) 20%,transparent),rgba(255,255,255,.015) 42%);
+}
+.read-card .num{font-size:12px;letter-spacing:.18em;color:var(--card-color);text-transform:uppercase}
 .read-card h3{font-size:42px;font-weight:400;margin:42px 0 15px;max-width:420px}
 .read-card p{color:var(--lav);font-size:18px;max-width:440px;margin:0}
-.read-card .arrow{position:absolute;right:28px;top:28px;color:var(--cyan);font-size:23px}
+.read-card .arrow{position:absolute;right:28px;top:28px;color:var(--card-color);font-size:23px}
 
 /* Reading sample */
 .demo{border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(120,239,250,.018),rgba(23,10,47,0))}
@@ -1228,9 +1251,6 @@ html {
     padding:13px 12px;
     font-size:16px;
   }
-  .nav-menu a:not(.nav-highlight)::after{
-    display:none;
-  }
   .nav-highlight{
     margin-top:5px;
     text-align:center;
@@ -1828,8 +1848,8 @@ footer.site-footer::after{
 <style>
 /* FINAL — 40px left/right padding on every section */
 section {
-  padding-left: 92px !important;
-  padding-right: 92px !important;
+  padding-left: 70px !important;
+  padding-right: 70px !important;
 }
 }
 </style>
@@ -1883,7 +1903,7 @@ section {
       <p>Poetry, rituals, history and cultural texts — read in Persian, with vocabulary and optional Finglish beside you when you need it.</p>
       <div class="actions">
         <a class="btn"
-   href="./stories.html" target="_top">
+   href="https://www.seedsofhom.com/graded-persian-stories" target="_top">
   Begin reading →
 </a>
         <a class="btn ghost" href="#hom">Discover Hom</a>
