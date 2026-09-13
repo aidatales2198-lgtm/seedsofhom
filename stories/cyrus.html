@@ -958,11 +958,29 @@ body{
   width:min(980px,calc(100% - 40px));
 }
 
-/* Sticky top bar */
+/* Reading progress bar:
+   hidden while the main site navigation is visible,
+   then fixed to the top once the site navigation scrolls away. */
 .lesson-nav{
-  background:rgba(23,10,47,.90);
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:75;
+  background:rgba(23,10,47,.94);
   border-bottom:1px solid rgba(247,240,231,.12);
   backdrop-filter:blur(18px);
+  transform:translateY(-100%);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:transform .28s ease, opacity .22s ease, visibility .28s ease;
+}
+.lesson-nav.is-visible{
+  transform:translateY(0);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 .lesson-nav-inner{min-height:58px}
 .brand-logo{
@@ -1689,6 +1707,11 @@ body{
   border-bottom:1px solid rgba(247,240,231,.12);
 }
 
+/* Homepage navigation uses the wider site shell, not the narrower lesson width. */
+.site-header .wrap{
+  width:min(1160px,calc(100% - 40px));
+}
+
 .site-nav-inner{
   min-height:72px;
   display:flex;
@@ -1884,6 +1907,10 @@ body{
 }
 
 @media(max-width:700px){
+  .site-header .wrap{
+    width:calc(100% - 36px);
+  }
+
   .site-nav-inner{
     min-height:62px;
   }
@@ -1926,6 +1953,33 @@ body{
   }
 }
 
+
+
+/* =========================================================
+   FINAL FONT OVERRIDE
+   Force all Latin/interface copy to Times New Roman.
+   Persian lesson text remains B Nazanin; Avestan icons stay Avestan.
+   ========================================================= */
+html body,
+html body *{
+  font-family:"Times New Roman", Times, serif !important;
+}
+
+html body [lang="fa"],
+html body .fa-text,
+html body .vocab-fa,
+html body .portrait-note,
+html body .closing-word,
+html body .event-card strong,
+html body .quiz-item h3[dir="rtl"],
+html body .answer-btn[dir="rtl"],
+html body .reading-pane[data-pane="fa"]{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,sans-serif !important;
+}
+
+html body .avestan-icon span{
+  font-family:"Noto Sans Avestan", serif !important;
+}
 </style>
 </head>
 <body>
@@ -1933,13 +1987,13 @@ body{
 
 <header class="site-header">
   <div class="wrap site-nav-inner">
-    <a class="site-logo" href="www.seedsofhom.com" target="_top" aria-label="Seeds of Hom home">
+    <a class="site-logo" href="../index.html" aria-label="Seeds of Hom home">
       <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
     </a>
 
     <nav class="site-menu" aria-label="Main navigation">
-      <a href="www.seedsofhom.com" target="_top">Home</a>
-      <a href=".www.seedsofhom.com/stories" target="_top">Stories</a>
+      <a href="../index.html">Home</a>
+      <a href="../stories.html">Stories</a>
       <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
       <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
     </nav>
@@ -1947,8 +2001,8 @@ body{
     <details class="site-menu-mobile">
       <summary>Menu</summary>
       <nav class="mobile-menu-panel" aria-label="Mobile navigation">
-        <a href="https://www.seedsofhom.com/" target="_top">Home</a>
-        <a href="https://www.seedsofhom.com/graded-persian-stories" target="_top">Stories</a>
+        <a href="../index.html">Home</a>
+        <a href="../stories.html">Stories</a>
         <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
         <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
       </nav>
@@ -1959,7 +2013,7 @@ body{
 
 <nav class="lesson-nav" aria-label="Lesson progress">
   <div class="wrap lesson-nav-inner">
-    <a class="brand brand-logo" href="https://www.seedsofhom.com/" target="_top" aria-label="Seeds of Hom home">
+    <a class="brand brand-logo" href="../index.html" aria-label="Seeds of Hom home">
       <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
     </a>
     <div class="lesson-progress" aria-hidden="true">
@@ -1999,7 +2053,7 @@ body{
       <div class="hero-art">
         <div class="portrait-shell">
           <img
-            src="https://github.com/aidatales2198-lgtm/seedsofhom/blob/eca9a6eea5db71821e5385ed912570c36714f02f/assets/koorosh.png"
+            src="../assets/koorosh.png"
             alt="Cyrus the Great"
             style="width:100%;height:100%;object-fit:cover;display:block;"
           >
@@ -2249,7 +2303,7 @@ body{
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="https://www.seedsofhom.com/" target="_top" aria-label="Seeds of Hom home">
+        <a href="../index.html" aria-label="Seeds of Hom home">
           <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
         </a>
         <p>
@@ -2259,8 +2313,8 @@ body{
       </div>
 
       <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="https://www.seedsofhom.com/" target="_top">Home</a>
-        <a href="https://www.seedsofhom.com/graded-persian-stories" target="_top">Stories</a>
+        <a href="../index.html">Home</a>
+        <a href="../stories.html">Stories</a>
         <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
         <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
       </nav>
@@ -2275,6 +2329,20 @@ body{
 
 
 <script>
+  // SHOW THE READING BAR ONLY AFTER THE MAIN SITE NAV HAS SCROLLED AWAY
+  const siteHeader = document.querySelector('.site-header');
+  const lessonNav = document.querySelector('.lesson-nav');
+
+  function updateLessonNavVisibility(){
+    if(!siteHeader || !lessonNav) return;
+    const headerBottom = siteHeader.getBoundingClientRect().bottom;
+    lessonNav.classList.toggle('is-visible', headerBottom <= 0);
+  }
+
+  window.addEventListener('scroll', updateLessonNavVisibility, {passive:true});
+  window.addEventListener('resize', updateLessonNavVisibility);
+  updateLessonNavVisibility();
+
   // HERO IN-PAGE NAVIGATION
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -2286,8 +2354,7 @@ body{
 
       e.preventDefault();
 
-      const nav = document.querySelector('.lesson-nav');
-      const navHeight = nav ? nav.offsetHeight : 0;
+      const navHeight = lessonNav ? lessonNav.offsetHeight : 0;
       const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
 
       window.scrollTo({
