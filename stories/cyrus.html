@@ -1980,33 +1980,319 @@ html body .reading-pane[data-pane="fa"]{
 html body .avestan-icon span{
   font-family:"Noto Sans Avestan", serif !important;
 }
+
+/* =========================================================
+   FINAL BORDER SYSTEM — MATCH HOMEPAGE
+   Thin, square, low-opacity cyan/ivory borders.
+   Beige reading panel stays beige.
+   ========================================================= */
+
+/* Main framed panels */
+.sidebar-card,
+.activity-card,
+.quiz-item,
+.next-card{
+  border-radius:0 !important;
+  box-shadow:none !important;
+  border:1px solid rgba(120,239,250,.24) !important;
+  background:linear-gradient(
+    180deg,
+    rgba(120,239,250,.055),
+    rgba(255,255,255,.012) 42%
+  ) !important;
+}
+
+/* Reading card keeps its warm beige treatment, only the frame changes */
+.reading-card{
+  border-radius:0 !important;
+  box-shadow:none !important;
+  border:1px solid rgba(120,239,250,.24) !important;
+}
+
+/* Smaller cards use the softer homepage frame */
+.vocab-card,
+.event-card,
+.answer-btn,
+.lang-btn,
+.inline-action,
+.meta-pill,
+.secondary-btn,
+.action-secondary,
+.quiz-summary{
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.vocab-card,
+.answer-btn{
+  border:1px solid rgba(247,240,231,.16) !important;
+}
+
+.event-card{
+  border:1px solid rgba(120,239,250,.22) !important;
+}
+
+.lang-btn{
+  border:1px solid rgba(247,240,231,.18) !important;
+}
+
+.inline-action{
+  border:1px solid rgba(120,239,250,.32) !important;
+}
+
+.meta-pill{
+  border:1px solid rgba(247,240,231,.16) !important;
+}
+
+.secondary-btn,
+.action-secondary{
+  border:1px solid rgba(120,239,250,.44) !important;
+}
+
+.quiz-summary{
+  border:1px solid rgba(120,239,250,.24) !important;
+}
+
+/* Reading card inner dividers */
+.reading-card-top{
+  border-bottom:1px solid rgba(23,10,47,.14) !important;
+}
+
+.reading-card .vocab-section{
+  border-top:1px solid rgba(23,10,47,.13) !important;
+}
+
+/* Beige vocabulary cards keep their warm fill but use the cleaner frame */
+.reading-card .vocab-card{
+  border:1px solid rgba(23,10,47,.16) !important;
+}
+
+/* Homepage-style hover: small rise + brighter border */
+.vocab-card,
+.event-card,
+.answer-btn,
+.lang-btn,
+.inline-action{
+  transition:transform .22s ease, border-color .22s ease, background .22s ease !important;
+}
+
+.vocab-card:hover,
+.event-card:hover,
+.answer-btn:hover,
+.inline-action:hover{
+  transform:translateY(-2px) !important;
+  border-color:var(--cyan) !important;
+  box-shadow:none !important;
+}
+
+.lang-btn:hover,
+.lang-btn.active{
+  transform:none !important;
+  border-color:var(--orange) !important;
+}
+
+/* Preserve the warm reading-card controls on hover */
+.reading-card .inline-action:hover,
+.reading-card .vocab-card:hover{
+  border-color:var(--orange) !important;
+}
+
+/* Cyrus image frame matches the same thin cyan language */
+.portrait-shell{
+  border-radius:0 !important;
+  border:1px solid rgba(120,239,250,.24) !important;
+  box-shadow:inset 0 0 60px rgba(120,239,250,.025) !important;
+}
+
+
+
+/* =========================================================
+   FINAL HOMEPAGE NAVIGATION MATCH
+   Exact desktop/mobile navigation sizing and spacing used on index.html.
+   ========================================================= */
+:root{
+  --content-width:1080px;
+  --page-gutter:24px;
+}
+
+.site-header{
+  position:relative !important;
+  z-index:80 !important;
+  background:rgba(23,10,47,.96) !important;
+  border-bottom:1px solid rgba(247,240,231,.12) !important;
+}
+
+.site-nav-inner{
+  width:min(var(--content-width), calc(100% - 2 * var(--page-gutter))) !important;
+  max-width:none !important;
+  margin:0 auto !important;
+  min-height:72px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:28px !important;
+}
+
+.site-logo{
+  display:flex !important;
+  align-items:center !important;
+  width:150px !important;
+  flex:0 0 150px !important;
+  text-decoration:none !important;
+}
+
+.site-logo img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:44px !important;
+  object-fit:contain !important;
+}
+
+.site-menu{
+  margin-left:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:30px !important;
+}
+
+.site-menu a{
+  position:relative !important;
+  color:#F7F0E7 !important;
+  text-decoration:none !important;
+  font-size:18px !important;
+  letter-spacing:.04em !important;
+  white-space:nowrap !important;
+  transition:color .18s ease !important;
+}
+
+.site-menu a::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:-7px !important;
+  height:1px !important;
+  background:#F5853F !important;
+  transform:scaleX(0) !important;
+  transform-origin:left !important;
+  transition:transform .18s ease !important;
+}
+
+.site-menu a:hover{
+  color:#78EFFA !important;
+}
+
+.site-menu a:hover::after{
+  transform:scaleX(1) !important;
+}
+
+.site-menu-mobile{
+  display:none !important;
+  position:relative !important;
+  margin-left:auto !important;
+}
+
+.site-menu-mobile summary{
+  list-style:none !important;
+  cursor:pointer !important;
+  border:1px solid rgba(120,239,250,.42) !important;
+  color:#78EFFA !important;
+  padding:8px 12px !important;
+  min-width:70px !important;
+  text-align:center !important;
+  font-size:.78rem !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+}
+
+.site-menu-mobile summary::-webkit-details-marker{
+  display:none !important;
+}
+
+.mobile-menu-panel{
+  position:absolute !important;
+  right:0 !important;
+  top:calc(100% + 10px) !important;
+  width:190px !important;
+  padding:8px !important;
+  background:#21103C !important;
+  border:1px solid rgba(120,239,250,.28) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.28) !important;
+  z-index:100 !important;
+}
+
+.mobile-menu-panel a{
+  display:block !important;
+  color:#F7F0E7 !important;
+  text-decoration:none !important;
+  padding:10px 11px !important;
+  border-bottom:1px solid rgba(247,240,231,.09) !important;
+  font-size:.9rem !important;
+}
+
+.mobile-menu-panel a:last-child{
+  border-bottom:0 !important;
+}
+
+.mobile-menu-panel a:hover{
+  color:#F5853F !important;
+  background:rgba(255,255,255,.025) !important;
+}
+
+@media(max-width:700px){
+  :root{--page-gutter:18px;}
+
+  .site-nav-inner{
+    min-height:62px !important;
+  }
+
+  .site-logo{
+    width:112px !important;
+    flex-basis:112px !important;
+  }
+
+  .site-menu{
+    display:none !important;
+  }
+
+  .site-menu-mobile{
+    display:block !important;
+  }
+}
 </style>
 </head>
 <body>
 
 
 <header class="site-header">
-  <div class="wrap site-nav-inner">
+  <div class="site-nav-inner">
+
+    <!-- LOGO LEFT -->
     <a class="site-logo" href="../index.html" aria-label="Seeds of Hom home">
-      <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
+      <img src="../vertical logo.svg" alt="Seeds of Hom">
     </a>
 
+    <!-- MENU RIGHT -->
     <nav class="site-menu" aria-label="Main navigation">
       <a href="../index.html">Home</a>
       <a href="../stories.html">Stories</a>
-      <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
-      <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
+      <a href="../poetry.html">Poetry</a>
+      <a href="../projects.html">Projects</a>
     </nav>
 
+    <!-- MOBILE MENU -->
     <details class="site-menu-mobile">
       <summary>Menu</summary>
       <nav class="mobile-menu-panel" aria-label="Mobile navigation">
         <a href="../index.html">Home</a>
         <a href="../stories.html">Stories</a>
-        <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
-        <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
+        <a href="../poetry.html">Poetry</a>
+        <a href="../projects.html">Projects</a>
       </nav>
     </details>
+
   </div>
 </header>
 
