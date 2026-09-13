@@ -710,142 +710,165 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 </style>
 
 <style>
-/* ===== GitHub sticky navigation ===== */
-.top-nav{
-  position:sticky;
-  top:0;
-  z-index:9999;
-  height:68px;
-  background:rgba(23,10,47,.92);
-  border-bottom:1px solid rgba(247,240,231,.12);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-}
-.nav-inner{
-  width:min(1080px,calc(100% - 48px));
-  height:100%;
-  margin:0 auto;
+
+/* ================================
+   SITE NAVIGATION
+   ================================ */
+
+.site-header{
   position:relative;
+  z-index:80;
+  background:rgba(23,10,47,.96);
+  border-bottom:1px solid rgba(247,240,231,.12);
+}
+
+.site-nav-inner{
+  width:min(1080px,calc(100% - 48px));
+  margin:0 auto;
+  min-height:72px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:28px;
 }
-.nav-links-left{
+
+/* LOGO LEFT */
+
+.site-logo{
   display:flex;
   align-items:center;
-  gap:28px;
-  z-index:2;
+  width:150px;
+  flex:0 0 150px;
+  text-decoration:none;
 }
-.nav-links-left a,
-.nav-menu a{
-  position:relative;
-  color:var(--soft);
-  font-size:18px;
-  transition:color .2s ease;
-}
-.nav-links-left a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:100%;
-  bottom:-8px;
-  height:1px;
-  background:var(--cyan);
-  transition:right .22s ease;
-}
-.nav-links-left a:hover,
-.nav-menu a:hover{
-  color:var(--paper);
-}
-.nav-links-left a:hover::after{
-  right:0;
-}
-.nav-brand-center{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  color:var(--paper);
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  white-space:nowrap;
-  z-index:3;
-}
-.nav-brand-center:hover{color:var(--cyan)}
-.nav-toggle{
-  display:none;
-  width:42px;
-  height:42px;
-  padding:0;
-  border:1px solid rgba(247,240,231,.18);
-  background:transparent;
-  color:var(--paper);
-  cursor:pointer;
-  align-items:center;
-  justify-content:center;
-}
-.nav-toggle-lines,
-.nav-toggle-lines::before,
-.nav-toggle-lines::after{
+
+.site-logo img{
   display:block;
-  width:18px;
-  height:1px;
-  background:currentColor;
-  position:relative;
-  transition:.2s ease;
+  width:100%;
+  height:auto;
+  max-height:44px;
+  object-fit:contain;
 }
-.nav-toggle-lines::before,
-.nav-toggle-lines::after{
+
+/* MENU RIGHT */
+
+.site-menu{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:30px;
+}
+
+.site-menu a{
+  position:relative;
+  color:#F7F0E7;
+  text-decoration:none;
+  font-size:18px;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  transition:color .18s ease;
+}
+
+.site-menu a::after{
   content:"";
   position:absolute;
   left:0;
+  right:0;
+  bottom:-7px;
+  height:1px;
+  background:#F5853F;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .18s ease;
 }
-.nav-toggle-lines::before{top:-6px}
-.nav-toggle-lines::after{top:6px}
 
-.nav-menu{display:none}
-
-#history,#celebrations,#people,#how-to-read{
-  scroll-margin-top:88px;
+.site-menu a:hover{
+  color:#78EFFA;
 }
 
-@media(max-width:820px){
-  .top-nav{height:62px}
-  .nav-inner{width:min(100% - 32px,1080px)}
-  .nav-links-left{display:none}
-  .nav-brand-center{
-    font-size:13px;
-    letter-spacing:.13em;
+.site-menu a:hover::after{
+  transform:scaleX(1);
+}
+
+/* ================================
+   MOBILE MENU
+   ================================ */
+
+.site-menu-mobile{
+  display:none;
+  position:relative;
+  margin-left:auto;
+}
+
+.site-menu-mobile summary{
+  list-style:none;
+  cursor:pointer;
+  border:1px solid rgba(120,239,250,.42);
+  color:#78EFFA;
+  padding:8px 12px;
+  min-width:70px;
+  text-align:center;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.site-menu-mobile summary::-webkit-details-marker{
+  display:none;
+}
+
+.mobile-menu-panel{
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  width:190px;
+  padding:8px;
+  background:#21103C;
+  border:1px solid rgba(120,239,250,.28);
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
+  z-index:100;
+}
+
+.mobile-menu-panel a{
+  display:block;
+  color:#F7F0E7;
+  text-decoration:none;
+  padding:10px 11px;
+  border-bottom:1px solid rgba(247,240,231,.09);
+  font-size:.9rem;
+}
+
+.mobile-menu-panel a:last-child{
+  border-bottom:0;
+}
+
+.mobile-menu-panel a:hover{
+  color:#F5853F;
+  background:rgba(255,255,255,.025);
+}
+
+@media(max-width:700px){
+  .site-nav-inner{
+    width:calc(100% - 36px);
+    min-height:62px;
   }
-  .nav-toggle{
-    display:inline-flex;
-    margin-left:auto;
+
+  .site-logo{
+    width:112px;
+    flex-basis:112px;
   }
-  .nav-menu{
+
+  .site-menu{
     display:none;
-    position:absolute;
-    top:62px;
-    left:16px;
-    right:16px;
-    padding:12px;
-    flex-direction:column;
-    align-items:stretch;
-    gap:0;
-    background:rgba(23,10,47,.98);
-    border:1px solid rgba(247,240,231,.14);
-    box-shadow:0 18px 45px rgba(0,0,0,.26);
   }
-  .nav-menu.open{display:flex}
-  .nav-menu a{
-    padding:13px 12px;
-    font-size:17px;
+
+  .site-menu-mobile{
+    display:block;
   }
 }
-</style>
 
+</style>
 
 <style>
 /* ===== GitHub footer ===== */
@@ -965,64 +988,37 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 </style>
 
 
-<style>
-/* ===== Center navbar logo ===== */
-.nav-brand-center{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  line-height:1;
-}
-
-.nav-logo-img{
-  display:block;
-  width:auto;
-  height:48px;
-  max-width:190px;
-  object-fit:contain;
-}
-
-@media(max-width:820px){
-  .nav-logo-img{
-    height:40px;
-    max-width:155px;
-  }
-}
-</style>
-
 </head>
 <body>
 
-<nav class="top-nav" aria-label="Main navigation">
-  <div class="nav-inner">
 
-    <div class="nav-links-left">
-      <a href="./index.html">Home</a>
-      <a href="./stories.html">Stories</a>
-      <a href="./poems.html">Poems</a>
-      <a href="./projects.html">Projects</a>
-    </div>
+<header class="site-header">
+  <div class="site-nav-inner">
 
-    <a class="nav-brand-center" href="./index.html" aria-label="Seeds of Hom home">
-      <img class="nav-logo-img" src="./vertical logo.svg" alt="Seeds of Hom">
+    <a class="site-logo" href="./index.html" aria-label="Seeds of Hom home">
+      <img src="./vertical logo.svg" alt="Seeds of Hom">
     </a>
 
-    <button class="nav-toggle" type="button"
-            aria-label="Open navigation"
-            aria-expanded="false"
-            aria-controls="nav-menu">
-      <span class="nav-toggle-lines"></span>
-    </button>
-
-    <div class="nav-menu" id="nav-menu">
+    <nav class="site-menu" aria-label="Main navigation">
       <a href="./index.html">Home</a>
       <a href="./stories.html">Stories</a>
       <a href="./poems.html">Poems</a>
       <a href="./projects.html">Projects</a>
-    </div>
+    </nav>
+
+    <details class="site-menu-mobile">
+      <summary>Menu</summary>
+
+      <nav class="mobile-menu-panel" aria-label="Mobile navigation">
+        <a href="./index.html">Home</a>
+        <a href="./stories.html">Stories</a>
+        <a href="./poems.html">Poems</a>
+        <a href="./projects.html">Projects</a>
+      </nav>
+    </details>
 
   </div>
-</nav>
+</header>
 
 <div class="site-bg" aria-hidden="true"></div>
 
@@ -1325,7 +1321,7 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
    ========================================================== */
 const PAGE_URLS = {
   home: "./index.html",
-  cyrus: "stories/cyrus.html",
+  cyrus: "./stories/cyrus.html",
   persepolis: "./perspolis.html",
   yalda: "./shb-ylda-shab-e-yalda.html",
   newsletter: "./index.html#newsletter"
@@ -1338,7 +1334,7 @@ const PAGE_URLS = {
    ========================================================== */
 const IMAGE_URLS = {
   hero: "",
-  cyrus: "assets/koorosh.png",
+  cyrus: "./assets/koorosh.png",
   persepolis: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-aug-22-2026-at-10_35_55-am-VzsuOfN8JiIE0u4O.png",
   constitutionalRevolution: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_05_08-pm-adIUvQu2CtQjCJZ2.png",
   nowruz: "https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-sep-4-2026-at-01_54_36-pm-Kqavpwe3zp093bPH.png",
@@ -1466,23 +1462,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.querySelector(".nav-toggle");
-  const menu = document.querySelector(".nav-menu");
-
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    menu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
   const year = document.getElementById("footer-year");
   if (year) year.textContent = new Date().getFullYear();
 });
