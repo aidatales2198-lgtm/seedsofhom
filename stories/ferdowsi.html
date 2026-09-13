@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ferdowsi — A2 Persian Reading | Seeds of Hom</title>
+<meta name="description" content="An interactive A2 Persian reading lesson about Ferdowsi and the Shahnameh with Persian, Finglish, English translation, vocabulary, Shahnameh characters, and quiz." />
+
+<link rel="stylesheet" href="https://esm.sh/gh/rahatool/persian-fonts/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap" rel="stylesheet">
+
+<style>
+@font-face{
+  font-family:"BNazaninWeb";
+  src:
+    local("B Nazanin"),
+    local("BNazanin"),
+    url("https://cdn.jsdelivr.net/gh/intuxicated/css-persian@master/fonts/BNazanin.ttf") format("truetype");
+  font-display:swap;
+}
+
+:root{
+  --night:#170A2F;
+  --night-2:#21103C;
+  --night-3:#2A1548;
+  --cyan:#78EFFA;
+  --orange:#F5853F;
+  --paper:#F7F0E7;
+  --paper-2:#F7F0E7;
+  --ink:#F7F0E7;
+  --muted:#B9AFC7;
+  --lav:#D8CDE7;
+  --line:rgba(247,240,231,.16);
+  --line-light:rgba(247,240,231,.16);
+  --success:#78EFFA;
+  --danger:#F5A083;
+  --shadow:none;
+
+  --content-width:1080px;
+  --page-gutter:24px;
+}
+
+*{box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  background:var(--night);
+}
+
+body,
+button,
+input{
+  font-family:"Times New Roman", Times, serif !important;
+}
+
+body{
+  margin:0;
+  color:var(--paper);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(120,239,250,.055), transparent 24%),
+    radial-gradient(circle at 84% 28%, rgba(245,133,63,.05), transparent 23%),
+    radial-gradient(circle at 40% 80%, rgba(120,239,250,.035), transparent 30%),
+    var(--night);
+  line-height:1.5;
+}
+
+button{font:inherit}
+a{color:inherit}
+
+[lang="fa"],
+.fa-text,
+.vocab-fa,
+.character-fa,
+.character-panel-fa,
+.quiz-item h3[dir="rtl"],
+.answer-btn[dir="rtl"],
+.reading-pane[data-pane="fa"]{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  font-feature-settings:normal !important;
+  -webkit-font-feature-settings:normal !important;
+}
+
+.quiz-item h3[dir="ltr"],
+.answer-btn[dir="ltr"],
+.reading-pane[data-pane="finglish"],
+.reading-pane[data-pane="en"]{
+  font-family:"Times New Roman", Times, serif !important;
+}
+
+/* EXACT HOMEPAGE FRAME */
+.wrap,
+.site-nav-inner,
+.site-footer-inner{
+  width:min(var(--content-width), calc(100% - 2 * var(--page-gutter))) !important;
+  max-width:none !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* ================================
+   HOMEPAGE NAVIGATION
+   ================================ */
+.site-header{
+  position:relative !important;
+  z-index:80 !important;
+  background:rgba(23,10,47,.96) !important;
+  border-bottom:1px solid rgba(247,240,231,.12) !important;
+}
+
+.site-nav-inner{
+  min-height:72px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:28px !important;
+}
+
+.site-logo{
+  display:flex !important;
+  align-items:center !important;
+  width:150px !important;
+  flex:0 0 150px !important;
+  text-decoration:none !important;
+}
+
+.site-logo img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:44px !important;
+  object-fit:contain !important;
+}
+
+.site-menu{
+  margin-left:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:30px !important;
+}
+
+.site-menu a{
+  position:relative !important;
+  color:#F7F0E7 !important;
+  text-decoration:none !important;
+  font-family:"Times New Roman", Times, serif !important;
+  font-size:18px !important;
+  letter-spacing:.04em !important;
+  white-space:nowrap !important;
+  transition:color .18s ease !important;
+}
+
+.site-menu a::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:-7px !important;
+  height:1px !important;
+  background:#F5853F !important;
+  transform:scaleX(0) !important;
+  transform-origin:left !important;
+  transition:transform .18s ease !important;
+}
+
+.site-menu a:hover{color:#78EFFA !important}
+.site-menu a:hover::after{transform:scaleX(1) !important}
+
+.site-menu-mobile{
+  display:none !important;
+  position:relative !important;
+  margin-left:auto !important;
+}
+
+.site-menu-mobile summary{
+  list-style:none !important;
+  cursor:pointer !important;
+  border:1px solid rgba(120,239,250,.42) !important;
+  color:#78EFFA !important;
+  padding:8px 12px !important;
+  min-width:70px !important;
+  text-align:center !important;
+  font-size:.78rem !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+}
+.site-menu-mobile summary::-webkit-details-marker{display:none !important}
+
+.mobile-menu-panel{
+  position:absolute !important;
+  right:0 !important;
+  top:calc(100% + 10px) !important;
+  width:190px !important;
+  padding:8px !important;
+  background:#21103C !important;
+  border:1px solid rgba(120,239,250,.28) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.28) !important;
+  z-index:100 !important;
+}
+.mobile-menu-panel a{
+  display:block !important;
+  color:#F7F0E7 !important;
+  text-decoration:none !important;
+  padding:10px 11px !important;
+  border-bottom:1px solid rgba(247,240,231,.09) !important;
+  font-size:.9rem !important;
+}
+.mobile-menu-panel a:last-child{border-bottom:0 !important}
+.mobile-menu-panel a:hover{
+  color:#F5853F !important;
+  background:rgba(255,255,255,.025) !important;
+}
+
+/* Reading bar */
+.lesson-nav{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  z-index:75 !important;
+  background:rgba(23,10,47,.94) !important;
+  border-bottom:1px solid rgba(247,240,231,.12) !important;
+  backdrop-filter:blur(18px) !important;
+  transform:translateY(-100%) !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transition:transform .28s ease, opacity .22s ease, visibility .28s ease !important;
+}
+.lesson-nav.is-visible{
+  transform:translateY(0) !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+.lesson-nav-inner{
+  min-height:58px !important;
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+.brand-logo{
+  display:flex;
+  align-items:center;
+  width:132px;
+  flex:0 0 132px;
+}
+.brand-logo img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:40px;
+  object-fit:contain;
+}
+.lesson-progress{
+  flex:1;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.progress-step{
+  flex:1;
+  height:3px;
+  background:rgba(247,240,231,.12);
+  overflow:hidden;
+}
+.progress-step span{
+  display:block;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--orange));
+  transition:width .25s ease;
+}
+.nav-label{
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  padding:44px 0 46px;
+  min-height:0;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  width:430px;
+  height:430px;
+  right:-110px;
+  top:50%;
+  transform:translateY(-50%);
+  border:1px solid rgba(120,239,250,.12);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(120,239,250,.045),transparent 68%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-20px;
+  top:54%;
+  transform:translateY(-50%);
+  border:1px dashed rgba(245,133,63,.16);
+  border-radius:50%;
+  pointer-events:none;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:42px;
+  align-items:center;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--cyan);
+  font-size:.72rem;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+}
+.eyebrow::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--orange);
+}
+.hero h1{
+  margin:14px 0 10px;
+  font-weight:400;
+  font-size:clamp(3.2rem,6.4vw,5.6rem);
+  line-height:.9;
+  letter-spacing:-.035em;
+}
+.hero h1 span{
+  color:var(--orange);
+  font-style:italic;
+}
+.hero-copy{
+  max-width:610px;
+  color:var(--lav);
+  font-size:1.03rem;
+  line-height:1.55;
+}
+.hero-actions{
+  margin-top:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.primary-btn,
+.secondary-btn{
+  min-height:44px;
+  padding:10px 18px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  border-radius:0;
+  font-weight:400;
+  letter-spacing:.02em;
+}
+.primary-btn{
+  border:1px solid var(--orange);
+  background:var(--orange);
+  color:var(--night);
+}
+.secondary-btn{
+  border:1px solid rgba(120,239,250,.62);
+  color:var(--cyan);
+  background:transparent;
+}
+.primary-btn:hover,.secondary-btn:hover{transform:translateY(-2px)}
+.lesson-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+.meta-pill{
+  border:1px solid rgba(247,240,231,.16);
+  padding:6px 9px;
+  color:var(--muted);
+  font-size:.76rem;
+}
+.hero-art{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.portrait-shell{
+  width:min(310px,88%);
+  aspect-ratio:4/5;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(120,239,250,.28);
+  background:
+    radial-gradient(circle at 50% 38%,rgba(120,239,250,.08),transparent 34%),
+    rgba(255,255,255,.018);
+  box-shadow:inset 0 0 60px rgba(120,239,250,.025);
+}
+.portrait-shell::before{
+  content:"";
+  position:absolute;
+  width:68%;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(245,133,63,.25);
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:1;
+}
+.portrait-shell::after{
+  content:"";
+  position:absolute;
+  width:52%;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px dashed rgba(120,239,250,.24);
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:1;
+}
+.ferdowsi-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  position:relative;
+  z-index:2;
+}
+.portrait-placeholder{
+  position:absolute;
+  inset:16px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:30px;
+  border:1px solid rgba(247,240,231,.12);
+  color:rgba(247,240,231,.42);
+}
+.portrait-note{
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  z-index:3;
+  background:var(--orange);
+  color:var(--night);
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  font-size:1.2rem;
+  padding:7px 12px;
+}
+
+/* SECTIONS */
+.section{
+  position:relative;
+  padding:66px 0 72px;
+  background:transparent !important;
+  color:var(--paper) !important;
+}
+.section::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:min(860px,78vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(120,239,250,.10) 10%,
+    rgba(120,239,250,.42) 48%,
+    rgba(245,133,63,.28) 62%,
+    transparent
+  );
+}
+.section-head{
+  display:grid;
+  grid-template-columns:1fr minmax(260px,460px);
+  gap:36px;
+  align-items:end;
+  margin-bottom:34px;
+}
+.section h2{
+  margin:0;
+  font-weight:400;
+  font-size:clamp(2.35rem,4.4vw,3.75rem);
+  line-height:.98;
+  letter-spacing:-.025em;
+}
+.section-intro{
+  margin:0;
+  color:var(--lav);
+  font-size:1rem;
+}
+.kicker{
+  color:var(--orange);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.70rem;
+  font-weight:400;
+  margin:0;
+}
+.section-kicker-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0 0 12px;
+}
+.avestan-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  flex:0 0 38px;
+  border-radius:50%;
+  border:1px solid rgba(120,239,250,.34);
+  color:var(--cyan);
+  background:radial-gradient(circle,rgba(120,239,250,.09),rgba(23,10,47,.2) 72%);
+  box-shadow:inset 0 0 24px rgba(120,239,250,.04);
+}
+.avestan-icon.orange{
+  color:var(--orange);
+  border-color:rgba(245,133,63,.36);
+  background:radial-gradient(circle,rgba(245,133,63,.10),rgba(23,10,47,.2) 72%);
+}
+.avestan-icon span{
+  font-family:"Noto Sans Avestan", serif !important;
+  font-size:18px;
+  line-height:1;
+}
+
+/* READING */
+.reading-layout{
+  display:grid;
+  grid-template-columns:210px 1fr;
+  gap:22px;
+  align-items:start;
+}
+.reading-sidebar{
+  position:sticky;
+  top:88px;
+}
+.sidebar-card,
+.reading-card{
+  border-radius:0;
+  box-shadow:none;
+}
+.sidebar-card{
+  padding:15px;
+  background:rgba(10,4,24,.22);
+  border:1px solid rgba(120,239,250,.24);
+}
+.sidebar-title{
+  font-weight:400;
+  color:var(--paper);
+  letter-spacing:.02em;
+  font-size:.86rem;
+  margin-bottom:10px;
+}
+.language-tabs{display:grid;gap:8px}
+.lang-btn{
+  border:1px solid rgba(247,240,231,.18);
+  color:var(--lav);
+  background:transparent;
+  padding:12px 14px;
+  text-align:left;
+  font-weight:400;
+  cursor:pointer;
+}
+.lang-btn:hover,
+.lang-btn.active{
+  background:transparent;
+  color:var(--orange);
+  border-color:var(--orange);
+}
+.tip{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(247,240,231,.12);
+  color:var(--muted);
+  font-size:.82rem;
+}
+.reading-card{
+  background:#F3E7D3 !important;
+  color:#170A2F !important;
+  border:1px solid rgba(23,10,47,.16) !important;
+  overflow:hidden;
+}
+.reading-card-top{
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:15px 20px;
+  background:#EBDDCA !important;
+  color:#170A2F !important;
+  border-bottom:1px solid rgba(23,10,47,.12) !important;
+}
+.level{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-size:.78rem;
+}
+.level::before{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--orange);
+}
+.reading-pane-wrap{padding:clamp(24px,4vw,40px)}
+.reading-pane{
+  display:none;
+  max-width:720px;
+  font-size:clamp(1.05rem,1.6vw,1.23rem);
+}
+.reading-pane.active{display:block}
+.reading-pane p{margin:0 0 1.15em}
+.reading-pane[data-pane="fa"]{
+  color:#170A2F !important;
+  font-size:clamp(1.55rem,2.5vw,1.95rem);
+  line-height:2.15;
+}
+.reading-pane[data-pane="finglish"]{
+  color:#6C4B34 !important;
+  font-style:italic;
+}
+.reading-pane[data-pane="en"]{color:#4E4658 !important}
+.reading-controls{
+  margin-top:28px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.inline-action{
+  border-radius:0;
+  background:transparent !important;
+  color:#170A2F !important;
+  border:1px solid rgba(23,10,47,.22) !important;
+  padding:9px 13px;
+  font-weight:400;
+  cursor:pointer;
+}
+.inline-action:hover{
+  color:#C65F2A !important;
+  border-color:#F5853F !important;
+}
+
+/* VOCAB */
+.vocab-section{
+  margin-top:34px;
+  border-top:1px solid rgba(23,10,47,.13) !important;
+  padding-top:28px;
+}
+.vocab-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:end;
+  margin-bottom:14px;
+}
+.vocab-head h3{
+  margin:0;
+  font-size:1.3rem;
+  color:#170A2F !important;
+}
+.vocab-head small{color:#170A2F !important}
+.vocab-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.vocab-card{
+  min-height:120px;
+  border:1px solid rgba(23,10,47,.14) !important;
+  background:#F8EFDF !important;
+  color:#170A2F !important;
+  padding:15px;
+  cursor:pointer;
+  text-align:left;
+  position:relative;
+}
+.vocab-card::after{
+  content:"+";
+  position:absolute;
+  right:12px;
+  top:8px;
+  color:var(--orange);
+  font-weight:900;
+}
+.vocab-card.open::after{content:"–"}
+.vocab-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(245,133,63,.7) !important;
+}
+.vocab-fa{
+  direction:rtl;
+  text-align:right;
+  font-size:1.42rem;
+  font-weight:900;
+  padding-right:20px;
+  color:#170A2F !important;
+}
+.vocab-finglish{
+  margin-top:4px;
+  color:#6C4B34 !important;
+  font-size:.83rem;
+}
+.vocab-en{
+  margin-top:10px;
+  color:#C65F2A !important;
+  font-weight:900;
+  display:none;
+}
+.vocab-card.open .vocab-en{display:block}
+
+/* PICTURE ↔ CHARACTER MATCHING GAME */
+.match-board{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr);
+  gap:24px;
+  align-items:start;
+}
+
+.match-images-panel,
+.match-names-panel{
+  border:1px solid rgba(247,240,231,.14);
+  background:rgba(255,255,255,.015);
+  padding:22px;
+}
+
+.match-panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:16px;
+  margin-bottom:16px;
+}
+
+.match-panel-head h3{
+  margin:0;
+  font-size:1.45rem;
+  font-weight:400;
+}
+
+.match-panel-head p{
+  margin:4px 0 0;
+  color:rgba(247,240,231,.58);
+  font-size:.86rem;
+}
+
+.match-score{
+  color:var(--cyan);
+  font-size:.78rem;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+
+.picture-match-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.picture-match-card{
+  position:relative;
+  aspect-ratio:4/5;
+  padding:0;
+  overflow:hidden;
+  border:1px solid rgba(120,239,250,.20);
+  background:
+    radial-gradient(circle at 50% 38%,rgba(120,239,250,.07),transparent 34%),
+    rgba(255,255,255,.018);
+  color:var(--paper);
+  cursor:pointer;
+  transition:transform .18s ease,border-color .18s ease,opacity .18s ease;
+}
+
+.picture-match-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(120,239,250,.62);
+}
+
+.picture-match-card.selected{
+  border-color:var(--cyan);
+  box-shadow:inset 0 0 0 1px rgba(120,239,250,.28);
+}
+
+.picture-match-card.wrong{
+  border-color:var(--orange);
+  animation:matchShake .24s linear 1;
+}
+
+.picture-match-card.matched{
+  border-color:var(--cyan);
+  cursor:default;
+}
+
+.picture-match-card.matched::after{
+  content:"✓";
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--cyan);
+  background:rgba(23,10,47,.82);
+  color:var(--cyan);
+  font-size:.9rem;
+  z-index:4;
+}
+
+.picture-match-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.picture-fallback{
+  position:absolute;
+  inset:12px;
+  display:none;
+  place-items:center;
+  text-align:center;
+  border:1px dashed rgba(247,240,231,.18);
+  color:rgba(247,240,231,.42);
+  padding:18px;
+  font-size:.78rem;
+}
+
+.picture-number{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  z-index:3;
+  min-width:30px;
+  height:30px;
+  padding:0 8px;
+  display:grid;
+  place-items:center;
+  background:rgba(23,10,47,.84);
+  border:1px solid rgba(247,240,231,.22);
+  color:var(--paper);
+  font-size:.72rem;
+}
+
+.picture-answer{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:3;
+  padding:32px 12px 11px;
+  background:linear-gradient(transparent,rgba(23,10,47,.96));
+  color:var(--cyan);
+  font-size:.92rem;
+  opacity:0;
+  transform:translateY(5px);
+  transition:.18s ease;
+  pointer-events:none;
+}
+
+.picture-match-card.matched .picture-answer{
+  opacity:1;
+  transform:none;
+}
+
+.name-match-list{
+  display:grid;
+  gap:9px;
+}
+
+.name-match-btn{
+  width:100%;
+  min-height:58px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:14px;
+  padding:11px 13px;
+  border:1px solid rgba(247,240,231,.18);
+  background:transparent;
+  color:var(--paper);
+  text-align:left;
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,opacity .18s ease;
+}
+
+.name-match-btn:hover{
+  border-color:var(--cyan);
+}
+
+.name-match-btn.selected{
+  border-color:var(--cyan);
+  background:rgba(120,239,250,.045);
+}
+
+.name-match-btn.wrong{
+  border-color:var(--orange);
+  color:var(--orange);
+}
+
+.name-match-btn.matched{
+  border-color:rgba(120,239,250,.55);
+  background:rgba(120,239,250,.08);
+  color:var(--cyan);
+  cursor:default;
+}
+
+.name-en{
+  font-size:1rem;
+}
+
+.name-fa{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  direction:rtl;
+  color:var(--orange);
+  font-size:1.25rem;
+}
+
+.name-match-btn.matched .name-fa{
+  color:var(--cyan);
+}
+
+.match-status{
+  min-height:28px;
+  margin-top:16px;
+  color:var(--lav);
+  font-size:.9rem;
+}
+
+.match-status.good{color:var(--cyan)}
+.match-status.bad{color:#FFB494}
+
+.match-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.match-reset{
+  border:1px solid rgba(120,239,250,.44);
+  background:transparent;
+  color:var(--cyan);
+  padding:10px 15px;
+  cursor:pointer;
+}
+
+.match-reset:hover{
+  border-color:var(--orange);
+  color:var(--orange);
+}
+
+.match-complete{
+  display:none;
+  margin-top:24px;
+  padding:22px;
+  border:1px solid rgba(120,239,250,.28);
+  background:rgba(120,239,250,.045);
+}
+
+.match-complete.show{
+  display:block;
+}
+
+.match-complete strong{
+  display:block;
+  color:var(--cyan);
+  font-size:1.15rem;
+  margin-bottom:5px;
+  font-weight:400;
+}
+
+.match-complete p{
+  margin:0;
+  color:var(--lav);
+  font-size:.9rem;
+}
+
+@keyframes matchShake{
+  0%,100%{transform:translateX(0)}
+  33%{transform:translateX(-4px)}
+  66%{transform:translateX(4px)}
+}
+
+
+/* QUIZ */
+.quiz-shell{
+  max-width:850px;
+  margin:0 auto;
+}
+.quiz-progress{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:18px;
+}
+.quiz-progress-bar{
+  flex:1;
+  height:4px;
+  background:rgba(247,240,231,.10);
+  overflow:hidden;
+}
+.quiz-progress-bar span{
+  display:block;
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--orange),var(--cyan));
+  transition:width .25s ease;
+}
+.quiz-progress-label{
+  font-size:.84rem;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.quiz-grid{display:grid;gap:16px}
+.quiz-item{
+  border:1px solid rgba(247,240,231,.14);
+  background:rgba(255,255,255,.015);
+  color:var(--paper);
+  padding:22px;
+}
+.quiz-number{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:transparent;
+  border:1px solid rgba(245,133,63,.42);
+  color:var(--orange);
+  font-size:.78rem;
+  margin-bottom:12px;
+}
+.quiz-item h3{
+  margin:0 0 15px;
+  font-weight:400;
+  font-size:1.35rem;
+  line-height:1.7;
+  color:var(--paper);
+}
+.answers{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.answer-btn{
+  border:1px solid rgba(247,240,231,.16);
+  background:transparent;
+  color:var(--paper);
+  padding:12px 13px;
+  text-align:right;
+  direction:rtl;
+  cursor:pointer;
+  transition:.15s ease;
+  font-size:1.08rem;
+}
+.answer-btn:hover{
+  border-color:var(--cyan);
+  transform:translateY(-1px);
+}
+.answer-btn.correct{
+  border-color:var(--cyan);
+  background:rgba(120,239,250,.08);
+  color:var(--cyan);
+}
+.answer-btn.wrong{
+  border-color:rgba(245,133,63,.7);
+  background:rgba(245,133,63,.07);
+}
+.quiz-feedback{
+  margin-top:10px;
+  min-height:23px;
+  color:var(--lav);
+  font-size:.9rem;
+}
+.quiz-summary{
+  margin-top:20px;
+  border:1px solid rgba(120,239,250,.24);
+  background:rgba(10,4,24,.24);
+  color:var(--paper);
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+}
+.score{
+  color:var(--cyan);
+  font-size:1.8rem;
+  font-weight:900;
+}
+
+/* FINAL PANEL */
+.next-card{
+  max-width:780px;
+  margin:0 auto;
+  text-align:center;
+  border:1px solid rgba(120,239,250,.22);
+  background:rgba(255,255,255,.015);
+  position:relative;
+  overflow:hidden;
+  padding:38px 26px;
+}
+.next-card::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-70px;
+  bottom:-90px;
+  border:1px solid rgba(245,133,63,.16);
+}
+.closing-word{
+  color:var(--orange);
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  font-size:clamp(3rem,7vw,5.4rem);
+  line-height:1.35;
+  direction:rtl;
+}
+.next-card p{
+  max-width:560px;
+  margin:18px auto 0;
+  color:var(--lav);
+}
+
+/* FOOTER */
+footer.site-footer{
+  display:block !important;
+  position:relative;
+  overflow:hidden;
+  padding:52px 0 24px !important;
+  background:var(--cyan) !important;
+  color:var(--night) !important;
+  border-top:0 !important;
+}
+footer.site-footer::before{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  border:1px solid rgba(23,10,47,.16);
+  border-radius:50%;
+  right:-120px;
+  top:-160px;
+}
+footer.site-footer::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border:1px dashed rgba(23,10,47,.14);
+  border-radius:50%;
+  left:-70px;
+  bottom:-95px;
+}
+.site-footer-inner{
+  position:relative;
+  z-index:1;
+  display:grid !important;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:32px;
+}
+.footer-left,.footer-center,.footer-right{
+  display:flex;
+  align-items:center;
+}
+.footer-left{justify-content:flex-start}
+.footer-center{justify-content:center;gap:10px}
+.footer-right{justify-content:flex-end;gap:18px}
+.footer-logo-text{
+  color:var(--night) !important;
+  font-family:"Times New Roman", Times, serif !important;
+  font-size:18px !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase;
+  font-weight:700;
+  text-decoration:none;
+}
+.social-link{
+  width:40px !important;
+  height:40px !important;
+  border:1px solid rgba(23,10,47,.34) !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--night) !important;
+  background:rgba(247,240,231,.12);
+  transition:transform .2s ease, background .2s ease, border-color .2s ease !important;
+}
+.social-link:hover{
+  background:rgba(247,240,231,.34) !important;
+  border-color:rgba(23,10,47,.62) !important;
+  transform:translateY(-2px);
+}
+.social-link svg{width:17px;height:17px;fill:currentColor}
+.footer-link{
+  color:var(--night) !important;
+  font-family:"Times New Roman", Times, serif !important;
+  font-size:15px !important;
+  border-bottom:1px solid rgba(23,10,47,.35);
+  padding-bottom:2px;
+  text-decoration:none;
+}
+.footer-link:hover{border-bottom-color:var(--night)}
+.footer-copy{
+  grid-column:1 / -1;
+  width:100%;
+  margin-top:10px;
+  padding-top:18px !important;
+  border-top:1px solid rgba(23,10,47,.20) !important;
+  color:rgba(23,10,47,.72) !important;
+  font-family:"Times New Roman", Times, serif !important;
+  font-size:12px !important;
+  letter-spacing:.03em;
+  text-align:center;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid,
+  .section-head{
+    grid-template-columns:1fr;
+  }
+  .hero-art{margin-top:12px}
+  .reading-layout{grid-template-columns:1fr}
+  .reading-sidebar{position:static}
+  .language-tabs{grid-template-columns:repeat(3,1fr)}
+  .lang-btn{text-align:center;padding:11px 8px}
+  .tip{display:none}
+  .picture-match-grid{grid-template-columns:repeat(2,1fr)}
+  .match-board{grid-template-columns:1fr}
+  .brand-logo{width:118px;flex-basis:118px}
+}
+
+@media(max-width:700px){
+  :root{--page-gutter:18px}
+
+  .site-nav-inner{min-height:62px !important}
+  .site-logo{width:112px !important;flex-basis:112px !important}
+  .site-menu{display:none !important}
+  .site-menu-mobile{display:block !important}
+
+  .hero{padding:34px 0 42px}
+  .hero-grid{display:flex;flex-direction:column;gap:28px}
+  .hero h1{
+    font-size:2.8rem !important;
+    line-height:.92 !important;
+  }
+  .hero-copy{
+    font-size:.94rem !important;
+    line-height:1.5 !important;
+  }
+  .eyebrow{font-size:.65rem !important}
+  .meta-pill{font-size:.7rem !important}
+  .hero-art{width:100%}
+  .portrait-shell{width:min(270px,82%)}
+
+  .section{padding:54px 0 58px}
+  .section-head{gap:18px;margin-bottom:26px}
+  .section h2{
+    font-size:2.15rem !important;
+    line-height:1 !important;
+  }
+  .section-intro{
+    font-size:.92rem !important;
+    line-height:1.5 !important;
+  }
+  .kicker{font-size:.64rem !important}
+  .avestan-icon{width:34px;height:34px;flex-basis:34px}
+  .avestan-icon span{font-size:16px}
+
+  .reading-pane[data-pane="fa"]{
+    font-size:1.22rem !important;
+    line-height:1.95 !important;
+  }
+  .reading-pane[data-pane="finglish"],
+  .reading-pane[data-pane="en"]{
+    font-size:1rem !important;
+    line-height:1.65 !important;
+  }
+  .reading-pane-wrap{padding:22px 18px !important}
+  .lang-btn{
+    font-size:.85rem !important;
+    padding:9px 5px !important;
+  }
+
+  .vocab-grid,
+  .answers{
+    grid-template-columns:1fr;
+  }
+  .vocab-fa{
+    font-size:1.18rem !important;
+    line-height:1.5 !important;
+  }
+  .vocab-finglish{font-size:.78rem !important}
+  .vocab-en{font-size:.9rem !important}
+  .vocab-card{
+    min-height:100px !important;
+    padding:12px !important;
+  }
+
+  .match-board{grid-template-columns:1fr}
+  .picture-match-grid{grid-template-columns:repeat(2,1fr)}
+  .match-images-panel,
+  .match-names-panel{padding:18px}
+  .name-match-btn{min-height:54px}
+
+  .quiz-item{padding:19px}
+  .quiz-item h3,
+  .quiz-item h3[dir="rtl"]{
+    font-size:1.16rem !important;
+    line-height:1.65 !important;
+  }
+  .answer-btn,
+  .answer-btn[dir="rtl"]{
+    font-size:1rem !important;
+    line-height:1.55 !important;
+    padding:10px 11px !important;
+  }
+
+  footer.site-footer{padding:42px 0 24px !important}
+  .site-footer-inner{
+    grid-template-columns:1fr !important;
+    justify-items:center !important;
+    gap:22px !important;
+    text-align:center;
+  }
+  .footer-left,.footer-center,.footer-right{justify-content:center !important}
+  .footer-logo-text{font-size:17px !important}
+  .footer-copy{grid-column:1 !important;margin-top:4px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="../index.html" aria-label="Seeds of Hom home">
+      <img src="../vertical logo.svg" alt="Seeds of Hom">
+    </a>
+
+    <nav class="site-menu" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="../stories.html">Stories</a>
+      <a href="../poetry.html">Poetry</a>
+      <a href="../projects.html">Projects</a>
+    </nav>
+
+    <details class="site-menu-mobile">
+      <summary>Menu</summary>
+      <nav class="mobile-menu-panel" aria-label="Mobile navigation">
+        <a href="../index.html">Home</a>
+        <a href="../stories.html">Stories</a>
+        <a href="../poetry.html">Poetry</a>
+        <a href="../projects.html">Projects</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<nav class="lesson-nav" aria-label="Lesson progress">
+  <div class="wrap lesson-nav-inner">
+    <a class="brand brand-logo" href="../index.html" aria-label="Seeds of Hom home">
+      <img src="../vertical logo.svg" alt="Seeds of Hom">
+    </a>
+    <div class="lesson-progress" aria-hidden="true">
+      <div class="progress-step"><span id="progress1"></span></div>
+      <div class="progress-step"><span id="progress2"></span></div>
+      <div class="progress-step"><span id="progress3"></span></div>
+    </div>
+    <div class="nav-label" id="progressLabel">Start reading</div>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">A2 Persian Reading</div>
+      <h1>Ferdowsi<br><span>and the Shahnameh</span></h1>
+      <p class="hero-copy">
+        Learn easy Persian through Ferdowsi, the poet of the Shahnameh. Read the story,
+        meet important Shahnameh characters, then test what you remember.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#reading" class="primary-btn">Start the lesson ↓</a>
+        <a href="#characters" class="secondary-btn">Meet the characters</a>
+      </div>
+
+      <div class="lesson-meta">
+        <span class="meta-pill">A2 level</span>
+        <span class="meta-pill">3–4 min reading</span>
+        <span class="meta-pill">8 key words</span>
+        <span class="meta-pill">7 characters</span>
+        <span class="meta-pill">5 questions</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="portrait-shell">
+        <img
+          src="../assets/ferdowsi.png"
+          alt="Ferdowsi"
+          class="ferdowsi-image"
+          onerror="this.style.display='none';document.getElementById('ferdowsiPlaceholder').style.display='grid';"
+        >
+        <div class="portrait-placeholder" id="ferdowsiPlaceholder" style="display:none">
+          Add your image at<br><strong>assets/ferdowsi.png</strong>
+        </div>
+        <div class="portrait-note" lang="fa">فردوسی</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper" id="reading" data-section="1">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker-row">
+          <div class="avestan-icon orange" aria-hidden="true"><span>𐬨</span></div>
+          <div class="kicker">01 · Read</div>
+        </div>
+        <h2>Who was Ferdowsi?</h2>
+      </div>
+      <p class="section-intro">
+        Start with Persian. Use Finglish for pronunciation and English only when you need to check the meaning.
+      </p>
+    </div>
+
+    <div class="reading-layout">
+      <aside class="reading-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Choose your reading mode</div>
+          <div class="language-tabs">
+            <button class="lang-btn active" data-lang="fa">فارسی</button>
+            <button class="lang-btn" data-lang="finglish">Finglish</button>
+            <button class="lang-btn" data-lang="en">English</button>
+          </div>
+          <div class="tip">
+            Try Persian first. Use Finglish when you need help with pronunciation.
+          </div>
+        </div>
+      </aside>
+
+      <article class="reading-card">
+        <div class="reading-card-top">
+          <div class="level">A2 reading</div>
+        </div>
+
+        <div class="reading-pane-wrap">
+          <div class="reading-pane active" data-pane="fa" dir="rtl" lang="fa">
+            <p>فردوسی شاعر بزرگ ایرانی بود. او حدود هزار سال پیش در توس زندگی می‌کرد.</p>
+            <p>فردوسی کتاب شاهنامه را نوشت. شاهنامه درباره‌ی پادشاهان، قهرمانان و داستان‌های قدیمی ایران است.</p>
+            <p>فردوسی سال‌های زیادی روی شاهنامه کار کرد. او می‌خواست داستان‌های قدیمی ایران و زبان فارسی را زنده نگه دارد.</p>
+            <p>در شاهنامه شخصیت‌های معروف زیادی هستند. رستم یک قهرمان بزرگ است. سهراب پسر رستم است. سیمرغ یک پرنده‌ی افسانه‌ای و دانا است.</p>
+            <p>شخصیت‌های دیگری مثل رودابه، تهمینه، سیاوش و ضحاک هم در شاهنامه هستند.</p>
+            <p>امروز مردم ایران هنوز شاهنامه می‌خوانند و داستان‌های آن را تعریف می‌کنند. فردوسی یکی از مهم‌ترین شاعران زبان فارسی است.</p>
+          </div>
+
+          <div class="reading-pane" data-pane="finglish">
+            <p>Ferdowsi shâ'er-e bozorg-e Irâni bud. U hodud-e hezâr sâl pish dar Tus zendegi mikard.</p>
+            <p>Ferdowsi ketâb-e Shâhnâme râ nevesht. Shâhnâme darbâre-ye pâdeshâhân, ghahremânân va dâstân-hâ-ye ghadimi-ye Irân ast.</p>
+            <p>Ferdowsi sâl-hâ-ye ziyâdi ru-ye Shâhnâme kâr kard. U mikhâst dâstân-hâ-ye ghadimi-ye Irân va zabân-e Fârsi râ zende negah dârad.</p>
+            <p>Dar Shâhnâme shakhsiyat-hâ-ye ma'ruf-e ziyâdi hastand. Rostam yek ghahremân-e bozorg ast. Sohrâb pesar-e Rostam ast. Simorgh yek parande-ye afsâne-i va dânâ ast.</p>
+            <p>Shakhsiyat-hâ-ye digari mesl-e Rudâbe, Tahmine, Siyâvash va Zahhâk ham dar Shâhnâme hastand.</p>
+            <p>Emruz mardom-e Irân hanuz Shâhnâme mikhanand va dâstân-hâ-ye ân râ tarif mikonand. Ferdowsi yeki az mohem-tarin shâ'erân-e zabân-e Fârsi ast.</p>
+          </div>
+
+          <div class="reading-pane" data-pane="en">
+            <p>Ferdowsi was a great Iranian poet. He lived in Tus about one thousand years ago.</p>
+            <p>Ferdowsi wrote the Shahnameh. The Shahnameh is about kings, heroes, and old stories of Iran.</p>
+            <p>Ferdowsi worked on the Shahnameh for many years. He wanted to keep Iran’s old stories and the Persian language alive.</p>
+            <p>There are many famous characters in the Shahnameh. Rostam is a great hero. Sohrab is Rostam’s son. Simurgh is a wise mythical bird.</p>
+            <p>Other characters such as Rudabeh, Tahmineh, Siavash, and Zahhak are also in the Shahnameh.</p>
+            <p>Today people in Iran still read the Shahnameh and tell its stories. Ferdowsi is one of the most important poets of the Persian language.</p>
+          </div>
+
+          <div class="reading-controls">
+            <button class="inline-action" id="showPersian">Back to Persian</button>
+            <button class="inline-action" id="scrollVocab">Review vocabulary ↓</button>
+          </div>
+
+          <div class="vocab-section" id="vocabulary">
+            <div class="vocab-head">
+              <div>
+                <div class="kicker" style="margin-bottom:4px;color:#C65F2A">Tap to reveal</div>
+                <h3>Key vocabulary</h3>
+              </div>
+              <small>8 useful words from the reading</small>
+            </div>
+
+            <div class="vocab-grid">
+              <button class="vocab-card" type="button"><div class="vocab-fa">شاعر</div><div class="vocab-finglish">shâ'er</div><div class="vocab-en">poet</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">قهرمان</div><div class="vocab-finglish">ghahremân</div><div class="vocab-en">hero</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">پادشاه</div><div class="vocab-finglish">pâdeshâh</div><div class="vocab-en">king</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">داستان</div><div class="vocab-finglish">dâstân</div><div class="vocab-en">story</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">قدیمی</div><div class="vocab-finglish">ghadimi</div><div class="vocab-en">old / ancient</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">افسانه‌ای</div><div class="vocab-finglish">afsâne-i</div><div class="vocab-en">mythical</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">دانا</div><div class="vocab-finglish">dânâ</div><div class="vocab-en">wise</div></button>
+              <button class="vocab-card" type="button"><div class="vocab-fa">زنده</div><div class="vocab-finglish">zende</div><div class="vocab-en">alive</div></button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="characters" data-section="2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker-row">
+          <div class="avestan-icon" aria-hidden="true"><span>𐬙</span></div>
+          <div class="kicker">02 · Match</div>
+        </div>
+        <h2>Who is who?</h2>
+      </div>
+      <p class="section-intro">
+        Match each Shahnameh picture with the correct character name. Choose a picture first, then choose a name.
+      </p>
+    </div>
+
+    <div class="match-board">
+      <div class="match-images-panel">
+        <div class="match-panel-head">
+          <div>
+            <h3>Character pictures</h3>
+            <p>Choose one picture.</p>
+          </div>
+          <div class="match-score"><span id="characterMatches">0</span> / 7 matched</div>
+        </div>
+
+        <div class="picture-match-grid" id="pictureMatchGrid">
+          <button class="picture-match-card" type="button" data-character="rostam" aria-label="Character picture 1">
+            <img src="../assets/rostam.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">01</span>
+            <span class="picture-answer">Rostam · رستم</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="sohrab" aria-label="Character picture 2">
+            <img src="../assets/sohrab.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">02</span>
+            <span class="picture-answer">Sohrab · سهراب</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="simurgh" aria-label="Character picture 3">
+            <img src="../assets/simurgh.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">03</span>
+            <span class="picture-answer">Simurgh · سیمرغ</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="zahhak" aria-label="Character picture 4">
+            <img src="../assets/zahhak.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">04</span>
+            <span class="picture-answer">Zahhak · ضحاک</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="siavash" aria-label="Character picture 5">
+            <img src="../assets/siavash.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">05</span>
+            <span class="picture-answer">Siavash · سیاوش</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="tahmineh" aria-label="Character picture 6">
+            <img src="../assets/tahmineh.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">06</span>
+            <span class="picture-answer">Tahmineh · تهمینه</span>
+          </button>
+
+          <button class="picture-match-card" type="button" data-character="rudabeh" aria-label="Character picture 7">
+            <img src="../assets/rudabeh.png" alt="Shahnameh character illustration" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+            <span class="picture-fallback">Add character image</span>
+            <span class="picture-number">07</span>
+            <span class="picture-answer">Rudabeh · رودابه</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="match-names-panel">
+        <div class="match-panel-head">
+          <div>
+            <h3>Character names</h3>
+            <p>Now choose the matching name.</p>
+          </div>
+        </div>
+
+        <div class="name-match-list" id="nameMatchList">
+          <button class="name-match-btn" type="button" data-character="zahhak">
+            <span class="name-en">Zahhak</span><span class="name-fa">ضحاک</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="rudabeh">
+            <span class="name-en">Rudabeh</span><span class="name-fa">رودابه</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="rostam">
+            <span class="name-en">Rostam</span><span class="name-fa">رستم</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="siavash">
+            <span class="name-en">Siavash</span><span class="name-fa">سیاوش</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="simurgh">
+            <span class="name-en">Simurgh</span><span class="name-fa">سیمرغ</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="tahmineh">
+            <span class="name-en">Tahmineh</span><span class="name-fa">تهمینه</span>
+          </button>
+          <button class="name-match-btn" type="button" data-character="sohrab">
+            <span class="name-en">Sohrab</span><span class="name-fa">سهراب</span>
+          </button>
+        </div>
+
+        <div class="match-status" id="matchStatus" aria-live="polite">
+          Select a picture to begin.
+        </div>
+
+        <div class="match-actions">
+          <button class="match-reset" type="button" id="resetCharacterMatch">Reset game</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="match-complete" id="matchComplete">
+      <strong>آفرین! You matched all seven characters.</strong>
+      <p>Rostam, Sohrab, Simurgh, Zahhak, Siavash, Tahmineh, and Rudabeh are now ready for the quiz.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section paper" id="quiz" data-section="3">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker-row">
+          <div class="avestan-icon orange" aria-hidden="true"><span>𐬭</span></div>
+          <div class="kicker">03 · Quiz</div>
+        </div>
+        <h2>What do you remember?</h2>
+      </div>
+      <p class="section-intro">
+        Answer five short questions about Ferdowsi and the Shahnameh.
+      </p>
+    </div>
+
+    <div class="quiz-shell">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar"><span id="quizBar"></span></div>
+        <div class="quiz-progress-label"><span id="quizAnswered">0</span>/5 answered</div>
+      </div>
+
+      <div class="quiz-grid">
+        <div class="quiz-item" data-correct="b">
+          <div class="quiz-number">1</div>
+          <h3>فردوسی در کجا زندگی می‌کرد؟</h3>
+          <div class="answers">
+            <button class="answer-btn" data-answer="a">شیراز</button>
+            <button class="answer-btn" data-answer="b">توس</button>
+            <button class="answer-btn" data-answer="c">تبریز</button>
+            <button class="answer-btn" data-answer="d">یزد</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-item" data-correct="c">
+          <div class="quiz-number">2</div>
+          <h3>فردوسی چه کتابی نوشت؟</h3>
+          <div class="answers">
+            <button class="answer-btn" data-answer="a">گلستان</button>
+            <button class="answer-btn" data-answer="b">بوستان</button>
+            <button class="answer-btn" data-answer="c">شاهنامه</button>
+            <button class="answer-btn" data-answer="d">مثنوی</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-item" data-correct="a">
+          <div class="quiz-number">3</div>
+          <h3>سهراب چه نسبتی با رستم دارد؟</h3>
+          <div class="answers">
+            <button class="answer-btn" data-answer="a">پسر او است</button>
+            <button class="answer-btn" data-answer="b">پدر او است</button>
+            <button class="answer-btn" data-answer="c">برادر او است</button>
+            <button class="answer-btn" data-answer="d">استاد او است</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-item" data-correct="b">
+          <div class="quiz-number">4</div>
+          <h3>سیمرغ چیست؟</h3>
+          <div class="answers">
+            <button class="answer-btn" data-answer="a">یک پادشاه</button>
+            <button class="answer-btn" data-answer="b">یک پرنده‌ی افسانه‌ای</button>
+            <button class="answer-btn" data-answer="c">یک شهر</button>
+            <button class="answer-btn" data-answer="d">یک شاعر</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-item" data-correct="c">
+          <div class="quiz-number">5</div>
+          <h3>فردوسی چرا مهم است؟</h3>
+          <div class="answers">
+            <button class="answer-btn" data-answer="a">چون پادشاه بود</button>
+            <button class="answer-btn" data-answer="b">چون تخت جمشید را ساخت</button>
+            <button class="answer-btn" data-answer="c">چون داستان‌های قدیمی و زبان فارسی را زنده نگه داشت</button>
+            <button class="answer-btn" data-answer="d">چون در شیراز زندگی می‌کرد</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+      </div>
+
+      <div class="quiz-summary">
+        <div>
+          <strong>Your score</strong><br>
+          <span style="color:rgba(247,240,231,.58);font-size:.9rem">Finish all five to complete the lesson.</span>
+        </div>
+        <div class="score"><span id="score">0</span> / 5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="next-card">
+      <div class="kicker">Keep exploring</div>
+      <div class="closing-word" lang="fa">شاهنامه</div>
+      <p>
+        You now know Ferdowsi and seven important Shahnameh characters.
+        Continue reading Persian through Iran’s stories, poetry, and cultural memory.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-left">
+      <a class="footer-logo-text" href="../index.html">Seeds of Hom</a>
+    </div>
+
+    <div class="footer-center" aria-label="Social media">
+      <a class="social-link" href="#" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5Zm8.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+        </svg>
+      </a>
+      <a class="social-link" href="#" aria-label="Substack" title="Substack">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h18v2H3V4Zm0 4h18v2H3V8Zm0 4h18v2H3v-2Zm2 4h14v4l-7 4-7-4v-4Z"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer-right">
+      <a class="footer-link" href="../impressum.html">Impressum</a>
+    </div>
+
+    <div class="footer-copy">
+      © <span id="footer-year"></span> Seeds of Hom. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+const siteHeader = document.querySelector('.site-header');
+const lessonNav = document.querySelector('.lesson-nav');
+
+function updateLessonNavVisibility(){
+  if(!siteHeader || !lessonNav) return;
+  const headerBottom = siteHeader.getBoundingClientRect().bottom;
+  lessonNav.classList.toggle('is-visible', headerBottom <= 0);
+}
+window.addEventListener('scroll', updateLessonNavVisibility, {passive:true});
+window.addEventListener('resize', updateLessonNavVisibility);
+updateLessonNavVisibility();
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href');
+    if (!id || id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const navHeight = lessonNav ? lessonNav.offsetHeight : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+    window.scrollTo({top,behavior:'smooth'});
+  });
+});
+
+/* LANGUAGE */
+const langButtons = document.querySelectorAll('.lang-btn');
+const panes = document.querySelectorAll('.reading-pane');
+let currentLanguage = 'fa';
+
+const quizContent = {
+  fa: [
+    { q:'فردوسی در کجا زندگی می‌کرد؟', a:{a:'شیراز',b:'توس',c:'تبریز',d:'یزد'} },
+    { q:'فردوسی چه کتابی نوشت؟', a:{a:'گلستان',b:'بوستان',c:'شاهنامه',d:'مثنوی'} },
+    { q:'سهراب چه نسبتی با رستم دارد؟', a:{a:'پسر او است',b:'پدر او است',c:'برادر او است',d:'استاد او است'} },
+    { q:'سیمرغ چیست؟', a:{a:'یک پادشاه',b:'یک پرنده‌ی افسانه‌ای',c:'یک شهر',d:'یک شاعر'} },
+    { q:'فردوسی چرا مهم است؟', a:{a:'چون پادشاه بود',b:'چون تخت جمشید را ساخت',c:'چون داستان‌های قدیمی و زبان فارسی را زنده نگه داشت',d:'چون در شیراز زندگی می‌کرد'} }
+  ],
+  finglish: [
+    { q:'Ferdowsi dar kojâ zendegi mikard?', a:{a:'Shirâz',b:'Tus',c:'Tabriz',d:'Yazd'} },
+    { q:'Ferdowsi che ketâbi nevesht?', a:{a:'Golestân',b:'Bustân',c:'Shâhnâme',d:'Masnavi'} },
+    { q:'Sohrâb che nesbati bâ Rostam dârad?', a:{a:'Pesar-e u ast',b:'Pedar-e u ast',c:'Barâdar-e u ast',d:'Ostâd-e u ast'} },
+    { q:'Simorgh chist?', a:{a:'Yek pâdeshâh',b:'Yek parande-ye afsâne-i',c:'Yek shahr',d:'Yek shâer'} },
+    { q:'Ferdowsi cherâ mohem ast?', a:{a:'Chon pâdeshâh bud',b:'Chon Takht-e Jamshid râ sâkht',c:'Chon dâstân-hâ-ye ghadimi va zabân-e Fârsi râ zende negah dâsht',d:'Chon dar Shirâz zendegi mikard'} }
+  ],
+  en: [
+    { q:'Where did Ferdowsi live?', a:{a:'Shiraz',b:'Tus',c:'Tabriz',d:'Yazd'} },
+    { q:'What book did Ferdowsi write?', a:{a:'Golestan',b:'Bustan',c:'Shahnameh',d:'Masnavi'} },
+    { q:'Who is Sohrab to Rostam?', a:{a:'His son',b:'His father',c:'His brother',d:'His teacher'} },
+    { q:'What is Simurgh?', a:{a:'A king',b:'A mythical bird',c:'A city',d:'A poet'} },
+    { q:'Why is Ferdowsi important?', a:{a:'He was a king',b:'He built Persepolis',c:'He helped keep old stories and Persian alive',d:'He lived in Shiraz'} }
+  ]
+};
+
+const feedbackText = {
+  fa:{correct:'آفرین! درست است.',wrong:'تقریباً! پاسخ درست مشخص شده است.'},
+  finglish:{correct:'Âfarin! Dorost ast.',wrong:'Nazdik bud! Javâb-e dorost moshakhas shode ast.'},
+  en:{correct:'Correct!',wrong:'Almost — the correct answer is highlighted.'}
+};
+
+function updateQuizLanguage(lang){
+  const content = quizContent[lang];
+  document.querySelectorAll('.quiz-item').forEach((item,index) => {
+    item.querySelector('h3').textContent = content[index].q;
+    item.querySelectorAll('.answer-btn').forEach(btn => {
+      btn.textContent = content[index].a[btn.dataset.answer];
+    });
+    if(answered.has(index)){
+      item.querySelector('.quiz-feedback').textContent =
+        answered.get(index) ? feedbackText[lang].correct : feedbackText[lang].wrong;
+    }
+  });
+
+  document.querySelectorAll('.quiz-item h3, .answer-btn').forEach(el => {
+    el.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    el.style.textAlign = lang === 'fa' ? 'right' : 'left';
+  });
+}
+
+function setLanguage(lang){
+  currentLanguage = lang;
+  langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  panes.forEach(p => p.classList.toggle('active', p.dataset.pane === lang));
+  updateQuizLanguage(lang);
+}
+
+langButtons.forEach(btn => btn.addEventListener('click',()=>setLanguage(btn.dataset.lang)));
+document.getElementById('showPersian').addEventListener('click',()=>setLanguage('fa'));
+document.getElementById('scrollVocab').addEventListener('click',()=>{
+  document.getElementById('vocabulary').scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.querySelectorAll('.vocab-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('open'));
+});
+
+/* PICTURE ↔ CHARACTER MATCHING */
+const pictureCards = [...document.querySelectorAll('.picture-match-card')];
+const nameButtons = [...document.querySelectorAll('.name-match-btn')];
+const matchStatus = document.getElementById('matchStatus');
+const matchCount = document.getElementById('characterMatches');
+const matchComplete = document.getElementById('matchComplete');
+const resetCharacterMatch = document.getElementById('resetCharacterMatch');
+
+let selectedPicture = null;
+let matchedCharacters = new Set();
+
+function clearPictureSelection(){
+  pictureCards.forEach(card => {
+    if(!card.classList.contains('matched')){
+      card.classList.remove('selected','wrong');
+    }
+  });
+}
+
+function clearNameSelection(){
+  nameButtons.forEach(btn => {
+    if(!btn.classList.contains('matched')){
+      btn.classList.remove('selected','wrong');
+    }
+  });
+}
+
+function updateCharacterMatchProgress(){
+  matchCount.textContent = matchedCharacters.size;
+  matchComplete.classList.toggle('show', matchedCharacters.size === 7);
+
+  if(matchedCharacters.size === 7){
+    matchStatus.textContent = 'Perfect — all seven characters are matched.';
+    matchStatus.className = 'match-status good';
+  }
+}
+
+pictureCards.forEach(card => {
+  card.addEventListener('click', () => {
+    if(card.classList.contains('matched')) return;
+
+    clearPictureSelection();
+    clearNameSelection();
+
+    selectedPicture = card;
+    card.classList.add('selected');
+
+    matchStatus.textContent = 'Picture selected. Now choose the character name.';
+    matchStatus.className = 'match-status';
+  });
+});
+
+nameButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(btn.classList.contains('matched')) return;
+
+    if(!selectedPicture){
+      clearNameSelection();
+      btn.classList.add('selected');
+      matchStatus.textContent = 'Choose a picture first, then choose its name.';
+      matchStatus.className = 'match-status bad';
+      return;
+    }
+
+    const pictureCharacter = selectedPicture.dataset.character;
+    const nameCharacter = btn.dataset.character;
+
+    if(pictureCharacter === nameCharacter){
+      selectedPicture.classList.remove('selected','wrong');
+      selectedPicture.classList.add('matched');
+
+      btn.classList.remove('selected','wrong');
+      btn.classList.add('matched');
+
+      matchedCharacters.add(pictureCharacter);
+
+      matchStatus.textContent = 'Correct match!';
+      matchStatus.className = 'match-status good';
+
+      selectedPicture = null;
+      updateCharacterMatchProgress();
+    }else{
+      selectedPicture.classList.add('wrong');
+      btn.classList.add('wrong');
+
+      matchStatus.textContent = 'Not this one — try another name.';
+      matchStatus.className = 'match-status bad';
+
+      setTimeout(() => {
+        selectedPicture?.classList.remove('wrong');
+        btn.classList.remove('wrong');
+      }, 500);
+    }
+  });
+});
+
+resetCharacterMatch.addEventListener('click', () => {
+  selectedPicture = null;
+  matchedCharacters = new Set();
+
+  pictureCards.forEach(card => card.classList.remove('selected','wrong','matched'));
+  nameButtons.forEach(btn => btn.classList.remove('selected','wrong','matched'));
+
+  matchStatus.textContent = 'Select a picture to begin.';
+  matchStatus.className = 'match-status';
+  matchComplete.classList.remove('show');
+  updateCharacterMatchProgress();
+});
+
+updateCharacterMatchProgress();
+      },1000);
+    });
+    whoOptions.appendChild(btn);
+  });
+}
+renderWho();
+
+/* QUIZ */
+const quizItems = [...document.querySelectorAll('.quiz-item')];
+const answered = new Map();
+
+quizItems.forEach((item,index)=>{
+  const correct=item.dataset.correct;
+  const feedback=item.querySelector('.quiz-feedback');
+  const buttons=item.querySelectorAll('.answer-btn');
+
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(answered.has(index)) return;
+      const selected=btn.dataset.answer;
+      const isCorrect=selected===correct;
+      answered.set(index,isCorrect);
+      buttons.forEach(b=>b.disabled=true);
+
+      if(isCorrect){
+        btn.classList.add('correct');
+        feedback.textContent=feedbackText[currentLanguage].correct;
+      }else{
+        btn.classList.add('wrong');
+        item.querySelector(`[data-answer="${correct}"]`).classList.add('correct');
+        feedback.textContent=feedbackText[currentLanguage].wrong;
+      }
+      updateQuiz();
+    });
+  });
+});
+
+function updateQuiz(){
+  let score=0;
+  answered.forEach(v=>{if(v)score++});
+  document.getElementById('score').textContent=score;
+  document.getElementById('quizAnswered').textContent=answered.size;
+  document.getElementById('quizBar').style.width=`${(answered.size/quizItems.length)*100}%`;
+}
+
+/* PAGE PROGRESS */
+const sections=[...document.querySelectorAll('[data-section]')];
+const progressParts=[
+  document.getElementById('progress1'),
+  document.getElementById('progress2'),
+  document.getElementById('progress3')
+];
+const progressLabel=document.getElementById('progressLabel');
+
+function updatePageProgress(){
+  const y=window.scrollY+window.innerHeight*.38;
+  let current=0;
+  sections.forEach((section,index)=>{
+    if(y>=section.offsetTop) current=index+1;
+  });
+  progressParts.forEach((bar,index)=>{
+    bar.style.width=index<current?'100%':'0%';
+  });
+  progressLabel.textContent=
+    current===0?'Start reading':
+    current===1?'Reading':
+    current===2?'Characters':
+    'Quiz';
+}
+window.addEventListener('scroll',updatePageProgress,{passive:true});
+updatePageProgress();
+
+const footerYear=document.getElementById('footer-year');
+if(footerYear) footerYear.textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
