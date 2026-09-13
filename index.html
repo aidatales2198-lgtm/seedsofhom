@@ -366,7 +366,6 @@ section{padding:68px 24px}
 
 @media(prefers-reduced-motion:reduce){.orbit{animation:none!important}}
 
-
 /* V9 — repaired orbital hero, fading dividers, Homa creature */
 .hero,.hom-section,.history,.readings,.demo,.workbook,.more{border-bottom:0!important}
 .hero:before{display:none!important}
@@ -469,7 +468,6 @@ footer,.footer-inner{display:none!important}
   .orbit,.orbit-label{animation:none!important}
 }
 
-
 /* V12 — invisible logo URL hook + restored hero/Homa fading divider */
 
 /*
@@ -509,8 +507,6 @@ footer,.footer-inner{display:none!important}
   opacity:1;
 }
 
-
-
 /* V18 — Avestan section medallions */
 .avestan-icon{
   font-family:"Noto Sans Avestan", serif !important;
@@ -549,8 +545,6 @@ footer,.footer-inner{display:none!important}
   .hero-logo{max-width:150px;max-height:68px;}
   .hero-divider{width:82vw;margin:20px auto 12px;}
 }
-
-
 
 /* V19 — medallions centered behind section titles */
 .hom-copy,
@@ -649,10 +643,6 @@ footer,.footer-inner{display:none!important}
   .workbook-copy .soon,
   .workbook-copy .title{padding-left:26px;}
 }
-</style>
-
-
-<style>
 
 /* V21 — Avestan medallions beside the small section labels */
 .avestan-icon{
@@ -702,9 +692,7 @@ footer,.footer-inner{display:none!important}
   .avestan-icon span{font-size:16px !important}
   .section-kicker-row{gap:10px;margin-bottom:12px}
 }
-</style>
 
-<style>
 /* V22 — center “Coming soon” inside its own outlined rectangle only */
 .soon{
   display:inline-flex !important;
@@ -715,10 +703,7 @@ footer,.footer-inner{display:none!important}
   min-height:34px;
   padding:0 12px !important;
 }
-</style>
 
-
-<style>
 /* V23 — scroll reveal for sections */
 .scroll-reveal{
   opacity:0;
@@ -752,10 +737,7 @@ footer,.footer-inner{display:none!important}
     transition:none !important;
   }
 }
-</style>
 
-
-<style>
 /* V24 — mobile scrolling + right-edge overflow repair */
 
 /* Clip horizontal overflow at the ROOT as well as the body.
@@ -835,9 +817,8 @@ section,
     min-height: 100dvh !important;
   }
 }
-</style>
-<style>
- /* V26 — remove visible scrollbars completely */
+
+/* V26 — remove visible scrollbars completely */
 html, body, body * {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
@@ -1116,9 +1097,7 @@ html {
   .newsletter .title { margin-left: 0 !important; margin-right: 0 !important; }
   .newsletter p { margin-left: 0 !important; margin-right: 0 !important; }
 }
-</style>
 
-<style>
 /* GitHub version — sticky one-page navigation */
 .top-nav{
   position:sticky;
@@ -1256,10 +1235,7 @@ html {
     text-align:center;
   }
 }
-</style>
 
-
-<style>
 /* Updated navigation: links left, logo dead-center */
 .top-nav .nav-inner{
   position:relative !important;
@@ -1332,10 +1308,7 @@ html {
     display:flex;
   }
 }
-</style>
 
-
-<style>
 /* Menu typography */
 .top-nav,
 .top-nav a,
@@ -1505,10 +1478,7 @@ footer.site-footer .site-footer-inner {
     flex-direction: column;
   }
 }
-</style>
 
-
-<style>
 .sr-only{
   position:absolute !important;
   width:1px !important;
@@ -1520,10 +1490,7 @@ footer.site-footer .site-footer-inner {
   white-space:nowrap !important;
   border:0 !important;
 }
-</style>
 
-
-<style>
 /* Footer upgrade: social icons + Impressum */
 footer.site-footer {
   display: block !important;
@@ -1630,10 +1597,7 @@ footer.site-footer {
     grid-column: 1;
   }
 }
-</style>
 
-
-<style>
 /* FINAL FOOTER — polished blue treatment */
 footer.site-footer{
   display:block !important;
@@ -1794,10 +1758,6 @@ footer.site-footer::after{
   }
 }
 
-</style>
-
-
-<style>
 /* FINAL OVERRIDES — navbar + desktop hero alignment */
 
 /* Larger Times New Roman menu text */
@@ -1842,21 +1802,24 @@ footer.site-footer::after{
     font-size: 18px !important;
   }
 }
-</style>
 
-
-<style>
-/* FINAL — 40px left/right padding on every section */
-section {
-  padding-left: 70px !important;
-  padding-right: 70px !important;
+/* Shared centered frame for both pages. */
+:root { --content-width: 1080px; --page-gutter: 24px; }
+.shell, .container, .hero-inner, .nav-inner, .site-footer-inner {
+  width: min(var(--content-width), calc(100% - 2 * var(--page-gutter))) !important;
+  max-width: none !important;
+  margin-inline: auto !important;
 }
+@media (max-width: 700px) { :root { --page-gutter: 18px; } }
+
+/* Section backgrounds span the viewport; content stays in the frame. */
+section, .hero { padding-left: 0 !important; padding-right: 0 !important; }
+@media (max-width: 700px) {
+  section, .hero { padding-left: 0 !important; padding-right: 0 !important; }
 }
 </style>
-
 </head>
 <body>
-
 
 <nav class="top-nav" aria-label="Main navigation">
   <div class="nav-inner">
@@ -1881,7 +1844,7 @@ section {
 
     <div class="nav-menu" id="nav-menu">
       <a href="#top">Home</a>
-      <a href="#stories">Stories</a>
+      <a href="./stories.html">Stories</a>
       <a href="#poems">Poems</a>
       <a href="#projects">Projects</a>
     </div>
@@ -1889,11 +1852,8 @@ section {
   </div>
 </nav>
 
-
 <div class="site-bg"></div>
 <div class="site-stars"></div>
-
-
 
 <header class="hero" id="top">
   <div class="hero-inner">
@@ -1992,7 +1952,6 @@ section {
   </div>
 </section>
 
-
 <section class="workbook" id="workbook">
   <div class="container workbook-grid">
 
@@ -2044,8 +2003,6 @@ section {
 
 </section>
 
-
-
 <script>
 /* V23 — reveal sections as they enter the viewport */
 document.addEventListener("DOMContentLoaded", () => {
@@ -2075,13 +2032,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
 <script>
 /* V28 — keep navigation native.
    Full-page links use target="_top" in the HTML so Hostinger cannot trap
    the destination inside the custom-code frame. */
 </script>
-
 
 <script>
 /* Sticky navigation — mobile menu */
@@ -2104,7 +2059,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-
 
 <section class="newsletter-signup" id="newsletter">
   <div class="newsletter-signup-inner">
@@ -2131,7 +2085,6 @@ document.addEventListener("DOMContentLoaded", () => {
     <p class="newsletter-note">Signup functionality coming soon.</p>
   </div>
 </section>
-
 
 <footer class="site-footer">
   <div class="site-footer-inner">
@@ -2166,7 +2119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </div>
 </footer>
-
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
