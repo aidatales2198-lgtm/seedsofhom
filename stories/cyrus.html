@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cyrus the Great — A2 Persian Reading | Seeds of Hom</title>
+<meta name="description" content="An interactive A2 Persian reading lesson about Cyrus the Great with Persian, Finglish, English translation, vocabulary, timeline, and quiz." />
+
+
+<link rel="stylesheet" href="https://esm.sh/gh/rahatool/persian-fonts/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Avestan&display=swap" rel="stylesheet">
+
+<style>
+  @font-face{
+    font-family:"BNazaninWeb";
+    src:
+      local("B Nazanin"),
+      local("BNazanin"),
+      url("https://cdn.jsdelivr.net/gh/intuxicated/css-persian@master/fonts/BNazanin.ttf") format("truetype");
+    font-display:swap;
+  }
+
+  :root{
+    --night:#170A2F;
+    --night-2:#21103C;
+    --night-3:#2A1548;
+    --cyan:#78EFFA;
+    --orange:#F5853F;
+    --paper:#F7F0E7;
+    --paper-2:#FFF9F1;
+    --ink:#170A2F;
+    --muted:#756B82;
+    --line:rgba(23,10,47,.12);
+    --line-light:rgba(247,240,231,.16);
+    --success:#4BAA83;
+    --danger:#C66A55;
+    --shadow:0 24px 60px rgba(23,10,47,.12);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--night);
+    color:var(--paper);
+    font-family:"Noto Serif", Georgia, serif;
+    line-height:1.65;
+  }
+  button{font:inherit}
+  a{color:inherit}
+
+  [lang="fa"],
+  .fa-text,
+  .vocab-fa,
+  .portrait-note,
+  .closing-word,
+  .event-card strong{
+    font-family:"Noto Naskh Arabic", Tahoma, serif !important;
+  }
+
+  .quiz-item h3[dir="rtl"],
+  .answer-btn[dir="rtl"]{
+    font-family:"Noto Naskh Arabic", Tahoma, serif !important;
+  }
+
+  .quiz-item h3[dir="ltr"],
+  .answer-btn[dir="ltr"]{
+    font-family:"Noto Serif", Georgia, serif !important;
+  }
+
+  .wrap{
+    width:min(1120px,calc(100% - 36px));
+    margin:0 auto;
+  }
+
+  /* TOP PROGRESS NAV */
+  .lesson-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(18px);
+    background:rgba(23,10,47,.82);
+    border-bottom:1px solid var(--line-light);
+  }
+
+  .lesson-nav-inner{
+    min-height:64px;
+    display:flex;
+    align-items:center;
+    gap:22px;
+  }
+
+  .brand{
+    font-weight:900;
+    letter-spacing:-.02em;
+    white-space:nowrap;
+  }
+
+  .brand span{color:var(--orange)}
+
+  .lesson-progress{
+    flex:1;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+
+  .progress-step{
+    flex:1;
+    height:5px;
+    border-radius:999px;
+    background:rgba(247,240,231,.12);
+    overflow:hidden;
+  }
+
+  .progress-step span{
+    display:block;
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--orange),var(--cyan));
+    transition:width .25s ease;
+  }
+
+  .nav-label{
+    color:rgba(247,240,231,.66);
+    font-size:.78rem;
+    font-weight:800;
+    white-space:nowrap;
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:38px 0 32px;
+    overflow:hidden;
+  }
+
+  .hero::before{
+    content:"𐎤";
+    position:absolute;
+    right:-7vw;
+    top:-14vh;
+    font-family:serif;
+    font-size:clamp(280px,45vw,650px);
+    color:rgba(120,239,250,.055);
+    line-height:1;
+    pointer-events:none;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:36px;
+    align-items:center;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    border:1px solid rgba(120,239,250,.4);
+    color:var(--cyan);
+    border-radius:999px;
+    padding:7px 12px;
+    font-size:.76rem;
+    font-weight:900;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--orange);
+  }
+
+  .hero h1{
+    margin:14px 0 10px;
+    font-size:clamp(2.8rem,6vw,5.4rem);
+    line-height:.88;
+    letter-spacing:-.06em;
+  }
+
+  .hero h1 span{color:var(--orange)}
+
+  .hero-copy{
+    max-width:610px;
+    color:rgba(247,240,231,.74);
+    font-size:1.05rem;
+  }
+
+  .hero-actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .primary-btn,
+  .secondary-btn{
+    border-radius:999px;
+    padding:12px 18px;
+    font-weight:900;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .primary-btn{
+    background:var(--orange);
+    color:var(--night);
+  }
+
+  .secondary-btn{
+    border:1px solid rgba(247,240,231,.22);
+    color:var(--paper);
+  }
+
+  .lesson-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+  }
+
+  .meta-pill{
+    border:1px solid rgba(247,240,231,.16);
+    border-radius:999px;
+    padding:8px 11px;
+    color:rgba(247,240,231,.7);
+    font-size:.8rem;
+  }
+
+  .hero-art{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .portrait-shell{
+    width:min(340px,86%);
+    aspect-ratio:4/5;
+    border-radius:42% 42% 20px 20px;
+    border:1px solid rgba(120,239,250,.34);
+    background:
+      radial-gradient(circle at 50% 20%,rgba(120,239,250,.16),transparent 36%),
+      linear-gradient(180deg,rgba(245,133,63,.08),rgba(23,10,47,.18));
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 36px 85px rgba(0,0,0,.25);
+  }
+
+  .portrait-placeholder{
+    position:absolute;
+    inset:18px;
+    border:1px dashed rgba(247,240,231,.22);
+    border-radius:38% 38% 12px 12px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    color:rgba(247,240,231,.48);
+    padding:30px;
+    font-size:.9rem;
+  }
+
+  .portrait-note{
+    position:absolute;
+    left:16px;
+    bottom:18px;
+    background:var(--cyan);
+    color:var(--night);
+    font-size:1.3rem;
+    font-weight:900;
+    padding:8px 13px;
+    border-radius:12px;
+    transform:rotate(-3deg);
+  }
+
+  /* LESSON SECTIONS */
+  .section{
+    padding:78px 0;
+  }
+
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .dark{
+    background:transparent;
+  }
+
+  .section-head{
+    display:grid;
+    grid-template-columns:1fr minmax(260px,520px);
+    gap:36px;
+    align-items:end;
+    margin-bottom:30px;
+  }
+
+  .kicker{
+    color:var(--orange);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.76rem;
+    font-weight:900;
+    margin-bottom:8px;
+  }
+
+  .section h2{
+    margin:0;
+    font-size:clamp(2.1rem,4vw,4rem);
+    line-height:.95;
+    letter-spacing:-.045em;
+  }
+
+  .section-intro{
+    margin:0;
+    color:rgba(23,10,47,.62);
+  }
+
+  .dark .section-intro{
+    color:rgba(247,240,231,.64);
+  }
+
+  /* READING EXPERIENCE */
+  .reading-layout{
+    display:grid;
+    grid-template-columns:245px 1fr;
+    gap:24px;
+    align-items:start;
+  }
+
+  .reading-sidebar{
+    position:sticky;
+    top:88px;
+  }
+
+  .sidebar-card{
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px;
+    background:rgba(255,255,255,.42);
+  }
+
+  .sidebar-title{
+    font-weight:900;
+    font-size:.86rem;
+    margin-bottom:10px;
+  }
+
+  .language-tabs{
+    display:grid;
+    gap:8px;
+  }
+
+  .lang-btn{
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--ink);
+    border-radius:12px;
+    padding:12px 14px;
+    text-align:left;
+    font-weight:900;
+    cursor:pointer;
+    transition:.18s ease;
+  }
+
+  .lang-btn:hover,
+  .lang-btn.active{
+    background:var(--night);
+    color:var(--paper);
+    border-color:var(--night);
+    transform:translateX(3px);
+  }
+
+  .tip{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    color:rgba(23,10,47,.55);
+    font-size:.82rem;
+  }
+
+  .reading-card{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  .reading-card-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:18px 22px;
+    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.45);
+  }
+
+  .level{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:900;
+  }
+
+  .level::before{
+    content:"";
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--orange);
+  }
+
+  .reading-pane-wrap{
+    padding:clamp(24px,4vw,46px);
+  }
+
+  .reading-pane{
+    display:none;
+    font-size:clamp(1.05rem,1.6vw,1.23rem);
+    max-width:780px;
+  }
+
+  .reading-pane.active{display:block}
+  .reading-pane p{margin:0 0 1.15em}
+
+  .reading-pane[dir="rtl"]{
+    font-size:clamp(1.35rem,2.1vw,1.62rem);
+    line-height:2.15;
+  }
+
+  .reading-controls{
+    margin-top:28px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .inline-action{
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:white;
+    color:var(--ink);
+    padding:9px 13px;
+    font-weight:800;
+    cursor:pointer;
+  }
+
+  .inline-action:hover{
+    border-color:var(--orange);
+  }
+
+  /* VOCAB */
+  .vocab-section{
+    margin-top:34px;
+    border-top:1px solid var(--line);
+    padding-top:28px;
+  }
+
+  .vocab-head{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:end;
+    margin-bottom:14px;
+  }
+
+  .vocab-head h3{
+    margin:0;
+    font-size:1.3rem;
+  }
+
+  .vocab-head small{
+    color:rgba(23,10,47,.52);
+  }
+
+  .vocab-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+
+  .vocab-card{
+    min-height:128px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:16px;
+    padding:15px;
+    cursor:pointer;
+    transition:.18s ease;
+    text-align:left;
+    position:relative;
+  }
+
+  .vocab-card::after{
+    content:"+";
+    position:absolute;
+    right:12px;
+    top:8px;
+    color:var(--orange);
+    font-weight:900;
+  }
+
+  .vocab-card.open::after{content:"–"}
+
+  .vocab-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(245,133,63,.7);
+    box-shadow:0 12px 28px rgba(23,10,47,.08);
+  }
+
+  .vocab-fa{
+    direction:rtl;
+    text-align:right;
+    font-size:1.42rem;
+    font-weight:900;
+    padding-right:20px;
+  }
+
+  .vocab-finglish{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:.83rem;
+  }
+
+  .vocab-en{
+    margin-top:10px;
+    color:var(--orange);
+    font-weight:900;
+    display:none;
+  }
+
+  .vocab-card.open .vocab-en{display:block}
+
+  /* INTERACTIVE TIMELINE */
+  .activity-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+
+  .activity-card{
+    border:1px solid rgba(247,240,231,.14);
+    border-radius:22px;
+    background:rgba(247,240,231,.035);
+    padding:22px;
+  }
+
+  .activity-card h3{
+    margin:0;
+    font-size:1.3rem;
+  }
+
+  .activity-card p{
+    margin:5px 0 18px;
+    color:rgba(247,240,231,.58);
+    font-size:.9rem;
+  }
+
+  .event-bank,
+  .event-order{
+    min-height:250px;
+    display:grid;
+    gap:10px;
+  }
+
+  .event-card{
+    border:1px solid rgba(120,239,250,.23);
+    border-radius:14px;
+    background:var(--night-3);
+    color:var(--paper);
+    padding:14px 15px;
+    text-align:left;
+    cursor:pointer;
+    transition:.18s ease;
+  }
+
+  .event-card:hover{
+    transform:translateY(-2px);
+    border-color:var(--cyan);
+  }
+
+  .event-card strong{
+    display:block;
+    color:var(--cyan);
+    font-size:1.12rem;
+    margin-bottom:2px;
+  }
+
+  .event-card small{
+    color:rgba(247,240,231,.6);
+  }
+
+  .timeline-row{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:8px;
+    align-items:center;
+  }
+
+  .timeline-number{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:rgba(245,133,63,.15);
+    color:var(--orange);
+    font-weight:900;
+  }
+
+  .activity-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+
+  .action-btn{
+    border:0;
+    border-radius:999px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:900;
+  }
+
+  .action-primary{
+    background:var(--orange);
+    color:var(--night);
+  }
+
+  .action-secondary{
+    background:transparent;
+    color:var(--paper);
+    border:1px solid rgba(247,240,231,.22);
+  }
+
+  .builder-result{
+    margin-top:12px;
+    min-height:26px;
+    font-weight:900;
+  }
+
+  .good{color:var(--cyan)}
+  .bad{color:#FFB494}
+
+  /* QUIZ */
+  .quiz-shell{
+    max-width:850px;
+    margin:0 auto;
+  }
+
+  .quiz-progress{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    margin-bottom:18px;
+  }
+
+  .quiz-progress-bar{
+    flex:1;
+    height:8px;
+    border-radius:999px;
+    background:rgba(23,10,47,.08);
+    overflow:hidden;
+  }
+
+  .quiz-progress-bar span{
+    display:block;
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,var(--orange),var(--cyan));
+    transition:width .25s ease;
+  }
+
+  .quiz-progress-label{
+    font-size:.84rem;
+    font-weight:900;
+    color:rgba(23,10,47,.62);
+    white-space:nowrap;
+  }
+
+  .quiz-grid{
+    display:grid;
+    gap:16px;
+  }
+
+  .quiz-item{
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:#fffaf4;
+    padding:22px;
+    box-shadow:0 12px 28px rgba(23,10,47,.05);
+  }
+
+  .quiz-number{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:var(--night);
+    color:var(--paper);
+    font-size:.78rem;
+    font-weight:900;
+    margin-bottom:12px;
+  }
+
+  .quiz-item h3{
+    margin:0 0 15px;
+    font-size:1.35rem;
+    line-height:1.7;
+  }
+
+  .answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .answer-btn{
+    border:1px solid var(--line);
+    background:white;
+    color:var(--ink);
+    border-radius:12px;
+    padding:12px 13px;
+    text-align:right;
+    direction:rtl;
+    cursor:pointer;
+    transition:.15s ease;
+    font-size:1.08rem;
+  }
+
+  .answer-btn:hover{
+    border-color:var(--orange);
+    transform:translateY(-1px);
+  }
+
+  .answer-btn.correct{
+    border-color:var(--success);
+    background:#EAF7F0;
+  }
+
+  .answer-btn.wrong{
+    border-color:var(--danger);
+    background:#FFF0EA;
+  }
+
+  .quiz-feedback{
+    margin-top:10px;
+    min-height:23px;
+    color:rgba(23,10,47,.65);
+    font-weight:800;
+    font-size:.9rem;
+  }
+
+  .quiz-summary{
+    margin-top:20px;
+    border-radius:18px;
+    background:var(--night);
+    color:var(--paper);
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+  }
+
+  .score{
+    color:var(--cyan);
+    font-size:1.8rem;
+    font-weight:900;
+  }
+
+  /* NEXT STEP */
+  .next-card{
+    max-width:780px;
+    margin:0 auto;
+    text-align:center;
+    border:1px solid rgba(247,240,231,.14);
+    border-radius:28px;
+    background:rgba(247,240,231,.04);
+    padding:38px 26px;
+  }
+
+  .closing-word{
+    color:var(--orange);
+    font-size:clamp(3rem,8vw,6.5rem);
+    line-height:1;
+    direction:rtl;
+    font-weight:900;
+  }
+
+  .next-card p{
+    max-width:560px;
+    margin:18px auto 0;
+    color:rgba(247,240,231,.64);
+  }
+
+  /* MOBILE */
+  @media(max-width:900px){
+    .hero-grid,
+    .activity-grid,
+    .section-head{
+      grid-template-columns:1fr;
+    }
+
+    .hero-art{
+      margin-top:12px;
+    }
+
+    .reading-layout{
+      grid-template-columns:1fr;
+    }
+
+    .reading-sidebar{
+      position:static;
+    }
+
+    .language-tabs{
+      grid-template-columns:repeat(3,1fr);
+    }
+
+    .lang-btn{
+      text-align:center;
+      padding:11px 8px;
+    }
+
+    .tip{
+      display:none;
+    }
+
+    .vocab-grid{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .lesson-nav-inner{
+      gap:12px;
+    }
+
+    .brand{display:none}
+  }
+
+  @media(max-width:600px){
+    .wrap{width:min(100% - 24px,1120px)}
+    .hero{padding:34px 0 28px}
+    .section{padding:58px 0}
+    .hero h1{font-size:clamp(3rem,16vw,5rem)}
+    .portrait-shell{width:95%}
+    .nav-label{display:none}
+    .reading-card-top{
+      align-items:flex-start;
+      flex-direction:column;
+      gap:5px;
+    }
+    .vocab-grid,
+    .answers{
+      grid-template-columns:1fr;
+    }
+    .quiz-summary{
+      align-items:flex-start;
+      flex-direction:column;
+    }
+    .activity-card{
+      padding:17px;
+    }
+  }
+
+  .reading-pane[data-pane="finglish"],
+  .reading-pane[data-pane="en"]{
+    font-family:"Noto Serif", Georgia, serif;
+  }
+
+  .reading-pane[data-pane="fa"]{
+    font-family:"Noto Naskh Arabic", Tahoma, serif;
+  }
+
+
+/* =========================================================
+   HOMEPAGE VISUAL LANGUAGE — lesson page
+   Matches Seeds of Hom homepage: editorial serif typography,
+   Avestan medallions, fading dividers, thin borders,
+   dark translucent panels, restrained square controls.
+   ========================================================= */
+
+:root{
+  --night:#170A2F;
+  --night-2:#21103C;
+  --night-3:#2A1548;
+  --cyan:#78EFFA;
+  --orange:#F5853F;
+  --paper:#F7F0E7;
+  --paper-2:#F7F0E7;
+  --ink:#F7F0E7;
+  --muted:#B9AFC7;
+  --lav:#D8CDE7;
+  --line:rgba(247,240,231,.16);
+  --line-light:rgba(247,240,231,.16);
+  --success:#78EFFA;
+  --danger:#F5A083;
+  --shadow:none;
+}
+
+html{
+  background:var(--night);
+}
+
+body,
+button,
+input{
+  font-family:"Times New Roman", Times, serif !important;
+}
+
+body{
+  color:var(--paper);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(120,239,250,.055), transparent 24%),
+    radial-gradient(circle at 84% 28%, rgba(245,133,63,.05), transparent 23%),
+    radial-gradient(circle at 40% 80%, rgba(120,239,250,.035), transparent 30%),
+    var(--night);
+  line-height:1.5;
+}
+
+[lang="fa"],
+.fa-text,
+.vocab-fa,
+.portrait-note,
+.closing-word,
+.event-card strong,
+.quiz-item h3[dir="rtl"],
+.answer-btn[dir="rtl"],
+.reading-pane[data-pane="fa"]{
+  font-family:"IranNastaliq", Tahoma, serif !important;
+  direction:rtl;
+  font-feature-settings:"calt" 1,"liga" 1,"rlig" 1,"cswh" 1;
+  -webkit-font-feature-settings:"calt" 1,"liga" 1,"rlig" 1,"cswh" 1;
+}
+
+.quiz-item h3[dir="ltr"],
+.answer-btn[dir="ltr"],
+.reading-pane[data-pane="finglish"],
+.reading-pane[data-pane="en"]{
+  font-family:"Times New Roman", Times, serif !important;
+}
+
+/* Narrower editorial content width like homepage */
+.wrap{
+  width:min(980px,calc(100% - 40px));
+}
+
+/* Sticky top bar */
+.lesson-nav{
+  background:rgba(23,10,47,.90);
+  border-bottom:1px solid rgba(247,240,231,.12);
+  backdrop-filter:blur(18px);
+}
+.lesson-nav-inner{min-height:58px}
+.brand-logo{
+  display:flex;
+  align-items:center;
+  width:132px;
+  flex:0 0 132px;
+}
+.brand-logo img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:40px;
+  object-fit:contain;
+}
+.progress-step{
+  height:3px;
+  background:rgba(247,240,231,.12);
+  border-radius:0;
+}
+.progress-step span{
+  background:linear-gradient(90deg,var(--cyan),var(--orange));
+}
+.nav-label{
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Hero: same editorial scale + orbit-like geometry */
+.hero{
+  padding:44px 0 46px;
+  min-height:0;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  width:430px;
+  height:430px;
+  right:-110px;
+  top:50%;
+  transform:translateY(-50%);
+  border:1px solid rgba(120,239,250,.12);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(120,239,250,.045),transparent 68%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  right:-20px;
+  top:54%;
+  transform:translateY(-50%);
+  border:1px dashed rgba(245,133,63,.16);
+  border-radius:50%;
+  pointer-events:none;
+}
+.hero-grid{
+  grid-template-columns:1.1fr .9fr;
+  gap:42px;
+}
+.eyebrow{
+  border:0;
+  border-radius:0;
+  padding:0;
+  color:var(--cyan);
+  font-size:.72rem;
+  letter-spacing:.20em;
+  font-weight:400;
+}
+.eyebrow::before{
+  width:6px;
+  height:6px;
+  background:var(--orange);
+}
+.hero h1{
+  font-weight:400;
+  font-size:clamp(3.2rem,6.4vw,5.6rem);
+  line-height:.9;
+  letter-spacing:-.035em;
+}
+.hero h1 span{
+  color:var(--orange);
+  font-style:italic;
+}
+.hero-copy{
+  color:var(--lav);
+  font-size:1.03rem;
+  line-height:1.55;
+}
+.primary-btn,
+.secondary-btn{
+  border-radius:0;
+  min-height:44px;
+  padding:10px 18px;
+  font-weight:400;
+  letter-spacing:.02em;
+}
+.primary-btn{
+  border:1px solid var(--orange);
+  background:var(--orange);
+  color:var(--night);
+}
+.secondary-btn{
+  border:1px solid rgba(120,239,250,.62);
+  color:var(--cyan);
+  background:transparent;
+}
+.primary-btn:hover,
+.secondary-btn:hover{
+  transform:translateY(-2px);
+}
+.meta-pill{
+  border:1px solid rgba(247,240,231,.16);
+  border-radius:0;
+  padding:6px 9px;
+  color:var(--muted);
+  font-size:.76rem;
+}
+
+/* Cyrus visual becomes a mystical framed panel rather than an app card */
+.portrait-shell{
+  width:min(310px,88%);
+  aspect-ratio:4/5;
+  border-radius:0;
+  border:1px solid rgba(120,239,250,.28);
+  background:
+    radial-gradient(circle at 50% 38%,rgba(120,239,250,.08),transparent 34%),
+    rgba(255,255,255,.018);
+  box-shadow:inset 0 0 60px rgba(120,239,250,.025);
+}
+.portrait-shell::before{
+  content:"";
+  position:absolute;
+  width:68%;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(245,133,63,.25);
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.portrait-shell::after{
+  content:"";
+  position:absolute;
+  width:52%;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px dashed rgba(120,239,250,.24);
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.portrait-placeholder{
+  inset:16px;
+  border:1px solid rgba(247,240,231,.12);
+  border-radius:0;
+  color:rgba(247,240,231,.42);
+  z-index:1;
+}
+.portrait-note{
+  left:18px;
+  bottom:16px;
+  border-radius:0;
+  transform:none;
+  background:var(--orange);
+  color:var(--night);
+  font-size:1.45rem;
+  z-index:3;
+}
+
+/* Fading homepage-style dividers */
+.section{
+  position:relative;
+  padding:66px 0 72px;
+  background:transparent !important;
+  color:var(--paper) !important;
+}
+.section::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:min(860px,78vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(120,239,250,.10) 10%,
+    rgba(120,239,250,.42) 48%,
+    rgba(245,133,63,.28) 62%,
+    transparent
+  );
+}
+.section-head{
+  grid-template-columns:1fr minmax(260px,460px);
+  margin-bottom:34px;
+}
+.section h2{
+  font-weight:400;
+  font-size:clamp(2.35rem,4.4vw,3.75rem);
+  line-height:.98;
+  letter-spacing:-.025em;
+}
+.section-intro,
+.dark .section-intro,
+.paper .section-intro{
+  color:var(--lav) !important;
+  font-size:1rem;
+}
+.kicker{
+  color:var(--orange);
+  letter-spacing:.18em;
+  font-size:.70rem;
+  font-weight:400;
+  margin:0;
+}
+.section-kicker-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0 0 12px;
+}
+.avestan-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  flex:0 0 38px;
+  border-radius:50%;
+  border:1px solid rgba(120,239,250,.34);
+  color:var(--cyan);
+  background:radial-gradient(circle,rgba(120,239,250,.09),rgba(23,10,47,.2) 72%);
+  box-shadow:inset 0 0 24px rgba(120,239,250,.04);
+}
+.avestan-icon.orange{
+  color:var(--orange);
+  border-color:rgba(245,133,63,.36);
+  background:radial-gradient(circle,rgba(245,133,63,.10),rgba(23,10,47,.2) 72%);
+}
+.avestan-icon span{
+  font-family:"Noto Sans Avestan", serif !important;
+  font-size:18px;
+  line-height:1;
+}
+
+/* Reading: homepage reading-panel language */
+.reading-layout{
+  grid-template-columns:210px 1fr;
+  gap:22px;
+}
+.sidebar-card,
+.reading-card{
+  border-radius:0;
+  box-shadow:none;
+  background:rgba(10,4,24,.22);
+  border:1px solid rgba(120,239,250,.24);
+}
+.sidebar-card{padding:15px}
+.sidebar-title{
+  font-weight:400;
+  color:var(--paper);
+  letter-spacing:.02em;
+}
+.lang-btn{
+  border-radius:0;
+  border:1px solid rgba(247,240,231,.18);
+  color:var(--lav);
+  font-weight:400;
+  background:transparent;
+}
+.lang-btn:hover,
+.lang-btn.active{
+  transform:none;
+  background:transparent;
+  color:var(--orange);
+  border-color:var(--orange);
+}
+.tip{
+  border-top:1px solid rgba(247,240,231,.12);
+  color:var(--muted);
+}
+.reading-card-top{
+  min-height:54px;
+  padding:15px 20px;
+  background:rgba(255,255,255,.015);
+  border-bottom:1px solid rgba(247,240,231,.12);
+}
+.level{
+  font-weight:400;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-size:.78rem;
+}
+.reading-pane-wrap{padding:clamp(24px,4vw,40px)}
+.reading-pane{
+  color:var(--paper);
+  max-width:720px;
+}
+.reading-pane[data-pane="finglish"]{
+  color:var(--cyan);
+  font-style:italic;
+}
+.reading-pane[data-pane="en"]{
+  color:var(--lav);
+}
+.reading-pane[dir="rtl"]{
+  font-size:clamp(1.55rem,2.5vw,1.95rem);
+  line-height:2.15;
+}
+.inline-action{
+  border-radius:0;
+  background:transparent;
+  color:var(--cyan);
+  border:1px solid rgba(120,239,250,.32);
+  font-weight:400;
+}
+.inline-action:hover{
+  border-color:var(--orange);
+  color:var(--orange);
+}
+.vocab-section{
+  border-top:1px solid rgba(247,240,231,.12);
+}
+.vocab-head small{color:var(--muted)}
+.vocab-card{
+  min-height:120px;
+  border-radius:0;
+  border:1px solid rgba(247,240,231,.14);
+  background:rgba(255,255,255,.015);
+  color:var(--paper);
+  box-shadow:none;
+}
+.vocab-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(120,239,250,.42);
+  box-shadow:none;
+}
+.vocab-finglish{color:var(--cyan)}
+.vocab-en{color:var(--orange)}
+
+/* Interactive activity */
+.activity-card{
+  border-radius:0;
+  border:1px solid rgba(247,240,231,.14);
+  background:rgba(255,255,255,.015);
+  padding:22px;
+}
+.activity-card h3{font-weight:400;font-size:1.45rem}
+.event-card{
+  border-radius:0;
+  background:rgba(255,255,255,.018);
+  border:1px solid rgba(120,239,250,.20);
+}
+.event-card:hover{
+  border-color:var(--cyan);
+}
+.timeline-number{
+  border-radius:50%;
+  border:1px solid rgba(245,133,63,.32);
+  background:transparent;
+}
+.action-btn{
+  border-radius:0;
+  font-weight:400;
+}
+.action-primary{
+  background:var(--orange);
+}
+.action-secondary{
+  border:1px solid rgba(120,239,250,.44);
+  color:var(--cyan);
+}
+
+/* Quiz: dark editorial cards */
+.quiz-progress-bar{
+  height:4px;
+  border-radius:0;
+  background:rgba(247,240,231,.10);
+}
+.quiz-progress-label{
+  color:var(--muted);
+  font-weight:400;
+}
+.quiz-item{
+  border-radius:0;
+  background:rgba(255,255,255,.015);
+  color:var(--paper);
+  border:1px solid rgba(247,240,231,.14);
+  box-shadow:none;
+}
+.quiz-number{
+  border-radius:50%;
+  background:transparent;
+  border:1px solid rgba(245,133,63,.42);
+  color:var(--orange);
+}
+.quiz-item h3{
+  font-weight:400;
+  color:var(--paper);
+}
+.answer-btn{
+  border-radius:0;
+  background:transparent;
+  color:var(--paper);
+  border:1px solid rgba(247,240,231,.16);
+}
+.answer-btn:hover{
+  border-color:var(--cyan);
+}
+.answer-btn.correct{
+  border-color:var(--cyan);
+  background:rgba(120,239,250,.08);
+  color:var(--cyan);
+}
+.answer-btn.wrong{
+  border-color:rgba(245,133,63,.7);
+  background:rgba(245,133,63,.07);
+}
+.quiz-feedback{color:var(--lav)}
+.quiz-summary{
+  border-radius:0;
+  border:1px solid rgba(120,239,250,.24);
+  background:rgba(10,4,24,.24);
+}
+.score{color:var(--cyan)}
+
+/* Final panel */
+.next-card{
+  border-radius:0;
+  border:1px solid rgba(120,239,250,.22);
+  background:rgba(255,255,255,.015);
+  position:relative;
+  overflow:hidden;
+}
+.next-card::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-70px;
+  bottom:-90px;
+  border:1px solid rgba(245,133,63,.16);
+}
+.closing-word{
+  color:var(--orange);
+  font-size:clamp(3rem,7vw,5.4rem);
+}
+.next-card p{color:var(--lav)}
+
+/* Mobile: same homepage approach — stacked, clean, no giant cards */
+@media(max-width:900px){
+  .brand-logo{width:118px;flex-basis:118px}
+  .hero-grid{gap:30px}
+  .reading-layout{grid-template-columns:1fr}
+  .section-head{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .wrap{width:calc(100% - 36px)}
+  .hero{padding:34px 0 42px}
+  .hero-grid{display:flex;flex-direction:column;gap:28px}
+  .hero h1{font-size:clamp(3rem,14vw,4.6rem)}
+  .hero-art{width:100%}
+  .portrait-shell{width:min(270px,82%)}
+  .section{padding:54px 0 58px}
+  .section-head{gap:18px;margin-bottom:26px}
+  .language-tabs{grid-template-columns:repeat(3,1fr)}
+  .vocab-grid,.answers{grid-template-columns:1fr}
+  .activity-card{padding:18px}
+  .quiz-item{padding:19px}
+  .lesson-nav-inner{gap:10px}
+  .brand-logo{width:104px;flex:0 0 104px}
+  .nav-label{display:none}
+  .avestan-icon{width:34px;height:34px;flex-basis:34px}
+  .avestan-icon span{font-size:16px}
+}
+
+
+/* =========================================================
+   READING BOX ONLY — BEIGE + B NAZANIN
+   Everything else stays in the homepage-style dark design.
+   ========================================================= */
+
+@font-face{
+  font-family:"BNazaninWeb";
+  src:
+    local("B Nazanin"),
+    local("BNazanin"),
+    url("https://cdn.jsdelivr.net/gh/intuxicated/css-persian@master/fonts/BNazanin.ttf") format("truetype");
+  font-display:swap;
+}
+
+/* Only the main reading card becomes beige */
+.reading-card{
+  background:#F3E7D3 !important;
+  color:#170A2F !important;
+  border-color:rgba(23,10,47,.16) !important;
+}
+
+.reading-card-top{
+  background:#EBDDCA !important;
+  color:#170A2F !important;
+  border-bottom-color:rgba(23,10,47,.12) !important;
+}
+
+.reading-card .level{
+  color:#170A2F !important;
+}
+
+/* Persian reading text only: B Nazanin */
+.reading-pane[data-pane="fa"]{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  color:#170A2F !important;
+}
+
+/* Finglish + English stay serif but dark enough for beige */
+.reading-pane[data-pane="finglish"]{
+  color:#6C4B34 !important;
+}
+
+.reading-pane[data-pane="en"]{
+  color:#4E4658 !important;
+}
+
+/* Controls inside the beige reading box */
+.reading-card .inline-action{
+  background:transparent !important;
+  color:#170A2F !important;
+  border-color:rgba(23,10,47,.22) !important;
+}
+
+.reading-card .inline-action:hover{
+  color:#C65F2A !important;
+  border-color:#F5853F !important;
+}
+
+/* Vocabulary lives inside the reading box, so keep it warm/light too */
+.reading-card .vocab-section{
+  border-top-color:rgba(23,10,47,.13) !important;
+}
+
+.reading-card .vocab-head h3,
+.reading-card .vocab-head small{
+  color:#170A2F !important;
+}
+
+.reading-card .vocab-card{
+  background:#F8EFDF !important;
+  color:#170A2F !important;
+  border-color:rgba(23,10,47,.14) !important;
+}
+
+.reading-card .vocab-fa{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  color:#170A2F !important;
+}
+
+.reading-card .vocab-finglish{
+  color:#6C4B34 !important;
+}
+
+.reading-card .vocab-en{
+  color:#C65F2A !important;
+}
+
+
+/* Final Pasargadae word — stable Persian rendering */
+.closing-word{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  font-weight:400 !important;
+  font-feature-settings:normal !important;
+  -webkit-font-feature-settings:normal !important;
+  line-height:1.35 !important;
+  letter-spacing:0 !important;
+  direction:rtl;
+  unicode-bidi:plaintext;
+  padding:8px 0 2px;
+}
+
+
+/* Build the Story — Persian event text in B Nazanin */
+#activity .event-card strong{
+  font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+  font-feature-settings:normal !important;
+  -webkit-font-feature-settings:normal !important;
+  line-height:1.7 !important;
+}
+
+
+/* =========================================================
+   MOBILE TYPOGRAPHY OVERRIDE
+   Keeps desktop unchanged; fixes Persian font + sizing on phones
+   ========================================================= */
+@media(max-width:700px){
+  [lang="fa"],
+  .fa-text,
+  .vocab-fa,
+  .portrait-note,
+  .closing-word,
+  .event-card strong,
+  .quiz-item h3[dir="rtl"],
+  .answer-btn[dir="rtl"],
+  .reading-pane[data-pane="fa"]{
+    font-family:"BNazaninWeb","B Nazanin","BNazanin",Tahoma,Arial,sans-serif !important;
+    font-feature-settings:normal !important;
+    -webkit-font-feature-settings:normal !important;
+  }
+
+  .hero h1{
+    font-size:2.8rem !important;
+    line-height:.92 !important;
+  }
+
+  .hero-copy{
+    font-size:.94rem !important;
+    line-height:1.5 !important;
+  }
+
+  .eyebrow{font-size:.65rem !important;}
+  .meta-pill{font-size:.7rem !important;}
+
+  .section h2{
+    font-size:2.15rem !important;
+    line-height:1 !important;
+  }
+
+  .section-intro{
+    font-size:.92rem !important;
+    line-height:1.5 !important;
+  }
+
+  .kicker{font-size:.64rem !important;}
+
+  .reading-pane[data-pane="fa"]{
+    font-size:1.22rem !important;
+    line-height:1.95 !important;
+  }
+
+  .reading-pane[data-pane="finglish"],
+  .reading-pane[data-pane="en"]{
+    font-size:1rem !important;
+    line-height:1.65 !important;
+  }
+
+  .reading-pane-wrap{padding:22px 18px !important;}
+
+  .lang-btn{
+    font-size:.85rem !important;
+    padding:9px 5px !important;
+  }
+
+  .sidebar-title{font-size:.82rem !important;}
+
+  .vocab-fa{
+    font-size:1.18rem !important;
+    line-height:1.5 !important;
+  }
+
+  .vocab-finglish{font-size:.78rem !important;}
+  .vocab-en{font-size:.9rem !important;}
+
+  .vocab-card{
+    min-height:100px !important;
+    padding:12px !important;
+  }
+
+  .vocab-head h3{font-size:1.15rem !important;}
+
+  .activity-card h3{font-size:1.25rem !important;}
+
+  #activity .event-card strong{
+    font-size:1.08rem !important;
+    line-height:1.55 !important;
+  }
+
+  .event-card small{font-size:.78rem !important;}
+  .event-card{padding:11px 12px !important;}
+
+  .quiz-item h3,
+  .quiz-item h3[dir="rtl"]{
+    font-size:1.16rem !important;
+    line-height:1.65 !important;
+  }
+
+  .answer-btn,
+  .answer-btn[dir="rtl"]{
+    font-size:1rem !important;
+    line-height:1.55 !important;
+    padding:10px 11px !important;
+  }
+
+  .quiz-feedback{font-size:.82rem !important;}
+
+  .closing-word{
+    font-size:2.7rem !important;
+    line-height:1.3 !important;
+  }
+
+  .primary-btn,
+  .secondary-btn{
+    font-size:.9rem !important;
+    min-height:40px !important;
+    padding:9px 14px !important;
+  }
+}
+
+
+/* =========================================================
+   SITE NAVIGATION + FOOTER
+   Added without changing the lesson layout/content.
+   ========================================================= */
+
+.site-header{
+  position:relative;
+  z-index:80;
+  background:rgba(23,10,47,.96);
+  border-bottom:1px solid rgba(247,240,231,.12);
+}
+
+.site-nav-inner{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+}
+
+.site-logo{
+  display:flex;
+  align-items:center;
+  width:150px;
+  flex:0 0 150px;
+  text-decoration:none;
+}
+
+.site-logo img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:44px;
+  object-fit:contain;
+}
+
+.site-menu{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:30px;
+}
+
+.site-menu a{
+  position:relative;
+  color:var(--paper);
+  text-decoration:none;
+  font-size:.88rem;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  transition:color .18s ease;
+}
+
+.site-menu a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-7px;
+  height:1px;
+  background:var(--orange);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .18s ease;
+}
+
+.site-menu a:hover{
+  color:var(--cyan);
+}
+
+.site-menu a:hover::after{
+  transform:scaleX(1);
+}
+
+/* CSS-only mobile menu */
+.site-menu-mobile{
+  display:none;
+  position:relative;
+  margin-left:auto;
+}
+
+.site-menu-mobile summary{
+  list-style:none;
+  cursor:pointer;
+  border:1px solid rgba(120,239,250,.42);
+  color:var(--cyan);
+  padding:8px 12px;
+  min-width:70px;
+  text-align:center;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.site-menu-mobile summary::-webkit-details-marker{
+  display:none;
+}
+
+.mobile-menu-panel{
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  width:190px;
+  padding:8px;
+  background:#21103C;
+  border:1px solid rgba(120,239,250,.28);
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+
+.mobile-menu-panel a{
+  display:block;
+  color:var(--paper);
+  text-decoration:none;
+  padding:10px 11px;
+  border-bottom:1px solid rgba(247,240,231,.09);
+  font-size:.9rem;
+}
+
+.mobile-menu-panel a:last-child{
+  border-bottom:0;
+}
+
+.mobile-menu-panel a:hover{
+  color:var(--orange);
+  background:rgba(255,255,255,.025);
+}
+
+/* Footer */
+.site-footer{
+  position:relative;
+  padding:56px 0 26px;
+  background:#120725;
+  border-top:1px solid rgba(120,239,250,.18);
+  color:var(--paper);
+}
+
+.site-footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:min(860px,78vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(120,239,250,.28),
+    rgba(245,133,63,.32),
+    transparent
+  );
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:minmax(240px,1.35fr) 1fr;
+  gap:70px;
+  align-items:start;
+}
+
+.footer-brand img{
+  display:block;
+  width:155px;
+  max-height:48px;
+  object-fit:contain;
+  margin-bottom:18px;
+}
+
+.footer-brand p{
+  max-width:430px;
+  margin:0;
+  color:var(--lav);
+  font-size:.95rem;
+  line-height:1.65;
+}
+
+.footer-nav{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 34px;
+}
+
+.footer-nav a{
+  color:var(--paper);
+  text-decoration:none;
+  padding:4px 0;
+  font-size:.92rem;
+}
+
+.footer-nav a:hover{
+  color:var(--cyan);
+}
+
+.footer-bottom{
+  margin-top:42px;
+  padding-top:18px;
+  border-top:1px solid rgba(247,240,231,.10);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:var(--muted);
+  font-size:.76rem;
+  letter-spacing:.03em;
+}
+
+@media(max-width:700px){
+  .site-nav-inner{
+    min-height:62px;
+  }
+
+  .site-logo{
+    width:112px;
+    flex-basis:112px;
+  }
+
+  .site-menu{
+    display:none;
+  }
+
+  .site-menu-mobile{
+    display:block;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .footer-brand img{
+    width:135px;
+  }
+
+  .footer-nav{
+    grid-template-columns:1fr 1fr;
+    gap:8px 22px;
+  }
+
+  .footer-bottom{
+    margin-top:32px;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .site-footer{
+    padding:44px 0 24px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrap site-nav-inner">
+    <a class="site-logo" href="https://www.seedsofhom.com/" target="_top" aria-label="Seeds of Hom home">
+      <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
+    </a>
+
+    <nav class="site-menu" aria-label="Main navigation">
+      <a href="https://www.seedsofhom.com/" target="_top">Home</a>
+      <a href="https://www.seedsofhom.com/graded-persian-stories" target="_top">Stories</a>
+      <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
+      <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
+    </nav>
+
+    <details class="site-menu-mobile">
+      <summary>Menu</summary>
+      <nav class="mobile-menu-panel" aria-label="Mobile navigation">
+        <a href="https://www.seedsofhom.com/" target="_top">Home</a>
+        <a href="https://www.seedsofhom.com/graded-persian-stories" target="_top">Stories</a>
+        <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
+        <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+
+<nav class="lesson-nav" aria-label="Lesson progress">
+  <div class="wrap lesson-nav-inner">
+    <a class="brand brand-logo" href="https://www.seedsofhom.com/" target="_top" aria-label="Seeds of Hom home">
+      <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
+    </a>
+    <div class="lesson-progress" aria-hidden="true">
+      <div class="progress-step"><span id="progress1"></span></div>
+      <div class="progress-step"><span id="progress2"></span></div>
+      <div class="progress-step"><span id="progress3"></span></div>
+    </div>
+    <div class="nav-label" id="progressLabel">Start reading</div>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">A2 Persian Reading</div>
+        <h1>Cyrus<br><span>the Great</span></h1>
+        <p class="hero-copy">
+          Learn Persian through Iranian history. Read the story in Persian, use Finglish
+          or English only when you need help, then test yourself with an interactive activity and quiz.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#reading" class="primary-btn">Start the lesson ↓</a>
+          <a href="#quiz" class="secondary-btn">Jump to quiz</a>
+        </div>
+
+        <div class="lesson-meta">
+          <span class="meta-pill">A2 level</span>
+          <span class="meta-pill">2–3 min reading</span>
+          <span class="meta-pill">8 key words</span>
+          <span class="meta-pill">5 questions</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="portrait-shell">
+          <img
+            src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/chatgpt-image-aug-22-2026-at-10_32_49-am-0jVkgT1OdxWOebGU.png"
+            alt="Cyrus the Great"
+            style="width:100%;height:100%;object-fit:cover;display:block;"
+          >
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section paper" id="reading" data-section="1">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker-row">
+            <div class="avestan-icon orange" aria-hidden="true"><span>𐬨</span></div>
+            <div class="kicker">01 · Read</div>
+          </div>
+          <h2>Meet Cyrus</h2>
+        </div>
+        <p class="section-intro">
+          Start with Persian. Switch only when you need support. This keeps the page useful
+          for learning instead of turning the translation into the default reading experience.
+        </p>
+      </div>
+
+      <div class="reading-layout">
+        <aside class="reading-sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-title">Choose your reading mode</div>
+            <div class="language-tabs">
+              <button class="lang-btn active" data-lang="fa">فارسی</button>
+              <button class="lang-btn" data-lang="finglish">Finglish</button>
+              <button class="lang-btn" data-lang="en">English</button>
+            </div>
+            <div class="tip">
+              UX tip for learners: try Persian first. Use Finglish for pronunciation and English only to check meaning.
+            </div>
+          </div>
+        </aside>
+
+        <article class="reading-card">
+          <div class="reading-card-top">
+            <div class="level">A2 reading</div>
+          </div>
+
+          <div class="reading-pane-wrap">
+            <div class="reading-pane active" data-pane="fa" dir="rtl" lang="fa">
+              <p>کوروش بزرگ یک پادشاه ایرانی بود. او حدود ۲۵۰۰ سال پیش زندگی می‌کرد. کوروش پادشاه پارس بود. او یکی از پادشاهان هخامنشی بود.</p>
+              <p>کوروش شهرها و سرزمین‌های زیادی را گرفت. او یک امپراتوری بزرگ ساخت. در سال ۵۳۹ پیش از میلاد، او به شهر بابل رفت. بابل یک شهر مهم بود.</p>
+              <p>در بابل، مردم دین‌ها و رسم‌های مختلف داشتند. کوروش به آن‌ها احترام گذاشت. بعضی از مردم به شهرهای خود برگشتند.</p>
+              <p>کوروش حدود سال ۵۳۰ پیش از میلاد مرد. آرامگاه او در پاسارگاد است. پاسارگاد در استان فارس است. امروز مردم زیادی از آرامگاه کوروش دیدن می‌کنند.</p>
+            </div>
+
+            <div class="reading-pane" data-pane="finglish">
+              <p>Kurosh-e Bozorg yek pâdeshâh-e Irâni bud. U hodud-e 2500 sâl pish zendegi mikard. Kurosh pâdeshâh-e Pârs bud. U yeki az pâdeshâhân-e Hakhamaneshi bud.</p>
+              <p>Kurosh shahrhâ va sarzaminhâ-ye ziâdi râ gereft. U yek emperâturi-ye bozorg sâkht. Dar sâl-e 539 pish az milâd, u be shahr-e Bâbel raft. Bâbel yek shahr-e mohem bud.</p>
+              <p>Dar Bâbel, mardom dinhâ va rasmhâ-ye mokhtalef dâshtand. Kurosh be ânhâ ehterâm gozâsht. Ba'zi az mardom be shahrhâ-ye khod bargashtand.</p>
+              <p>Kurosh hodud-e sâl-e 530 pish az milâd mord. Ârâmgâh-e u dar Pâsârgâd ast. Pâsârgâd dar ostân-e Fârs ast. Emruz mardom-e ziâdi az ârâmgâh-e Kurosh didan mikonand.</p>
+            </div>
+
+            <div class="reading-pane" data-pane="en">
+              <p>Cyrus the Great was an Iranian king. He lived about 2,500 years ago. Cyrus was king of Persia. He was one of the Achaemenid kings.</p>
+              <p>Cyrus took many cities and lands. He built a large empire. In 539 BCE, he went to the city of Babylon. Babylon was an important city.</p>
+              <p>In Babylon, people had different religions and customs. Cyrus respected them. Some people returned to their own cities.</p>
+              <p>Cyrus died around 530 BCE. His tomb is in Pasargadae. Pasargadae is in Fars Province. Today, many people visit the tomb of Cyrus.</p>
+            </div>
+
+            <div class="reading-controls">
+              <button class="inline-action" id="showPersian">Back to Persian</button>
+              <button class="inline-action" id="scrollVocab">Review vocabulary ↓</button>
+            </div>
+
+            <div class="vocab-section" id="vocabulary">
+              <div class="vocab-head">
+                <div>
+                  <div class="kicker" style="margin-bottom:4px">Tap to reveal</div>
+                  <h3>Key vocabulary</h3>
+                </div>
+                <small>8 useful words from the reading</small>
+              </div>
+
+              <div class="vocab-grid">
+                <button class="vocab-card" type="button"><div class="vocab-fa">پادشاه</div><div class="vocab-finglish">pâdeshâh</div><div class="vocab-en">king</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">سرزمین</div><div class="vocab-finglish">sarzamin</div><div class="vocab-en">land</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">شهر</div><div class="vocab-finglish">shahr</div><div class="vocab-en">city</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">مهم</div><div class="vocab-finglish">mohem</div><div class="vocab-en">important</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">برگشت</div><div class="vocab-finglish">bargasht</div><div class="vocab-en">returned</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">مرد</div><div class="vocab-finglish">mord</div><div class="vocab-en">died</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">آرامگاه</div><div class="vocab-finglish">ârâmgâh</div><div class="vocab-en">tomb</div></button>
+                <button class="vocab-card" type="button"><div class="vocab-fa">دیدن</div><div class="vocab-finglish">didan</div><div class="vocab-en">to visit / to see</div></button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="activity" data-section="2">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker-row">
+            <div class="avestan-icon" aria-hidden="true"><span>𐬙</span></div>
+            <div class="kicker">02 · Play</div>
+          </div>
+          <h2>Build the story</h2>
+        </div>
+        <p class="section-intro">
+          Put the story in order. Use the short sentences from the reading to help you.
+        </p>
+      </div>
+
+      <div class="activity-grid">
+        <div class="activity-card">
+          <h3>Event cards</h3>
+          <p>Tap an event to move it into your timeline.</p>
+          <div class="event-bank" id="eventBank"></div>
+        </div>
+
+        <div class="activity-card">
+          <h3>Your timeline</h3>
+          <p>Put all four events in the order they happened.</p>
+          <div class="event-order" id="eventOrder"></div>
+
+          <div class="activity-actions">
+            <button class="action-btn action-primary" id="checkStory" type="button">Check my order</button>
+            <button class="action-btn action-secondary" id="resetStory" type="button">Reset</button>
+          </div>
+          <div class="builder-result" id="storyResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" id="quiz" data-section="3">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker-row">
+            <div class="avestan-icon orange" aria-hidden="true"><span>𐬭</span></div>
+            <div class="kicker">03 · Quiz</div>
+          </div>
+          <h2>What do you remember?</h2>
+        </div>
+        <p class="section-intro">
+          Answer five short questions about the story.
+        </p>
+      </div>
+
+      <div class="quiz-shell">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><span id="quizBar"></span></div>
+          <div class="quiz-progress-label"><span id="quizAnswered">0</span>/5 answered</div>
+        </div>
+
+        <div class="quiz-grid">
+          <div class="quiz-item" data-correct="b">
+            <div class="quiz-number">1</div>
+            <h3>کوروش حدود چند سال پیش زندگی می‌کرد؟</h3>
+            <div class="answers">
+              <button class="answer-btn" data-answer="a">حدود ۵۰۰ سال پیش</button>
+              <button class="answer-btn" data-answer="b">حدود ۲۵۰۰ سال پیش</button>
+              <button class="answer-btn" data-answer="c">حدود ۱۰۰ سال پیش</button>
+              <button class="answer-btn" data-answer="d">حدود ۵۰۰۰ سال پیش</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-item" data-correct="c">
+            <div class="quiz-number">2</div>
+            <h3>کوروش در سال ۵۳۹ پیش از میلاد وارد کدام شهر شد؟</h3>
+            <div class="answers">
+              <button class="answer-btn" data-answer="a">تهران</button>
+              <button class="answer-btn" data-answer="b">شیراز</button>
+              <button class="answer-btn" data-answer="c">بابل</button>
+              <button class="answer-btn" data-answer="d">اصفهان</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-item" data-correct="a">
+            <div class="quiz-number">3</div>
+            <h3>بعضی از مردم در بابل چه کردند؟</h3>
+            <div class="answers">
+              <button class="answer-btn" data-answer="a">به شهرهای خود برگشتند</button>
+              <button class="answer-btn" data-answer="b">به تهران رفتند</button>
+              <button class="answer-btn" data-answer="c">در پاسارگاد ماندند</button>
+              <button class="answer-btn" data-answer="d">به مصر سفر کردند</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-item" data-correct="d">
+            <div class="quiz-number">4</div>
+            <h3>آرامگاه کوروش کجاست؟</h3>
+            <div class="answers">
+              <button class="answer-btn" data-answer="a">بابل</button>
+              <button class="answer-btn" data-answer="b">تهران</button>
+              <button class="answer-btn" data-answer="c">شوش</button>
+              <button class="answer-btn" data-answer="d">پاسارگاد</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-item" data-correct="b">
+            <div class="quiz-number">5</div>
+            <h3>«آرامگاه» یعنی چه؟</h3>
+            <div class="answers">
+              <button class="answer-btn" data-answer="a">باغ / garden</button>
+              <button class="answer-btn" data-answer="b">مقبره / tomb</button>
+              <button class="answer-btn" data-answer="c">پادشاه / king</button>
+              <button class="answer-btn" data-answer="d">شهر / city</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+
+        <div class="quiz-summary">
+          <div>
+            <strong>Your score</strong><br>
+            <span style="color:rgba(247,240,231,.58);font-size:.9rem">Finish all five to complete the lesson.</span>
+          </div>
+          <div class="score"><span id="score">0</span> / 5</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <div class="next-card">
+        <div class="kicker">Next in the story</div>
+        <div class="closing-word" lang="fa">پاسارگاد</div>
+        <p>
+          Continue with Pasargadae or Persepolis so learners move through Iranian history
+          one short, connected Persian lesson at a time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="https://www.seedsofhom.com/" target="_top" aria-label="Seeds of Hom home">
+          <img src="https://assets.zyrosite.com/GaORh9EVFsQd4iXJ/lockup_seeds-of-hom_white_vamana-85UpZ7PlT6DTILkN.svg" alt="Seeds of Hom">
+        </a>
+        <p>
+          Learn Persian through stories, history, poetry, and Iranian culture —
+          one readable lesson at a time.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="https://www.seedsofhom.com/" target="_top">Home</a>
+        <a href="https://www.seedsofhom.com/graded-persian-stories" target="_top">Stories</a>
+        <a href="https://www.seedsofhom.com/poetry" target="_top">Poetry</a>
+        <a href="https://www.seedsofhom.com/projects" target="_top">Projects</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Seeds of Hom</span>
+      <span>Persian language · history · culture</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // HERO IN-PAGE NAVIGATION
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (!id || id === '#') return;
+
+      const target = document.querySelector(id);
+      if (!target) return;
+
+      e.preventDefault();
+
+      const nav = document.querySelector('.lesson-nav');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // LANGUAGE SWITCHER
+  const langButtons = document.querySelectorAll('.lang-btn');
+  const panes = document.querySelectorAll('.reading-pane');
+  let currentLanguage = 'fa';
+
+  const quizContent = {
+    fa: [
+      {
+        q: 'کوروش حدود چند سال پیش زندگی می‌کرد؟',
+        a: {a:'حدود ۵۰۰ سال پیش', b:'حدود ۲۵۰۰ سال پیش', c:'حدود ۱۰۰ سال پیش', d:'حدود ۵۰۰۰ سال پیش'}
+      },
+      {
+        q: 'کوروش در سال ۵۳۹ پیش از میلاد وارد کدام شهر شد؟',
+        a: {a:'تهران', b:'شیراز', c:'بابل', d:'اصفهان'}
+      },
+      {
+        q: 'بعضی از مردم در بابل چه کردند؟',
+        a: {a:'به شهرهای خود برگشتند', b:'به تهران رفتند', c:'در پاسارگاد ماندند', d:'به مصر سفر کردند'}
+      },
+      {
+        q: 'آرامگاه کوروش کجاست؟',
+        a: {a:'بابل', b:'تهران', c:'شوش', d:'پاسارگاد'}
+      },
+      {
+        q: '«آرامگاه» یعنی چه؟',
+        a: {a:'باغ / garden', b:'مقبره / tomb', c:'پادشاه / king', d:'شهر / city'}
+      }
+    ],
+
+    finglish: [
+      {
+        q: 'Kurosh hodud-e chand sâl pish zendegi mikard?',
+        a: {a:'Hodud-e 500 sâl pish', b:'Hodud-e 2500 sâl pish', c:'Hodud-e 100 sâl pish', d:'Hodud-e 5000 sâl pish'}
+      },
+      {
+        q: 'Kurosh dar sâl-e 539 pish az milâd vâred-e kodâm shahr shod?',
+        a: {a:'Tehrân', b:'Shirâz', c:'Bâbel', d:'Esfahân'}
+      },
+      {
+        q: "Ba'zi az mardom dar Bâbel che kardand?",
+        a: {a:'Be shahrhâ-ye khod bargashtand', b:'Be Tehrân raftand', c:'Dar Pâsârgâd mândand', d:'Be Mesr safar kardand'}
+      },
+      {
+        q: 'Ârâmgâh-e Kurosh kojâst?',
+        a: {a:'Bâbel', b:'Tehrân', c:'Shush', d:'Pâsârgâd'}
+      },
+      {
+        q: '“Ârâmgâh” yani che?',
+        a: {a:'Bâgh / garden', b:'Maghbare / tomb', c:'Pâdeshâh / king', d:'Shahr / city'}
+      }
+    ],
+
+    en: [
+      {
+        q: 'About how many years ago did Cyrus live?',
+        a: {a:'About 500 years ago', b:'About 2,500 years ago', c:'About 100 years ago', d:'About 5,000 years ago'}
+      },
+      {
+        q: 'Which city did Cyrus enter in 539 BCE?',
+        a: {a:'Tehran', b:'Shiraz', c:'Babylon', d:'Isfahan'}
+      },
+      {
+        q: 'What did some people in Babylon do?',
+        a: {a:'They returned to their own cities', b:'They went to Tehran', c:'They stayed in Pasargadae', d:'They traveled to Egypt'}
+      },
+      {
+        q: 'Where is the tomb of Cyrus?',
+        a: {a:'Babylon', b:'Tehran', c:'Susa', d:'Pasargadae'}
+      },
+      {
+        q: 'What does “ârâmgâh” mean?',
+        a: {a:'garden', b:'tomb', c:'king', d:'city'}
+      }
+    ]
+  };
+
+  const quizFeedbackText = {
+    fa: {
+      correct: 'آفرین! درست است.',
+      wrong: 'تقریباً! پاسخ درست مشخص شده است.'
+    },
+    finglish: {
+      correct: 'Âfarin! Dorost ast.',
+      wrong: 'Nazdik bud! Javâb-e dorost moshakhas shode ast.'
+    },
+    en: {
+      correct: 'Correct!',
+      wrong: 'Almost — the correct answer is highlighted.'
+    }
+  };
+
+  function updateQuizLanguage(lang){
+    const content = quizContent[lang];
+
+    document.querySelectorAll('.quiz-item').forEach((item, index) => {
+      item.querySelector('h3').textContent = content[index].q;
+
+      item.querySelectorAll('.answer-btn').forEach(btn => {
+        btn.textContent = content[index].a[btn.dataset.answer];
+      });
+
+      // Keep feedback in the selected language if this question was already answered.
+      if(typeof answered !== 'undefined' && answered.has(index)){
+        const feedback = item.querySelector('.quiz-feedback');
+        feedback.textContent = answered.get(index)
+          ? quizFeedbackText[lang].correct
+          : quizFeedbackText[lang].wrong;
+      }
+    });
+
+    // Persian is RTL; Finglish and English are LTR.
+    document.querySelectorAll('.quiz-item h3, .answer-btn').forEach(el => {
+      el.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      el.style.textAlign = lang === 'fa' ? 'right' : 'left';
+    });
+  }
+
+  function setLanguage(lang){
+    currentLanguage = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    panes.forEach(p => p.classList.toggle('active', p.dataset.pane === lang));
+    updateQuizLanguage(lang);
+  }
+
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
+  document.getElementById('showPersian').addEventListener('click', () => setLanguage('fa'));
+  document.getElementById('scrollVocab').addEventListener('click', () => {
+    document.getElementById('vocabulary').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // VOCAB
+  document.querySelectorAll('.vocab-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('open'));
+  });
+
+  // STORY BUILDER
+  const events = [
+    {id:'persia',order:1,title:'کوروش پادشاه پارس بود',sub:'Kurosh pâdeshâh-e Pârs bud.'},
+    {id:'empire',order:2,title:'او یک امپراتوری بزرگ ساخت',sub:'U yek emperâturi-ye bozorg sâkht.'},
+    {id:'babylon',order:3,title:'او در سال ۵۳۹ به بابل رفت',sub:'U dar sâl-e 539 be Bâbel raft.'},
+    {id:'death',order:4,title:'کوروش حدود سال ۵۳۰ مرد',sub:'Kurosh hodud-e sâl-e 530 mord.'}
+  ];
+
+  let chosen = [];
+  let bankItems = [...events].sort(() => Math.random() - .5);
+  const bank = document.getElementById('eventBank');
+  const orderBox = document.getElementById('eventOrder');
+  const storyResult = document.getElementById('storyResult');
+
+  function makeEventButton(item,inOrder=false){
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'event-card';
+    btn.innerHTML = `<strong>${item.title}</strong><small>${item.sub}</small>`;
+    btn.addEventListener('click', () => {
+      if(inOrder){
+        chosen = chosen.filter(x => x.id !== item.id);
+      } else {
+        chosen.push(item);
+      }
+      renderStory();
+    });
+    return btn;
+  }
+
+  function renderStory(){
+    bank.innerHTML = '';
+    orderBox.innerHTML = '';
+
+    bankItems.filter(item => !chosen.some(c => c.id === item.id))
+      .forEach(item => bank.appendChild(makeEventButton(item)));
+
+    chosen.forEach((item,index) => {
+      const row = document.createElement('div');
+      row.className = 'timeline-row';
+
+      const num = document.createElement('div');
+      num.className = 'timeline-number';
+      num.textContent = index + 1;
+
+      row.appendChild(num);
+      row.appendChild(makeEventButton(item,true));
+      orderBox.appendChild(row);
+    });
+
+    storyResult.textContent = '';
+    storyResult.className = 'builder-result';
+  }
+
+  document.getElementById('checkStory').addEventListener('click', () => {
+    if(chosen.length !== events.length){
+      storyResult.textContent = 'Add all four events first.';
+      storyResult.className = 'builder-result bad';
+      return;
+    }
+
+    const correct = chosen.every((item,index) => item.order === index + 1);
+    storyResult.textContent = correct
+      ? 'آفرین! The story is in the correct order.'
+      : 'Not quite. Try again — think about Babylon in 539 BCE.';
+    storyResult.className = 'builder-result ' + (correct ? 'good' : 'bad');
+  });
+
+  document.getElementById('resetStory').addEventListener('click', () => {
+    chosen = [];
+    bankItems = [...events].sort(() => Math.random() - .5);
+    renderStory();
+  });
+
+  renderStory();
+
+  // QUIZ
+  const quizItems = [...document.querySelectorAll('.quiz-item')];
+  const answered = new Map();
+
+  quizItems.forEach((item,index) => {
+    const correct = item.dataset.correct;
+    const feedback = item.querySelector('.quiz-feedback');
+    const buttons = item.querySelectorAll('.answer-btn');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(answered.has(index)) return;
+
+        const selected = btn.dataset.answer;
+        const isCorrect = selected === correct;
+        answered.set(index,isCorrect);
+
+        buttons.forEach(b => b.disabled = true);
+
+        if(isCorrect){
+          btn.classList.add('correct');
+          feedback.textContent = quizFeedbackText[currentLanguage].correct;
+        } else {
+          btn.classList.add('wrong');
+          item.querySelector(`[data-answer="${correct}"]`).classList.add('correct');
+          feedback.textContent = quizFeedbackText[currentLanguage].wrong;
+        }
+
+        updateQuiz();
+      });
+    });
+  });
+
+  function updateQuiz(){
+    let score = 0;
+    answered.forEach(v => { if(v) score++; });
+
+    document.getElementById('score').textContent = score;
+    document.getElementById('quizAnswered').textContent = answered.size;
+    document.getElementById('quizBar').style.width = `${(answered.size / quizItems.length) * 100}%`;
+  }
+
+  // PAGE PROGRESS
+  const sections = [...document.querySelectorAll('[data-section]')];
+  const progressParts = [
+    document.getElementById('progress1'),
+    document.getElementById('progress2'),
+    document.getElementById('progress3')
+  ];
+  const progressLabel = document.getElementById('progressLabel');
+
+  function updatePageProgress(){
+    const y = window.scrollY + window.innerHeight * .38;
+    let current = 0;
+
+    sections.forEach((section,index) => {
+      if(y >= section.offsetTop) current = index + 1;
+    });
+
+    progressParts.forEach((bar,index) => {
+      bar.style.width = index < current ? '100%' : '0%';
+    });
+
+    progressLabel.textContent =
+      current === 0 ? 'Start reading' :
+      current === 1 ? 'Reading' :
+      current === 2 ? 'Interactive' :
+      'Quiz';
+  }
+
+  window.addEventListener('scroll', updatePageProgress, {passive:true});
+  updatePageProgress();
+</script>
+
+</body>
+</html>
