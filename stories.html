@@ -254,6 +254,96 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 .filter-buttons{display:flex;gap:7px;flex-wrap:wrap}
 .filter-btn{padding:7px 11px;min-height:34px;font-size:12px}
 
+/* ================================================================
+   UNIFIED CARD SYSTEM
+   Every card in the site (read-card, history-card, story-card,
+   person-card) shares one visual language:
+   - 1px border using the section's topic color at ~30% opacity
+   - a faint gradient wash from the topic color into transparent
+   - a soft rise + brighter border on hover
+   - a large decorative circle bleeding off one corner
+   - a small uppercase eyebrow/kind label + arrow footer
+   Only size/grid differ per card type; the "kadr" (frame) itself
+   is identical everywhere.
+   ================================================================ */
+:root{
+  --card-radius:0;
+  --card-fg:var(--paper);
+}
+.card,
+.read-card,
+.history-card,
+.story-card,
+.person-card{
+  --card-color:var(--cyan);
+  --card-faint:rgba(120,239,250,.14);
+  position:relative;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--card-color) 34%,transparent);
+  background:linear-gradient(180deg,var(--card-faint),rgba(255,255,255,.012) 40%);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+  display:flex;
+  flex-direction:column;
+}
+.card:after,
+.read-card:after,
+.history-card:after,
+.story-card:after,
+.person-card:after{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;
+  border-radius:50%;
+  right:-64px;bottom:-74px;
+  border:1px solid color-mix(in srgb,var(--card-color) 26%,transparent);
+  pointer-events:none;
+}
+.card:hover,
+.read-card:hover,
+.history-card:hover,
+.story-card:hover,
+.person-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--card-color);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--card-color) 20%,transparent),rgba(255,255,255,.015) 42%);
+}
+.card-eyebrow{
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--card-color);
+}
+.card-title{
+  font-size:32px;
+  line-height:1;
+  font-weight:400;
+  letter-spacing:-.02em;
+  margin:0 0 10px;
+  color:var(--card-fg);
+}
+.card-body-text{
+  font-size:15.5px;
+  line-height:1.45;
+  color:var(--soft);
+  margin:0 0 12px;
+}
+.card-foot{
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-top:12px;
+  border-top:1px solid rgba(247,240,231,.10);
+}
+.card-foot span:first-child{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--card-color);
+}
+.card-arrow{font-size:19px;color:var(--card-color)}
+
 /* ===== History — original vertical design, compact Famous-People scale ===== */
 .history-list{
   display:grid;
@@ -275,29 +365,12 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 
 /* History cards: compact, with image on the left and text on the right. */
 .history-card{
+  --card-color:var(--history);
+  --card-faint:var(--history-faint);
   width:100%;
   height:272px;
   display:grid;
   grid-template-columns:150px minmax(0,1fr);
-  border:1px solid color-mix(in srgb,var(--history) 38%,transparent);
-  background:linear-gradient(180deg,var(--history-faint),rgba(255,255,255,.01) 38%);
-  position:relative;
-  overflow:hidden;
-  transition:.22s ease;
-}
-.history-card:hover{
-  transform:translateY(-3px);
-  border-color:var(--history);
-  background:linear-gradient(180deg,rgba(120,239,250,.14),rgba(255,255,255,.015) 42%);
-}
-.history-card:after{
-  content:"";
-  position:absolute;
-  left:16px;
-  right:16px;
-  bottom:10px;
-  height:1px;
-  background:linear-gradient(90deg,color-mix(in srgb,var(--history) 38%,transparent),transparent);
 }
 .history-image{
   width:100%;
@@ -334,6 +407,7 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
   font-weight:400;
   letter-spacing:-.02em;
   margin-bottom:6px;
+  color:var(--card-fg);
 }
 .history-card p{
   font-size:12.5px;
@@ -376,12 +450,8 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
   border-color:color-mix(in srgb,var(--celebrations) 48%,transparent);
 }
 .celebrations .story-card{
-  border-color:color-mix(in srgb,var(--celebrations) 30%,transparent);
-  background:linear-gradient(180deg,var(--celebrations-faint),rgba(255,255,255,.01) 34%);
-}
-.celebrations .story-card:hover{
-  border-color:var(--celebrations);
-  background:linear-gradient(180deg,rgba(245,133,63,.18),rgba(255,255,255,.015) 40%);
+  --card-color:var(--celebrations);
+  --card-faint:var(--celebrations-faint);
 }
 .celebrations .level{background:var(--celebrations)}
 .celebrations .card-kind,
@@ -393,10 +463,9 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
   border-color:color-mix(in srgb,var(--people) 48%,transparent);
 }
 .people .person-card{
-  border-color:color-mix(in srgb,var(--people) 30%,transparent);
-  background:linear-gradient(90deg,var(--people-faint),rgba(255,255,255,.01) 38%);
+  --card-color:var(--people);
+  --card-faint:var(--people-faint);
 }
-.people .person-card:hover{border-color:var(--people)}
 .people .person-era,
 .people .card-kind,
 .people .card-arrow{color:var(--people)}
@@ -415,32 +484,15 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 .story-card{
   grid-column:span 4;
   min-height:420px;
-  position:relative;
   padding:18px;
-  border:1px solid rgba(247,240,231,.14);
-  background:rgba(255,255,255,.014);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  transition:.25s ease;
-}
-.story-card:hover{transform:translateY(-4px)}
-.story-card:after{
-  content:"";
-  position:absolute;
-  width:145px;height:145px;border-radius:50%;
-  right:-62px;bottom:-68px;
-  border:1px solid rgba(120,239,250,.10);
 }
 .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 .level{color:var(--night);background:var(--cyan);padding:5px 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
 .readtime{font-size:12px;color:var(--soft)}
 .card-fa{font-size:31px;color:var(--orange);line-height:1.5;margin-bottom:6px;min-height:48px}
-.story-card h3{font-size:33px;line-height:.98;font-weight:400;letter-spacing:-.02em;margin-bottom:12px}
+.story-card h3{font-size:33px;line-height:.98;font-weight:400;letter-spacing:-.02em;margin-bottom:12px;color:var(--card-fg)}
 .story-card p{font-size:15.5px;color:var(--soft);margin-bottom:24px;max-width:520px}
-.card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid rgba(247,240,231,.10);padding-top:14px}
 .card-kind{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
-.card-arrow{font-size:20px;color:var(--cyan)}
 .story-card[hidden], .history-card[hidden], .person-card[hidden]{display:none !important}
 .history-event[hidden]{display:none !important}
 
@@ -497,24 +549,34 @@ h2{font-size:clamp(42px,5.4vw,66px);font-weight:400;letter-spacing:-.03em;line-h
 .people-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .person-card{
   min-height:272px;
-  border:1px solid rgba(247,240,231,.14);
   display:grid;
   grid-template-columns:180px 1fr;
-  position:relative;
-  overflow:hidden;
-  transition:.22s ease;
-  background:rgba(255,255,255,.012);
 }
-.person-card:hover{border-color:rgba(245,133,63,.46);transform:translateY(-3px)}
 .person-image{
   border-right:1px solid rgba(247,240,231,.12);
   min-height:100%;
 }
 .person-body{padding:23px;display:flex;flex-direction:column}
 .person-era{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
-.person-body h3{font-size:32px;line-height:1;margin-bottom:9px;font-weight:400}
+.person-body h3{font-size:32px;line-height:1;margin-bottom:9px;font-weight:400;color:var(--card-fg)}
 .person-body p{font-size:15px;color:var(--soft);margin-bottom:18px}
 .person-body .card-foot{padding-top:11px}
+
+/* ===== Reading room / doorway cards (unified with the rest of the site) ===== */
+.read-card{
+  --card-color:var(--cyan);
+  --card-faint:var(--cyan-faint);
+  min-height:310px;
+  padding:34px;
+}
+.read-card:nth-child(even){
+  --card-color:var(--orange);
+  --card-faint:var(--orange-faint);
+}
+.read-card .num{font-size:12px;letter-spacing:.18em;color:var(--card-color);text-transform:uppercase}
+.read-card h3{font-size:42px;font-weight:400;margin:42px 0 15px;max-width:420px;color:var(--card-fg)}
+.read-card p{color:var(--soft);font-size:18px;max-width:440px;margin:0}
+.read-card .arrow{position:absolute;right:28px;top:28px;color:var(--card-color);font-size:23px}
 
 /* ===== Reading experience ===== */
 .reading-system{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
