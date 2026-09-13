@@ -2261,6 +2261,61 @@ html body .avestan-icon span{
     display:block !important;
   }
 }
+
+
+/* =========================================================
+   FINAL PAGE FRAME — EXACT HOMEPAGE SHELL
+   This is the same centered 1080px content frame used on index.html.
+   Navigation styles above are intentionally untouched.
+   ========================================================= */
+
+:root{
+  --content-width:1080px;
+  --page-gutter:24px;
+}
+
+/* Same homepage formula:
+   width = 1080px maximum, with equal left/right gutters. */
+.wrap{
+  width:min(var(--content-width), calc(100% - 2 * var(--page-gutter))) !important;
+  max-width:none !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Sections/backgrounds remain full-width.
+   Only their content sits inside the shared homepage frame. */
+.hero,
+.section{
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+
+/* Keep the internal layouts from creating their own competing width. */
+.hero-grid,
+.section-head,
+.reading-layout,
+.activity-grid{
+  max-width:none !important;
+}
+
+/* Homepage mobile gutter. */
+@media(max-width:700px){
+  :root{
+    --page-gutter:18px;
+  }
+
+  .wrap{
+    width:min(var(--content-width), calc(100% - 2 * var(--page-gutter))) !important;
+  }
+
+  .hero,
+  .section{
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+}
+
 </style>
 </head>
 <body>
